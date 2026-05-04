@@ -1,0 +1,697 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<REPOSITORY
+   NAME="Siebel Repository"
+   UPDATED="02/11/2019 19:21:26"
+   UPDATED_BY="SADMIN"
+   CREATED="02/11/2019 18:54:57"
+   CREATED_BY="SADMIN"
+   FIO_PLACEHOLDER_FIO="TRUE">
+	<PROJECT
+	   ALLOW_OBJECT_LOCKING="Y"
+	   COMMENTS="VHA - Muthushankari 18/5/2016 - Created for Sharing Simplification Project"
+	   INACTIVE="N"
+	   LANGUAGE_LOCKED="ENU"
+	   LOCKED="Y"
+	   LOCKED_DATE="05/10/2019 19:44:43"
+	   NAME="VHA Sharing Simplification"
+	   UI_FREEZE="N"
+	   LOCKED_BY_NAME="SADMIN"
+	   UPDATED="05/10/2019 19:44:45"
+	   UPDATED_BY="SADMIN"
+	   CREATED="08/17/2016 08:55:40"
+	   CREATED_BY="SADMIN"
+	   FIO_PLACEHOLDER_FIO="TRUE">
+		<VIEW
+		   ADD_TO_HISTORY="N"
+		   ADMIN_MODE_FLAG="N"
+		   BUSINESS_OBJECT="Order Entry (Sales)"
+		   COMMENTS="Subramanian K 28/8/14: Changed applet visibility applet and type 
+ MURALIDHARANK 29/05/2014: Changed the BO for TBUI Post Pay flow
+MURALIDHARANK 12/05/2014: Created for Postpay TBUI"
+		   DISABLE_PDQ="N"
+		   EXPLICIT_LOGIN="N"
+		   INACTIVE="N"
+		   NAME="VHA Customise Service View - FTTP Manage Service"
+		   NO_BORDERS="N"
+		   SCREEN_MENU="Y"
+		   SECURE="N"
+		   TYPE="Task"
+		   UPGRADE_BEHAVIOR="Admin"
+		   VISIBILITY_APPLET="VF Order Hidden Applet - TBUI"
+		   VISIBILITY_APPLET_TYPE="All"
+		   UPDATED="01/25/2024 21:00:24"
+		   UPDATED_BY="SADMIN"
+		   CREATED="01/25/2024 21:00:24"
+		   CREATED_BY="SADMIN">
+			<VIEW_LOCALE
+			   APPLICATION_CODE="STD"
+			   INACTIVE="N"
+			   LANGUAGE_CODE="ENU"
+			   NAME="ENU-STD"
+			   TITLE="VF Select Proposition And Customize Task"
+			   TRANSLATE="Y"
+			   UPDATED="01/25/2024 21:00:30"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/25/2024 21:00:30"
+			   CREATED_BY="SADMIN">
+			</VIEW_LOCALE>
+			<VIEW_WEB_TEMPLATE
+			   INACTIVE="N"
+			   NAME="Base"
+			   USER_LAYOUT="N"
+			   WEB_TEMPLATE="View Basic"
+			   UPDATED="01/25/2024 21:00:25"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/25/2024 21:00:25"
+			   CREATED_BY="SADMIN">
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Account Hidden Thin TBUI"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   COMMENTS="MURALIDHARANK 09/02/2014: Created for Postpay TBUI Thin Bc&apos;s"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="4"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Account Hidden Applet - TBUI"
+				   UPDATED="01/25/2024 21:00:26"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/25/2024 21:00:26"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="3"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Hidden Applet - TBUI"
+				   UPDATED="01/25/2024 21:00:26"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/25/2024 21:00:26"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Salesperson Edit Applet - TBUI"
+				   APPLET_MODE="Edit"
+				   APPLET_VISIBILITY_TYPE="All"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="7"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Salesperson Edit Applet - TBUI"
+				   UPDATED="01/25/2024 21:00:26"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/25/2024 21:00:26"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Playbar Applet - Bottom MSO"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   COMMENTS="Subramanian 14SEP2014: Added playbar bottom applet modified to call writerecord on clicking NEXT"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Playbar Applet - Bottom"
+				   UPDATED="01/25/2024 21:00:26"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/25/2024 21:00:26"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Fibre NBN Appointment Contact Details List Applet"
+				   APPLET_MODE="Edit List"
+				   APPLET_VISIBILITY_TYPE="All"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="11"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Fibre NBN Appointment Contact Details List Applet"
+				   UPDATED="01/25/2024 21:00:26"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/25/2024 21:00:26"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Fibre connect NBN Appointment List Applet"
+				   APPLET_MODE="Edit List"
+				   APPLET_VISIBILITY_TYPE="All"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="10"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Fibre connect NBN Appointment List Applet"
+				   UPDATED="01/25/2024 21:00:26"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/25/2024 21:00:26"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Order Entry Line Items List Applet - FTTP Manage Service"
+				   APPLET_MODE="Edit List"
+				   APPLET_VISIBILITY_TYPE="All"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Order Entry Line Items List Applet - FTTP Manage Service"
+				   UPDATED="01/25/2024 21:00:26"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/25/2024 21:00:26"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Sharing Task Session Form Applet – TBUI"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="2"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Sharing Task Session Form Applet – TBUI"
+				   UPDATED="01/25/2024 21:00:26"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/25/2024 21:00:26"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+			</VIEW_WEB_TEMPLATE>
+		</VIEW>
+		<VIEW
+		   ADD_TO_HISTORY="N"
+		   ADMIN_MODE_FLAG="N"
+		   BUSINESS_OBJECT="Order Entry (Sales)"
+		   COMMENTS="Subramanian K 28/8/14: Changed applet visibility applet and type 
+ MURALIDHARANK 29/05/2014: Changed the BO for TBUI Post Pay flow
+MURALIDHARANK 12/05/2014: Created for Postpay TBUI"
+		   DISABLE_PDQ="N"
+		   EXPLICIT_LOGIN="N"
+		   INACTIVE="N"
+		   NAME="VHA Customise Service View - Manage Service"
+		   NO_BORDERS="N"
+		   OBJECT_LOCKED="N"
+		   SCREEN_MENU="Y"
+		   SECURE="N"
+		   TYPE="Task"
+		   UPGRADE_BEHAVIOR="Admin"
+		   VISIBILITY_APPLET="VF Order Hidden Applet - TBUI"
+		   VISIBILITY_APPLET_TYPE="All"
+		   UPDATED="08/07/2017 00:35:19"
+		   UPDATED_BY="SADMIN"
+		   CREATED="08/17/2016 09:19:42"
+		   CREATED_BY="SADMIN">
+			<VIEW_LOCALE
+			   APPLICATION_CODE="STD"
+			   INACTIVE="N"
+			   LANGUAGE_CODE="ENU"
+			   NAME="ENU-STD"
+			   TITLE="VF Select Proposition And Customize Task"
+			   TRANSLATE="Y"
+			   UPDATED="08/17/2016 09:19:43"
+			   UPDATED_BY="SADMIN"
+			   CREATED="08/17/2016 09:19:43"
+			   CREATED_BY="SADMIN">
+			</VIEW_LOCALE>
+			<VIEW_WEB_TEMPLATE
+			   INACTIVE="N"
+			   NAME="Base"
+			   USER_LAYOUT="N"
+			   WEB_TEMPLATE="View Basic"
+			   UPDATED="08/07/2017 00:35:19"
+			   UPDATED_BY="SADMIN"
+			   CREATED="08/17/2016 09:19:43"
+			   CREATED_BY="SADMIN">
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Account Hidden Thin TBUI"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   COMMENTS="MURALIDHARANK 09/02/2014: Created for Postpay TBUI Thin Bc&apos;s"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="4"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Account Hidden Applet - TBUI"
+				   UPDATED="08/17/2016 09:19:43"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:43"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Credit Check Profile Form Applet Thin TBUI"
+				   APPLET_MODE="Edit"
+				   APPLET_VISIBILITY_TYPE="All"
+				   COMMENTS="MURALIDHARANK 09/02/2014: Created for Postpay TBUI Thin Bc&apos;s"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="5"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Credit Check Profile Form Applet – TBUI"
+				   UPDATED="08/17/2016 09:19:43"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:43"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Fulfilment Items - TBUI"
+				   APPLET_MODE="Edit List"
+				   APPLET_VISIBILITY_TYPE="All"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="10"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Fulfilment Items - TBUI"
+				   UPDATED="08/07/2017 00:35:19"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:44"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA AOA Fulfilment Items - TBUI"
+				   APPLET_MODE="Edit List"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="11"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Fulfilment Items - TBUI2"
+				   UPDATED="08/07/2017 00:35:19"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:44"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="3"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Hidden Applet - TBUI"
+				   UPDATED="08/17/2016 09:19:44"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:44"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Out of Stock Summary Form Applet - TBUI HI"
+				   APPLET_MODE="Edit"
+				   APPLET_VISIBILITY_TYPE="All"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="12"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Out of Stock Summary Form Applet - TBUI HI"
+				   UPDATED="08/07/2017 00:35:19"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:45"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Recommended Product List Applet - TBUI"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="8"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Recommended Product List Applet - TBUI"
+				   UPDATED="08/07/2017 00:35:19"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:45"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Salesperson Edit Applet - TBUI"
+				   APPLET_MODE="Edit"
+				   APPLET_VISIBILITY_TYPE="All"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="7"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Salesperson Edit Applet - TBUI"
+				   UPDATED="08/07/2017 00:35:19"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:45"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Playbar Applet - Bottom MSO"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   COMMENTS="Subramanian 14SEP2014: Added playbar bottom applet modified to call writerecord on clicking NEXT"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Playbar Applet - Bottom"
+				   UPDATED="08/17/2016 09:19:45"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:45"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Playbar Applet - Top"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   DISPLAY_VISIBILITY="Hide"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="1"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Playbar Applet - Top"
+				   UPDATED="08/17/2016 09:19:46"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:46"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Accessories List Applet TBUI"
+				   APPLET_MODE="Edit List"
+				   APPLET_VISIBILITY_TYPE="All"
+				   COMMENTS="Kathambari 04/06/2016 - added for AOA project"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="10"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Accessories List Applet TBUI"
+				   UPDATED="08/07/2017 00:35:19"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:46"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Order Entry Line Items List Applet - Manage Service"
+				   APPLET_MODE="Edit List"
+				   APPLET_VISIBILITY_TYPE="All"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Order Entry Line Items List Applet - Manage Service"
+				   UPDATED="08/07/2017 00:35:19"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:46"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Sharing Task Session Form Applet – TBUI"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="2"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Sharing Task Session Form Applet – TBUI"
+				   UPDATED="08/17/2016 09:19:47"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:47"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+			</VIEW_WEB_TEMPLATE>
+		</VIEW>
+		<VIEW
+		   ADD_TO_HISTORY="N"
+		   ADMIN_MODE_FLAG="N"
+		   BUSINESS_OBJECT="Order Entry (Sales)"
+		   COMMENTS="RAJUD: 24/12/2024 Add MSP Applet for R1.2
+Muthushankari 20/5/2016 : Created for sharing simplification"
+		   DISABLE_PDQ="N"
+		   EXPLICIT_LOGIN="N"
+		   INACTIVE="N"
+		   NAME="VHA Manage Subscriptions View"
+		   NO_BORDERS="N"
+		   OBJECT_LOCKED="N"
+		   SCREEN_MENU="Y"
+		   SECURE="N"
+		   TYPE="Task"
+		   UPGRADE_BEHAVIOR="Admin"
+		   VISIBILITY_APPLET="VF Order Hidden Applet - TBUI"
+		   VISIBILITY_APPLET_TYPE="All"
+		   UPDATED="01/21/2025 00:47:56"
+		   UPDATED_BY="RAJUD"
+		   CREATED="08/17/2016 09:19:51"
+		   CREATED_BY="SADMIN">
+			<VIEW_LOCALE
+			   APPLICATION_CODE="STD"
+			   INACTIVE="N"
+			   LANGUAGE_CODE="ENU"
+			   NAME="ENU-STD"
+			   TITLE="VF Select Proposition And Customize Task"
+			   TRANSLATE="Y"
+			   UPDATED="08/17/2016 09:19:52"
+			   UPDATED_BY="SADMIN"
+			   CREATED="08/17/2016 09:19:52"
+			   CREATED_BY="SADMIN">
+			</VIEW_LOCALE>
+			<VIEW_WEB_TEMPLATE
+			   INACTIVE="N"
+			   NAME="Base"
+			   USER_LAYOUT="N"
+			   WEB_TEMPLATE="VF Connection View Template"
+			   UPDATED="08/07/2017 00:35:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="08/17/2016 09:19:52"
+			   CREATED_BY="SADMIN">
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Account Hidden Thin TBUI"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   COMMENTS="MURALIDHARANK 09/02/2014: Created for Postpay TBUI Thin Bc&apos;s"
+				   DISPLAY_VISIBILITY="Hide"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="4"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Account Hidden Applet - TBUI"
+				   UPDATED="08/17/2016 09:19:52"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:52"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   DISPLAY_VISIBILITY="Hide"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="3"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Hidden Applet - TBUI"
+				   UPDATED="08/17/2016 09:19:52"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:52"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Playbar Applet - Bottom MSO"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   COMMENTS="Subramanian 14SEP2014: Added playbar bottom applet modified to call writerecord on clicking NEXT"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1113"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Playbar Applet - Bottom"
+				   UPDATED="09/30/2019 11:49:07"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:53"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Playbar Applet - Top"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   DISPLAY_VISIBILITY="Hide"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="1"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Playbar Applet - Top"
+				   UPDATED="08/17/2016 09:19:53"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:53"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Billing Account Hidden Applet"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Billing Account Hidden Applet"
+				   UPDATED="08/17/2016 09:19:53"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:53"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Bundle Save List Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="VHA Sharukh Added on 11/12/2018  for Progressive Discount"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="18"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Bundle Save Offers List Applet"
+				   UPDATED="08/20/2025 01:20:24"
+				   UPDATED_BY="VENKATAM"
+				   CREATED="05/19/2019 20:45:59"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Existing Subscriptions List Applet"
+				   APPLET_MODE="Edit List"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="13"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Existing Subscriptions List Applet"
+				   UPDATED="08/07/2017 00:35:22"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:54"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Insurance Manage Service List Applet"
+				   APPLET_MODE="Edit List"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="19"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Insurance Manage Service List Applet"
+				   UPDATED="08/20/2025 01:20:24"
+				   UPDATED_BY="VENKATAM"
+				   CREATED="09/30/2019 11:49:10"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA MSP OLI Discount Calc List Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="24122024:Raju:Added new applet to display the MSP details in Manage Service journey R1.2"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="17"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA MSP OLI Discount Calc List Applet"
+				   UPDATED="08/20/2025 01:20:24"
+				   UPDATED_BY="VENKATAM"
+				   CREATED="01/09/2025 02:24:52"
+				   CREATED_BY="RAJUD">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN Manage Service Form Applet"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1084"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN Manage Service Form Applet"
+				   UPDATED="08/07/2017 00:35:22"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/07/2017 00:35:22"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN Modify CVC Details Form Applet"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN Modify CVC Details Form Applet"
+				   UPDATED="08/20/2025 01:20:24"
+				   UPDATED_BY="VENKATAM"
+				   CREATED="08/07/2017 00:35:22"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Pega Accepted Recommendation Details Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="Added for IgniteR2"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="16"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Pega Accepted Recommendation Details Applet"
+				   UPDATED="10/11/2025 20:57:06"
+				   UPDATED_BY="ARUNAC"
+				   CREATED="08/20/2025 01:20:24"
+				   CREATED_BY="VENKATAM">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Pega Accepted Recommendation TBUI Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="Added for IgniteR2"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="16"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Pega Accepted Recommendation TBUI Applet"
+				   UPDATED="10/11/2025 20:57:06"
+				   UPDATED_BY="ARUNAC"
+				   CREATED="10/11/2025 20:57:06"
+				   CREATED_BY="ARUNAC">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA SSJ Parent Order Line Items Applet"
+				   APPLET_MODE="Edit List"
+				   APPLET_VISIBILITY_TYPE="All"
+				   COMMENTS="Aditik : 11102025 for SSJ Quote Proposition"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="14"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA SSJ Parent Order Line Items Applet"
+				   UPDATED="10/29/2025 18:58:43"
+				   UPDATED_BY="ADITIK"
+				   CREATED="10/29/2025 18:58:43"
+				   CREATED_BY="ADITIK">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Sharing Select Rate Plan Applet"
+				   APPLET_MODE="Edit"
+				   APPLET_VISIBILITY_TYPE="All"
+				   COMMENTS="24122024:Raju:Changed Applet seqeunce Manage Service journey R1.2"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="15"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Sharing Select Rate Plan Applet"
+				   UPDATED="08/20/2025 16:30:10"
+				   UPDATED_BY="VENKATAM"
+				   CREATED="08/17/2016 09:19:54"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Sharing Task Session Form Applet – TBUI"
+				   APPLET_MODE="Base"
+				   APPLET_VISIBILITY_TYPE="All"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="2"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Sharing Task Session Form Applet – TBUI"
+				   UPDATED="08/17/2016 09:19:54"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 09:19:54"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+			</VIEW_WEB_TEMPLATE>
+		</VIEW>
+	</PROJECT>
+	<SBL_EXT_TYPE_DEF>
+		<TYPE
+		   NAME="View">
+			<ATTRIBUTE
+			   NAME="Responsive Flag">
+			</ATTRIBUTE>
+		</TYPE>
+		<TYPE
+		   NAME="View Web Template Item">
+			<ATTRIBUTE
+			   NAME="Ext Expression">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Group Name">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Html Attr">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Sequence">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Tmpl Item Holder Name">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Type">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Web Tmpl Name">
+			</ATTRIBUTE>
+		</TYPE>
+	</SBL_EXT_TYPE_DEF>
+</REPOSITORY>
+
+
+

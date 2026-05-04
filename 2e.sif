@@ -1,0 +1,1728 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<REPOSITORY
+   NAME="Siebel Repository"
+   UPDATED="02/11/2019 19:21:26"
+   UPDATED_BY="SADMIN"
+   CREATED="02/11/2019 18:54:57"
+   CREATED_BY="SADMIN"
+   FIO_PLACEHOLDER_FIO="TRUE">
+	<PROJECT
+	   ALLOW_OBJECT_LOCKING="Y"
+	   INACTIVE="N"
+	   LANGUAGE_LOCKED="ENU"
+	   LOCKED="Y"
+	   LOCKED_DATE="04/27/2019 16:56:34"
+	   NAME="VF Postpay TBUI MSO"
+	   UI_FREEZE="N"
+	   LOCKED_BY_NAME="SADMIN"
+	   UPDATED="04/27/2019 16:56:38"
+	   UPDATED_BY="SADMIN"
+	   CREATED="08/28/2014 20:59:10"
+	   CREATED_BY="SADMIN"
+	   FIO_PLACEHOLDER_FIO="TRUE">
+		<VIEW
+		   ADD_TO_HISTORY="N"
+		   ADMIN_MODE_FLAG="N"
+		   BUSINESS_OBJECT="Order Entry (Sales)"
+		   COMMENTS="VF - Neel 02/06/2014 - Added new Applets for Order Summary
+MURALIDHARANK 29/05/2014: Changed the BO for TBUI Post Pay flow
+MURALIDHARANK 12/05/2014: Created for Postpay TBUI"
+		   DISABLE_PDQ="N"
+		   EXPLICIT_LOGIN="N"
+		   INACTIVE="N"
+		   NAME="VF Change Location Order Summary View TBUI - Fibre"
+		   NO_BORDERS="N"
+		   SCREEN_MENU="Y"
+		   SECURE="N"
+		   THREAD_FIELD="Name"
+		   TYPE="Task"
+		   UPGRADE_BEHAVIOR="Preserve"
+		   UPDATED="06/28/2024 18:49:55"
+		   UPDATED_BY="SADMIN"
+		   CREATED="06/28/2024 18:49:55"
+		   CREATED_BY="SADMIN">
+			<VIEW_LOCALE
+			   APPLICATION_CODE="STD"
+			   INACTIVE="N"
+			   LANGUAGE_CODE="ENU"
+			   NAME="ENU-STD"
+			   TITLE="Connection Customer Detail"
+			   TRANSLATE="Y"
+			   UPDATED="06/28/2024 18:49:58"
+			   UPDATED_BY="SADMIN"
+			   CREATED="06/28/2024 18:49:58"
+			   CREATED_BY="SADMIN">
+			</VIEW_LOCALE>
+			<VIEW_WEB_TEMPLATE
+			   INACTIVE="N"
+			   NAME="Base"
+			   USER_LAYOUT="N"
+			   WEB_TEMPLATE="VHA View 1 Over 2 Over 1"
+			   UPDATED="06/28/2024 18:49:55"
+			   UPDATED_BY="SADMIN"
+			   CREATED="06/28/2024 18:49:55"
+			   CREATED_BY="SADMIN">
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF All Offers Applet - TBUI"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="12/12/2014     Bharat     Changed to Edit List for Defect#3591"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="504"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF All Offers Applet - TBUI"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Session Form Applet – TBUI"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="102"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF ID Scan Disabled Form Applet - TBUI"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA GPP Order Summary List Applet TBUI"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="502"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF MPP List Applet – TBUI2"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF One Off Charging List Applet - TBUI"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="602"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF One Off Charging List Applet - TBUI2"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Upgrade Line Item Summary Applet TBUI"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="402"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry - Line Item List Applet Summary - TBUI2"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Entry - Order Form Applet TBUI - OrdSum"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="203"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry - Order Form Applet TBUI2"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Entry Attachment List Applet TBUI"
+				   APPLET_MODE="Edit List"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="505"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry Attachment List Applet TBUI2"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   COMMENTS="Vinodhini-16/05/2017-Added for PIPE"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="104"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Hidden Applet - TBUI"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Line Item List Applet Summary - TBUI MSO Fibre"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="404"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Line Item List Applet Summary - TBUI MSO Fibre"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Paperless Fields Applet - Wizard"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="605"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Paperless Fields Applet - Wizard2"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Playbar Applet - Order Summary"
+				   APPLET_MODE="Base"
+				   COMMENTS="Changed the Applet"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="506"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Playbar Applet - Top"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Validation Msg List Applet - TBUI MSO"
+				   APPLET_MODE="Base"
+				   COMMENTS="Subramanian 23SEP2014. Changed Validation MSg Applet"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="604"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Validation Msg List Applet - TBUI2"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA APP Accessory TBUI - Order Summary Applet"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="503"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA APP Accessory TBUI - Order Summary Applet"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Accessory List Payment Plan Applet"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="603"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Accessory List Payment Plan Applet"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Bundle Save Offers List Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="VHA Jaya 13/12/2018: Created for PD-Bundle and Save Offers"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="407"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Bundle Save Offers List Applet"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Credit Check Profile Form Applet – EL"
+				   APPLET_MODE="Edit"
+				   COMMENTS="9/11Mani-Activated;Manikandan - 15/04/19 - disabled for session applet redesign"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="106"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Credit Check Profile Form Applet – TBUI EL"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN Appointment Contact Details  Fibre List Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="12/12/2014     Bharat     Changed to Edit List for Defect#3591"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="406"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN Appointment Contact Details  Fibre List Applet"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN Appointment Fibre List Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="12/12/2014     Bharat     Changed to Edit List for Defect#3591"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="405"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN Appointment Fibre List Applet"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN Order Details Thin Applet"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="403"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN Order Details Thin Applet"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN to 5G Migration Form Applet"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="306"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN to 5G Migration Form Applet"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Prepayment Order Summary Form Applet"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="303"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Prepayment Order Summary Form Applet"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Shipment Preference Form Applet"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="206"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Shipment Preference Form Applet"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Two Way SMS Override Applet"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="606"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Two Way SMS Override Applet"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+			</VIEW_WEB_TEMPLATE>
+		</VIEW>
+		<VIEW
+		   ADD_TO_HISTORY="N"
+		   ADMIN_MODE_FLAG="N"
+		   BUSINESS_OBJECT="Order Entry (Sales)"
+		   COMMENTS="VF - Neel 02/06/2014 - Added new Applets for Order Summary
+MURALIDHARANK 29/05/2014: Changed the BO for TBUI Post Pay flow
+MURALIDHARANK 12/05/2014: Created for Postpay TBUI"
+		   DISABLE_PDQ="N"
+		   EXPLICIT_LOGIN="N"
+		   INACTIVE="N"
+		   NAME="VF New Connect MSO Order Summary View TBUI"
+		   NO_BORDERS="N"
+		   OBJECT_LOCKED="N"
+		   SCREEN_MENU="Y"
+		   SECURE="N"
+		   THREAD_FIELD="Name"
+		   TYPE="Task"
+		   UPGRADE_BEHAVIOR="Preserve"
+		   UPDATED="08/07/2017 00:35:14"
+		   UPDATED_BY="SADMIN"
+		   CREATED="09/18/2014 15:09:04"
+		   CREATED_BY="SADMIN">
+			<VIEW_LOCALE
+			   APPLICATION_CODE="STD"
+			   INACTIVE="N"
+			   LANGUAGE_CODE="ENU"
+			   NAME="ENU-STD"
+			   TITLE="Connection Customer Detail"
+			   TRANSLATE="Y"
+			   UPDATED="09/18/2014 15:09:05"
+			   UPDATED_BY="SADMIN"
+			   CREATED="09/18/2014 15:09:05"
+			   CREATED_BY="SADMIN">
+			</VIEW_LOCALE>
+			<VIEW_WEB_TEMPLATE
+			   INACTIVE="N"
+			   NAME="Base"
+			   USER_LAYOUT="N"
+			   WEB_TEMPLATE="VHA View 1 Over 2 Over 1"
+			   UPDATED="08/07/2017 00:35:14"
+			   UPDATED_BY="SADMIN"
+			   CREATED="09/18/2014 15:09:05"
+			   CREATED_BY="SADMIN">
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Account Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="202"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Account Hidden Applet - TBUI"
+				   UPDATED="09/18/2014 15:09:05"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF All Offers Applet - TBUI"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="12/12/2014     Bharat     Changed to Edit List for Defect#3591"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="504"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF All Offers Applet - TBUI"
+				   UPDATED="08/17/2016 11:28:53"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Coverage Check Form Applet TBUI"
+				   APPLET_MODE="Base"
+				   COMMENTS="VF R1.0 Subramanian 21/8/14 Inactivated applet to remove GetURL from the Order Summary page"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="302"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Coverage Check Form Applet TBUI"
+				   UPDATED="09/18/2014 15:09:05"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Credit Check Profile Form Applet AOA – TBUI"
+				   APPLET_MODE="Edit"
+				   COMMENTS="Manikandan - 15/04/19 - disabled for session applet redesign"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="103"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Credit Check Profile Form Applet AOA – TBUI"
+				   UPDATED="04/30/2019 02:37:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 11:28:53"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Session Form Applet – TBUI"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="102"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF ID Scan Disabled Form Applet - TBUI"
+				   UPDATED="09/18/2014 15:09:05"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA GPP Order Summary List Applet TBUI"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="502"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF MPP List Applet – TBUI2"
+				   UPDATED="09/30/2019 11:49:06"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF One Off Charging List Applet - TBUI"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="602"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF One Off Charging List Applet - TBUI2"
+				   UPDATED="09/18/2014 15:09:05"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Line Item List Applet Summary - TBUI MSO"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="402"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry - Line Item List Applet Summary - TBUI2"
+				   UPDATED="10/12/2014 15:24:46"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Entry - Order Form Applet TBUI - OrdSum"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="203"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry - Order Form Applet TBUI2"
+				   UPDATED="09/18/2014 15:09:05"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Entry Attachment List Applet TBUI"
+				   APPLET_MODE="Edit List"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="505"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry Attachment List Applet TBUI2"
+				   UPDATED="08/17/2016 11:28:53"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   COMMENTS="Vinodhini-16/05/2017-Added for PIPE"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="104"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Hidden Applet - TBUI"
+				   UPDATED="08/07/2017 00:35:14"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/07/2017 00:35:14"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Paperless Fields Applet - Wizard"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="605"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Paperless Fields Applet - Wizard2"
+				   UPDATED="08/17/2016 11:28:53"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Playbar Applet - Order Summary"
+				   APPLET_MODE="Base"
+				   COMMENTS="Changed the Applet"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="506"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Playbar Applet - Top"
+				   UPDATED="04/20/2015 02:08:19"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Validation Msg List Applet - TBUI MSO"
+				   APPLET_MODE="Base"
+				   COMMENTS="Subramanian 23SEP2014. Changed Validation MSg Applet"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="604"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Validation Msg List Applet - TBUI2"
+				   UPDATED="08/17/2016 11:28:53"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/18/2014 15:09:05"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA APP Accessory TBUI - Order Summary Applet"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="503"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA APP Accessory TBUI - Order Summary Applet"
+				   UPDATED="08/17/2016 11:28:53"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 11:28:53"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Accessory List Payment Plan Applet"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="603"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Accessory List Payment Plan Applet"
+				   UPDATED="08/17/2016 11:28:53"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 11:28:53"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Bundle Save Offers List Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="VHA Jaya 13/12/2018: Created for PD-Bundle and Save Offers"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="406"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Bundle Save Offers List Applet"
+				   UPDATED="05/19/2019 18:54:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 18:54:21"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Credit Check Profile Form Applet – EL"
+				   APPLET_MODE="Edit"
+				   COMMENTS="9/11Mani-Activated;Manikandan - 15/04/19 - disabled for session applet redesign"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="106"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Credit Check Profile Form Applet – TBUI EL"
+				   UPDATED="11/11/2019 23:22:55"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 11:28:53"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA MSP OLI Discount Calc Ord Summ List Applet"
+				   APPLET_MODE="Edit List"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="405"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA MSP OLI Discount Calc Ord Summ List Applet"
+				   UPDATED="01/09/2025 02:24:52"
+				   UPDATED_BY="RAJUD"
+				   CREATED="01/09/2025 02:24:52"
+				   CREATED_BY="RAJUD">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN to 5G Migration Form Applet"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="306"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN to 5G Migration Form Applet"
+				   UPDATED="08/17/2021 21:36:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2021 21:36:59"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Order Feasibility Form Applet"
+				   APPLET_MODE="Edit"
+				   COMMENTS="Manikandan - 15/04/19 - disabled for session applet redesign"
+				   INACTIVE="Y"
+				   ITEM_IDENTIFIER="105"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Order Feasibility Form Applet"
+				   UPDATED="04/30/2019 02:37:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/07/2017 00:35:14"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Prepayment Order Summary Form Applet"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="303"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Prepayment Order Summary Form Applet"
+				   UPDATED="09/30/2019 11:49:08"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:08"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Shipment Preference Form Applet"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="206"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Shipment Preference Form Applet"
+				   UPDATED="08/07/2017 00:35:14"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2016 11:28:53"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Two Way SMS Override Applet"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="606"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Two Way SMS Override Applet"
+				   UPDATED="11/12/2020 22:40:19"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/12/2020 22:40:19"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+			</VIEW_WEB_TEMPLATE>
+		</VIEW>
+		<VIEW
+		   ADD_TO_HISTORY="N"
+		   ADMIN_MODE_FLAG="N"
+		   BUSINESS_OBJECT="Order Entry (Sales)"
+		   COMMENTS="VF - Neel 02/06/2014 - Added new Applets for Order Summary
+MURALIDHARANK 29/05/2014: Changed the BO for TBUI Post Pay flow
+MURALIDHARANK 12/05/2014: Created for Postpay TBUI"
+		   DISABLE_PDQ="N"
+		   EXPLICIT_LOGIN="N"
+		   INACTIVE="N"
+		   NAME="VF New Connect MSO Order Summary View TBUI - Fibre"
+		   NO_BORDERS="N"
+		   SCREEN_MENU="Y"
+		   SECURE="N"
+		   THREAD_FIELD="Name"
+		   TYPE="Task"
+		   UPGRADE_BEHAVIOR="Preserve"
+		   UPDATED="06/28/2024 18:49:55"
+		   UPDATED_BY="SADMIN"
+		   CREATED="06/28/2024 18:49:55"
+		   CREATED_BY="SADMIN">
+			<VIEW_LOCALE
+			   APPLICATION_CODE="STD"
+			   INACTIVE="N"
+			   LANGUAGE_CODE="ENU"
+			   NAME="ENU-STD"
+			   TITLE="Connection Customer Detail"
+			   TRANSLATE="Y"
+			   UPDATED="06/28/2024 18:49:58"
+			   UPDATED_BY="SADMIN"
+			   CREATED="06/28/2024 18:49:58"
+			   CREATED_BY="SADMIN">
+			</VIEW_LOCALE>
+			<VIEW_WEB_TEMPLATE
+			   INACTIVE="N"
+			   NAME="Base"
+			   USER_LAYOUT="N"
+			   WEB_TEMPLATE="VHA View 1 Over 2 Over 1"
+			   UPDATED="06/28/2024 18:49:55"
+			   UPDATED_BY="SADMIN"
+			   CREATED="06/28/2024 18:49:55"
+			   CREATED_BY="SADMIN">
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF All Offers Applet - TBUI"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="12/12/2014     Bharat     Changed to Edit List for Defect#3591"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="504"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF All Offers Applet - TBUI"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Session Form Applet – TBUI"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="102"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF ID Scan Disabled Form Applet - TBUI"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA GPP Order Summary List Applet TBUI"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="502"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF MPP List Applet – TBUI2"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF One Off Charging List Applet - TBUI"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="602"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF One Off Charging List Applet - TBUI2"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Line Item List Applet Summary - TBUI MSO"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="402"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry - Line Item List Applet Summary - TBUI2"
+				   UPDATED="06/28/2024 18:49:56"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:56"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Entry - Order Form Applet TBUI - OrdSum"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="203"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry - Order Form Applet TBUI2"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Entry Attachment List Applet TBUI"
+				   APPLET_MODE="Edit List"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="505"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry Attachment List Applet TBUI2"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   COMMENTS="Vinodhini-16/05/2017-Added for PIPE"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="104"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Hidden Applet - TBUI"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Line Item List Applet Summary - TBUI MSO Fibre"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="404"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Line Item List Applet Summary - TBUI MSO Fibre"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Paperless Fields Applet - Wizard"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="605"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Paperless Fields Applet - Wizard2"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Playbar Applet - Order Summary"
+				   APPLET_MODE="Base"
+				   COMMENTS="Changed the Applet"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="506"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Playbar Applet - Top"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Validation Msg List Applet - TBUI MSO"
+				   APPLET_MODE="Base"
+				   COMMENTS="Subramanian 23SEP2014. Changed Validation MSg Applet"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="604"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Validation Msg List Applet - TBUI2"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA APP Accessory TBUI - Order Summary Applet"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="503"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA APP Accessory TBUI - Order Summary Applet"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Accessory List Payment Plan Applet"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="603"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Accessory List Payment Plan Applet"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Bundle Save Offers List Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="VHA Jaya 13/12/2018: Created for PD-Bundle and Save Offers"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="407"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Bundle Save Offers List Applet"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Credit Check Profile Form Applet – EL"
+				   APPLET_MODE="Edit"
+				   COMMENTS="9/11Mani-Activated;Manikandan - 15/04/19 - disabled for session applet redesign"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="106"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Credit Check Profile Form Applet – TBUI EL"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA MSP OLI Discount Calc Ord Summ List Applet"
+				   APPLET_MODE="Edit List"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="706"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA MSP OLI Discount Calc Ord Summ List Applet"
+				   UPDATED="01/09/2025 02:24:52"
+				   UPDATED_BY="RAJUD"
+				   CREATED="01/09/2025 02:24:52"
+				   CREATED_BY="RAJUD">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN Appointment Contact Details  Fibre List Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="12/12/2014     Bharat     Changed to Edit List for Defect#3591"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="406"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN Appointment Contact Details  Fibre List Applet"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN Appointment Fibre List Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="12/12/2014     Bharat     Changed to Edit List for Defect#3591"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="405"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN Appointment Fibre List Applet"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN Order Details Thin Applet"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="403"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN Order Details Thin Applet"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN to 5G Migration Form Applet"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="306"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN to 5G Migration Form Applet"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Prepayment Order Summary Form Applet"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="303"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Prepayment Order Summary Form Applet"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Shipment Preference Form Applet"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="206"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Shipment Preference Form Applet"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Two Way SMS Override Applet"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="606"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Two Way SMS Override Applet"
+				   UPDATED="06/28/2024 18:49:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="06/28/2024 18:49:57"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+			</VIEW_WEB_TEMPLATE>
+		</VIEW>
+	</PROJECT>
+	<PROJECT
+	   ALLOW_OBJECT_LOCKING="Y"
+	   COMMENTS="VHA: Balaji 6/22/2018 Created for Hard Caps"
+	   INACTIVE="N"
+	   LANGUAGE_LOCKED="ENU"
+	   LOCKED="Y"
+	   LOCKED_DATE="05/01/2019 01:19:01"
+	   NAME="VHA Hard Caps"
+	   UI_FREEZE="N"
+	   LOCKED_BY_NAME="SADMIN"
+	   UPDATED="05/01/2019 01:19:03"
+	   UPDATED_BY="SADMIN"
+	   CREATED="11/01/2018 13:55:53"
+	   CREATED_BY="SADMIN"
+	   FIO_PLACEHOLDER_FIO="TRUE">
+		<VIEW
+		   ADD_TO_HISTORY="N"
+		   ADMIN_MODE_FLAG="N"
+		   BUSINESS_OBJECT="Order Entry (Sales)"
+		   COMMENTS="VF - Neel 02/06/2014 - Added new Applets for Order Summary
+MURALIDHARANK 29/05/2014: Changed the BO for TBUI Post Pay flow
+MURALIDHARANK 12/05/2014: Created for Postpay TBUI"
+		   DISABLE_PDQ="N"
+		   EXPLICIT_LOGIN="N"
+		   INACTIVE="N"
+		   NAME="VF New Connect MSO Order Summary View TBUI - eSIM Details"
+		   NO_BORDERS="N"
+		   SCREEN_MENU="Y"
+		   SECURE="N"
+		   THREAD_FIELD="Name"
+		   TYPE="Task"
+		   UPGRADE_BEHAVIOR="Preserve"
+		   UPDATED="05/19/2019 20:45:50"
+		   UPDATED_BY="SADMIN"
+		   CREATED="05/19/2019 20:45:50"
+		   CREATED_BY="SADMIN">
+			<VIEW_LOCALE
+			   APPLICATION_CODE="STD"
+			   INACTIVE="N"
+			   LANGUAGE_CODE="ENU"
+			   NAME="ENU-STD"
+			   TITLE="Connection Customer Detail"
+			   TRANSLATE="Y"
+			   UPDATED="05/19/2019 20:46:04"
+			   UPDATED_BY="SADMIN"
+			   CREATED="05/19/2019 20:46:04"
+			   CREATED_BY="SADMIN">
+			</VIEW_LOCALE>
+			<VIEW_WEB_TEMPLATE
+			   INACTIVE="N"
+			   NAME="Base"
+			   USER_LAYOUT="N"
+			   WEB_TEMPLATE="VHA PD View 1 Over 2 Over 1"
+			   UPDATED="05/19/2019 20:45:52"
+			   UPDATED_BY="SADMIN"
+			   CREATED="05/19/2019 20:45:52"
+			   CREATED_BY="SADMIN">
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF All Offers Applet - TBUI"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="12/12/2014     Bharat     Changed to Edit List for Defect#3591"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="504"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF All Offers Applet - TBUI"
+				   UPDATED="05/19/2019 20:45:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Session Form Applet – TBUI"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="102"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF ID Scan Disabled Form Applet - TBUI"
+				   UPDATED="05/19/2019 20:45:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA GPP Order Summary List Applet TBUI"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="502"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF MPP List Applet – TBUI2"
+				   UPDATED="09/30/2019 11:49:05"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF One Off Charging List Applet - TBUI"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="602"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF One Off Charging List Applet - TBUI2"
+				   UPDATED="05/19/2019 20:45:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Line Item List Applet Summary - TBUI MSO"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="402"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry - Line Item List Applet Summary - TBUI2"
+				   UPDATED="05/19/2019 20:45:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Entry - Order Form Applet TBUI - OrdSum"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="203"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry - Order Form Applet TBUI2"
+				   UPDATED="05/19/2019 20:45:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Entry Attachment List Applet TBUI"
+				   APPLET_MODE="Edit List"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="505"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry Attachment List Applet TBUI2"
+				   UPDATED="05/19/2019 20:45:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   COMMENTS="Vinodhini-16/05/2017-Added for PIPE"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="104"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Hidden Applet - TBUI"
+				   UPDATED="05/19/2019 20:45:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Paperless Fields Applet - Wizard"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="605"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Paperless Fields Applet - Wizard2"
+				   UPDATED="05/19/2019 20:45:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Playbar Applet - Order Summary eSIM"
+				   APPLET_MODE="Base"
+				   COMMENTS="Changed the Applet"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="506"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Playbar Applet - Top"
+				   UPDATED="05/19/2019 20:45:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Validation Msg List Applet - TBUI MSO"
+				   APPLET_MODE="Base"
+				   COMMENTS="Subramanian 23SEP2014. Changed Validation MSg Applet"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="604"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Validation Msg List Applet - TBUI2"
+				   UPDATED="05/19/2019 20:45:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA APP Accessory TBUI - Order Summary Applet"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="503"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA APP Accessory TBUI - Order Summary Applet"
+				   UPDATED="05/19/2019 20:45:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:58"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Accessory List Payment Plan Applet"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="603"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Accessory List Payment Plan Applet"
+				   UPDATED="05/19/2019 20:45:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:59"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Bundle Save Offers List Applet"
+				   APPLET_MODE="Edit List"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="406"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Bundle Save Offers List Applet"
+				   UPDATED="05/19/2019 20:45:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:59"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Credit Check Profile Form Applet – EL"
+				   APPLET_MODE="Edit"
+				   COMMENTS="9/11Mani-Activated;Manikandan - 15/04/19 - disabled for session applet redesign;VHA Nithu created for CIR24_20062016"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="106"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Credit Check Profile Form Applet – TBUI EL"
+				   UPDATED="11/11/2019 23:22:55"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:59"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA MSP OLI Discount Calc Ord Summ List Applet"
+				   APPLET_MODE="Edit List"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="405"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA MSP OLI Discount Calc Ord Summ List Applet"
+				   UPDATED="01/09/2025 02:24:52"
+				   UPDATED_BY="RAJUD"
+				   CREATED="01/09/2025 02:24:52"
+				   CREATED_BY="RAJUD">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN to 5G Migration Form Applet"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="306"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN to 5G Migration Form Applet"
+				   UPDATED="08/17/2021 21:36:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2021 21:36:59"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Prepayment Order Summary Form Applet"
+				   APPLET_MODE="Base"
+				   COMMENTS="Sreevidya-Added for Siebel HLD GPP-07/06/2019"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="303"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Prepayment Order Summary Form Applet"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Shipment Preference Form Applet"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="206"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Shipment Preference Form Applet"
+				   UPDATED="05/19/2019 20:45:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/19/2019 20:45:59"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Two Way SMS Override Applet"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="606"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Two Way SMS Override Applet"
+				   UPDATED="11/13/2020 17:32:07"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/13/2020 17:32:07"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+			</VIEW_WEB_TEMPLATE>
+		</VIEW>
+	</PROJECT>
+	<PROJECT
+	   ALLOW_OBJECT_LOCKING="Y"
+	   INACTIVE="N"
+	   LANGUAGE_LOCKED="ENU"
+	   LOCKED="Y"
+	   LOCKED_DATE="09/03/2019 17:22:02"
+	   NAME="VHA Prepayment"
+	   UI_FREEZE="N"
+	   LOCKED_BY_NAME="SADMIN"
+	   UPDATED="09/03/2019 17:22:02"
+	   UPDATED_BY="SADMIN"
+	   CREATED="09/03/2019 14:31:04"
+	   CREATED_BY="SADMIN"
+	   FIO_PLACEHOLDER_FIO="TRUE">
+		<VIEW
+		   ADD_TO_HISTORY="N"
+		   ADMIN_MODE_FLAG="N"
+		   BUSINESS_OBJECT="Order Entry (Sales)"
+		   COMMENTS="21/5/2019: Christy:Added for 19.3"
+		   DISABLE_PDQ="N"
+		   EXPLICIT_LOGIN="N"
+		   INACTIVE="N"
+		   NAME="VF New Connect MSO Order Summary View TBUI Prepayment"
+		   NO_BORDERS="N"
+		   SCREEN_MENU="Y"
+		   SECURE="N"
+		   THREAD_FIELD="Name"
+		   TYPE="Task"
+		   UPGRADE_BEHAVIOR="Preserve"
+		   UPDATED="09/30/2019 11:48:51"
+		   UPDATED_BY="SADMIN"
+		   CREATED="09/30/2019 11:48:51"
+		   CREATED_BY="SADMIN">
+			<VIEW_LOCALE
+			   APPLICATION_CODE="STD"
+			   INACTIVE="N"
+			   LANGUAGE_CODE="ENU"
+			   NAME="ENU-STD"
+			   TITLE="Connection Customer Detail"
+			   TRANSLATE="Y"
+			   UPDATED="09/30/2019 11:49:23"
+			   UPDATED_BY="SADMIN"
+			   CREATED="09/30/2019 11:49:23"
+			   CREATED_BY="SADMIN">
+			</VIEW_LOCALE>
+			<VIEW_WEB_TEMPLATE
+			   INACTIVE="N"
+			   NAME="Base"
+			   USER_LAYOUT="N"
+			   WEB_TEMPLATE="VHA View 1 Over 2 Over 1"
+			   UPDATED="09/30/2019 11:48:56"
+			   UPDATED_BY="SADMIN"
+			   CREATED="09/30/2019 11:48:56"
+			   CREATED_BY="SADMIN">
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF All Offers Applet - TBUI"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="12/12/2014     Bharat     Changed to Edit List for Defect#3591"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="504"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF All Offers Applet - TBUI"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Session Form Applet – TBUI"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="102"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF ID Scan Disabled Form Applet - TBUI"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA GPP Order Summary List Applet TBUI"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="502"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF MPP List Applet – TBUI2"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF One Off Charging List Applet - TBUI"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="602"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF One Off Charging List Applet - TBUI2"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Line Item List Applet Summary - TBUI MSO"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="402"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry - Line Item List Applet Summary - TBUI2"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Entry - Order Form Applet TBUI - OrdSum"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="203"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry - Order Form Applet TBUI2"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Entry Attachment List Applet TBUI"
+				   APPLET_MODE="Edit List"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="505"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Entry Attachment List Applet TBUI2"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   COMMENTS="Vinodhini-16/05/2017-Added for PIPE"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="104"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Hidden Applet - TBUI"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Paperless Fields Applet - Wizard"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="605"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Paperless Fields Applet - Wizard2"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Paybar Applet Prepaymet Order Summary"
+				   APPLET_MODE="Base"
+				   COMMENTS="Christy:20/5/2019:Added for 19.3"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="506"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Playbar Applet - Top"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Validation Msg List Applet - TBUI MSO"
+				   APPLET_MODE="Base"
+				   COMMENTS="Subramanian 23SEP2014. Changed Validation MSg Applet"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="604"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Validation Msg List Applet - TBUI2"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA APP Accessory TBUI - Order Summary Applet"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="503"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA APP Accessory TBUI - Order Summary Applet"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Accessory List Payment Plan Applet"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="603"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Accessory List Payment Plan Applet"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Bundle Save Offers List Applet"
+				   APPLET_MODE="Edit List"
+				   COMMENTS="VHA Jaya 13/12/2018: Created for PD-Bundle and Save Offers"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="406"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Bundle Save Offers List Applet"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Credit Check Profile Form Applet – EL"
+				   APPLET_MODE="Edit"
+				   COMMENTS="9/11Mani-Activated;VHA Nithu created for CIR24_20062016"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="106"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Credit Check Profile Form Applet – TBUI EL"
+				   UPDATED="11/11/2019 23:22:55"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA MSP OLI Discount Calc Ord Summ List Applet"
+				   APPLET_MODE="Edit List"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="405"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA MSP OLI Discount Calc Ord Summ List Applet"
+				   UPDATED="01/09/2025 02:24:52"
+				   UPDATED_BY="RAJUD"
+				   CREATED="01/09/2025 02:24:52"
+				   CREATED_BY="RAJUD">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA NBN to 5G Migration Form Applet"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="306"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA NBN to 5G Migration Form Applet"
+				   UPDATED="08/17/2021 21:36:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="08/17/2021 21:36:59"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Prepayment Order Summary Form Applet"
+				   APPLET_MODE="Base"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="303"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Prepayment Order Summary Form Applet"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Shipment Preference Form Applet"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="206"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Shipment Preference Form Applet"
+				   UPDATED="09/30/2019 11:49:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="09/30/2019 11:49:09"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Two Way SMS Override Applet"
+				   APPLET_MODE="Edit"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="606"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Two Way SMS Override Applet"
+				   UPDATED="11/12/2020 22:40:19"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/12/2020 22:40:19"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+			</VIEW_WEB_TEMPLATE>
+		</VIEW>
+	</PROJECT>
+	<SBL_EXT_TYPE_DEF>
+		<TYPE
+		   NAME="View">
+			<ATTRIBUTE
+			   NAME="Responsive Flag">
+			</ATTRIBUTE>
+		</TYPE>
+		<TYPE
+		   NAME="View Web Template Item">
+			<ATTRIBUTE
+			   NAME="Ext Expression">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Group Name">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Html Attr">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Sequence">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Tmpl Item Holder Name">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Type">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Web Tmpl Name">
+			</ATTRIBUTE>
+		</TYPE>
+	</SBL_EXT_TYPE_DEF>
+</REPOSITORY>
+
+
+
