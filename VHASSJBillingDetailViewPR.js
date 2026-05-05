@@ -224,25 +224,18 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                 //CM-7656 - End code added by Renuka
                 watchBankPopupAfterPickClick();
                 watchUpdateBankAcctPopupAfterPickClick();
-                setTimeout(function () {
-                    makeBillingAddressReadOnly();
-                }, 300);
-                setTimeout(function () {
-                    refreshBillingLayout
-                }, 50);
+                // CR fix: removed makeBillingAddressReadOnly() call - users must be able to edit address per CR (Billing Address CR)
+                setTimeout(refreshBillingLayout, 50);
             }
             VHASSJBillingDetailViewPR.prototype.BindData = function (bRefresh) {
                 SiebelAppFacade.VHASSJBillingDetailViewPR.superclass.BindData.apply(this, arguments);
                 // Manually sync the address details applet to ensure data is visible
                 //Soumalya:Added if condition for SIT blocker
                 if (activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ" || activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ") {
-                    manualDataSync(this.GetPM().Get("GetAppletMap")["VF SSJ Billing Account Address Details TBUI"]);
-                    setTimeout(function () {
-                        makeBillingAddressReadOnly();
-                    }, 200);
-                    setTimeout(function () {
-                        refreshBillingLayout
-                    }, 150);
+                    // CR fix: use GetActiveView().GetApplet() instead of GetPM().Get("GetAppletMap") - PR-only approach per Billing Address CR
+                    manualDataSync(SiebelApp.S_App.GetActiveView().GetApplet("VF SSJ Billing Account Address Details TBUI"));
+                    // CR fix: removed makeBillingAddressReadOnly() call - users must be able to edit address per CR (Billing Address CR)
+                    setTimeout(refreshBillingLayout, 150);
                 }
             }
             VHASSJBillingDetailViewPR.prototype.BindEvents = function () {
@@ -250,12 +243,27 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                 $(document).off("click.vhaSSJLayout").on("click.vhaSSJLayout", "button, a", function () {
                     var txt = ($(this).text() || "").trim().toLowerCase();
                     if (txt === "edit" || txt === "save" || txt === "discard") {
-                        setTimeout(function () {
-                            refreshBillingLayout
-                        }, 500);
+                        setTimeout(refreshBillingLayout, 500);
                     }
                 });
                 // ---- DFA Flow Billing Page- SAMALA----//
+                // CR fix: When manual address checkbox is clicked inside address form applet,
+                // switch the applet to Edit mode so user can enter/update the manual address (Billing Address CR)
+                $(document).off("change.vhaBillingManualAddr").on("change.vhaBillingManualAddr", ".BillingAddressContainer input[type='checkbox']", function () {
+                    if (activeView === "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ") {
+                        var addrFormApplet = SiebelApp.S_App.GetActiveView().GetApplet("VF SSJ Billing Account Address Details TBUI");
+                        if (addrFormApplet) {
+                            var $formEl = $("#" + addrFormApplet.GetFullId());
+                            var isAlreadyEditing = $formEl.find("button[data-display='Save'], button:contains('Save')").length > 0;
+                            if (!isAlreadyEditing) {
+                                setTimeout(function () {
+                                    addrFormApplet.InvokeMethod("EditRecord");
+                                }, 100);
+                            }
+                        }
+                    }
+                });
+                // ---- Manual address checkbox End ----//
                 $(".Refreshbutton img").off("click").on("click", function () {
                     var appletPM = SiebelApp.S_App.GetActiveView().GetApplet("VHA DFA Billing Setup Applet TBUI").GetPModel();
                     var service = SiebelApp.S_App.GetService("SIS OM PMT Service");
@@ -320,6 +328,7 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
             }
             VHASSJBillingDetailViewPR.prototype.EndLife = function () {
                 $(document).off(".vhaSSJLayout");
+                $(document).off(".vhaBillingManualAddr");
                 SiebelAppFacade.VHASSJBillingDetailViewPR.superclass.EndLife.apply(this, arguments);
             }
             return VHASSJBillingDetailViewPR;
