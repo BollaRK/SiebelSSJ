@@ -551,8 +551,8 @@ if (typeof(SiebelAppFacade.VHASSJNavigationPR) === "undefined") {
                             
                             if(isFWA == "Y" && !(hasErrors))
                             {
-                                var proceedFlag = $(".CCMobileCoverage #vha-or-cover-chk #vha-or-warning-banner").hasClass('displaynone');
-                                hasErrors = (!proceedFlag);
+                                //var proceedFlag = $(".CCMobileCoverage #vha-or-cover-chk #vha-or-warning-banner").hasClass('displaynone');
+                                //hasErrors = (!proceedFlag); commented both lines for blocker 10940
                             }
                         }
                     }
