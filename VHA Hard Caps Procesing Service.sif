@@ -1,0 +1,3255 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<REPOSITORY
+   NAME="Siebel Repository"
+   UPDATED="02/11/2019 19:21:26"
+   UPDATED_BY="SADMIN"
+   CREATED="02/11/2019 18:54:57"
+   CREATED_BY="SADMIN"
+   FIO_PLACEHOLDER_FIO="TRUE">
+	<PROJECT
+	   ALLOW_OBJECT_LOCKING="Y"
+	   COMMENTS="VHA: Balaji 6/22/2018 Created for Hard Caps"
+	   INACTIVE="N"
+	   LANGUAGE_LOCKED="ENU"
+	   LOCKED="Y"
+	   LOCKED_DATE="05/01/2019 01:19:01"
+	   NAME="VHA Hard Caps"
+	   UI_FREEZE="N"
+	   LOCKED_BY_NAME="SADMIN"
+	   UPDATED="05/01/2019 01:19:03"
+	   UPDATED_BY="SADMIN"
+	   CREATED="11/01/2018 13:55:53"
+	   CREATED_BY="SADMIN"
+	   FIO_PLACEHOLDER_FIO="TRUE">
+		<BUSINESS_SERVICE
+		   CACHE="N"
+		   CLASS="CSSService"
+		   COMMENTS="VHA - Rinu - 05/07/2018 - Created for Hard Caps"
+		   EXTERNAL_USE="N"
+		   HIDDEN="N"
+		   INACTIVE="N"
+		   NAME="VHA Hard Caps Procesing Service"
+		   OBJECT_LOCKED="N"
+		   SERVER_ENABLED="N"
+		   STATE_MANAGEMENT_TYPE="Stateful"
+		   WEB_SERVICE_ENABLED="N"
+		   UPDATED="11/01/2018 14:08:01"
+		   UPDATED_BY="SADMIN"
+		   CREATED="11/01/2018 13:55:59"
+		   CREATED_BY="SADMIN">
+			<BUSINESS_SERVICE_LOCALE
+			   APPLICATION_CODE="STD"
+			   DISPLAY_NAME="VHA Hard Caps Procesing Service"
+			   INACTIVE="N"
+			   LANGUAGE_CODE="ENU"
+			   NAME="ENU-STD"
+			   TRANSLATE="Y"
+			   UPDATED="11/01/2018 13:55:59"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:55:59"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_LOCALE>
+			<BUSINESS_SERVICE_METHOD
+			   COMMENTS="25/Jul/18: Added by Kailash for Hard Caps"
+			   HIDDEN="N"
+			   INACTIVE="N"
+			   NAME="ButtonEnable"
+			   UPDATED="11/01/2018 13:55:59"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:55:59"
+			   CREATED_BY="SADMIN">
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="AccountEnable"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Output"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="AssetEnable"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Output"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="CARowId"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="DateEnable"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Output"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="sAccntCheck"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="sAssetCheck"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="sAssetId"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="sCreditClass"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="sCreditModDate"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_LOCALE
+				   APPLICATION_CODE="STD"
+				   DISPLAY_NAME="ButtonEnable"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_LOCALE>
+			</BUSINESS_SERVICE_METHOD>
+			<BUSINESS_SERVICE_METHOD
+			   COMMENTS="Sachi - 20/Sep/2018 Added for HardCaps"
+			   HIDDEN="N"
+			   INACTIVE="N"
+			   NAME="CapsAccessoryValidation"
+			   UPDATED="11/01/2018 13:55:59"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:55:59"
+			   CREATED_BY="SADMIN">
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="OrdFunction"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="OrderId"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="SessionId"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_LOCALE
+				   APPLICATION_CODE="STD"
+				   DISPLAY_NAME="CapsAccessoryValidation"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_LOCALE>
+			</BUSINESS_SERVICE_METHOD>
+			<BUSINESS_SERVICE_METHOD
+			   HIDDEN="N"
+			   INACTIVE="N"
+			   NAME="CreditCheckValidation"
+			   UPDATED="11/01/2018 13:55:59"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:55:59"
+			   CREATED_BY="SADMIN">
+				<BUSINESS_SERVICE_METHOD_LOCALE
+				   APPLICATION_CODE="STD"
+				   DISPLAY_NAME="CreditCheckValidation"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_LOCALE>
+			</BUSINESS_SERVICE_METHOD>
+			<BUSINESS_SERVICE_METHOD
+			   COMMENTS="Sachi - 17/Aug/2018 Added for Hard Caps"
+			   HIDDEN="N"
+			   INACTIVE="N"
+			   NAME="CreditCheckValidation_UI"
+			   UPDATED="11/01/2018 13:55:59"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:55:59"
+			   CREATED_BY="SADMIN">
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="CreditChkDate"
+				   OPTIONAL="N"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="CreditClass"
+				   OPTIONAL="N"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="FormattedDate"
+				   OPTIONAL="N"
+				   STORAGE_TYPE="Property"
+				   TYPE="Output"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="FormattedDateMod"
+				   OPTIONAL="N"
+				   STORAGE_TYPE="Property"
+				   TYPE="Output"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_LOCALE
+				   APPLICATION_CODE="STD"
+				   DISPLAY_NAME="CreditCheckValidation_UI"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_LOCALE>
+			</BUSINESS_SERVICE_METHOD>
+			<BUSINESS_SERVICE_METHOD
+			   COMMENTS="17/08/2018-Added for HardCaps"
+			   HIDDEN="N"
+			   INACTIVE="N"
+			   NAME="GetCurrentStatusForIDD"
+			   UPDATED="11/01/2018 13:55:59"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:55:59"
+			   CREATED_BY="SADMIN">
+				<BUSINESS_SERVICE_METHOD_LOCALE
+				   APPLICATION_CODE="STD"
+				   DISPLAY_NAME="GetCurrentStatusForIDD"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_LOCALE>
+			</BUSINESS_SERVICE_METHOD>
+			<BUSINESS_SERVICE_METHOD
+			   COMMENTS="Sachi - 17/03/2019 Added for R19.1B Interim."
+			   HIDDEN="N"
+			   INACTIVE="N"
+			   NAME="GetPropositionSplType"
+			   UPDATED="05/20/2019 23:31:16"
+			   UPDATED_BY="SADMIN"
+			   CREATED="05/20/2019 23:31:16"
+			   CREATED_BY="SADMIN">
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="IsHardCaps"
+				   OPTIONAL="N"
+				   STORAGE_TYPE="Property"
+				   TYPE="Output"
+				   UPDATED="05/20/2019 23:31:18"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/20/2019 23:31:18"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="New Root Order Item Id"
+				   OPTIONAL="N"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="05/20/2019 23:31:18"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/20/2019 23:31:18"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="Order Id"
+				   OPTIONAL="N"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="05/20/2019 23:31:18"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/20/2019 23:31:18"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="Order Sub Type"
+				   OPTIONAL="N"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="05/20/2019 23:31:18"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/20/2019 23:31:18"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="Root Line Item Id"
+				   OPTIONAL="N"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="05/20/2019 23:31:18"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/20/2019 23:31:18"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_LOCALE
+				   APPLICATION_CODE="STD"
+				   DISPLAY_NAME="GetPropositionSplType"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="05/20/2019 23:31:17"
+				   UPDATED_BY="SADMIN"
+				   CREATED="05/20/2019 23:31:17"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_LOCALE>
+			</BUSINESS_SERVICE_METHOD>
+			<BUSINESS_SERVICE_METHOD
+			   COMMENTS="17/08/2018-Added for HardCaps"
+			   HIDDEN="N"
+			   INACTIVE="N"
+			   NAME="PostOrderHardCapsProcess"
+			   UPDATED="11/01/2018 13:55:59"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:55:59"
+			   CREATED_BY="SADMIN">
+				<BUSINESS_SERVICE_METHOD_LOCALE
+				   APPLICATION_CODE="STD"
+				   DISPLAY_NAME="PostOrderHardCapsProcess"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_LOCALE>
+			</BUSINESS_SERVICE_METHOD>
+			<BUSINESS_SERVICE_METHOD
+			   COMMENTS="17/08/2018-Added for HardCaps"
+			   HIDDEN="N"
+			   INACTIVE="N"
+			   NAME="SubmitBarValidation"
+			   UPDATED="11/01/2018 13:55:59"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:55:59"
+			   CREATED_BY="SADMIN">
+				<BUSINESS_SERVICE_METHOD_LOCALE
+				   APPLICATION_CODE="STD"
+				   DISPLAY_NAME="SubmitBarValidation"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_LOCALE>
+			</BUSINESS_SERVICE_METHOD>
+			<BUSINESS_SERVICE_METHOD
+			   COMMENTS="13/Jul/18: Added by Kailash for Hard Caps"
+			   HIDDEN="N"
+			   INACTIVE="N"
+			   NAME="UpdateCapsDetails"
+			   UPDATED="11/01/2018 13:55:59"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:55:59"
+			   CREATED_BY="SADMIN">
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="Order Id"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="OrderFunction"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_ARG
+				   DATA_TYPE="String"
+				   HIDDEN="N"
+				   INACTIVE="N"
+				   NAME="Root Line Item Id"
+				   OPTIONAL="Y"
+				   STORAGE_TYPE="Property"
+				   TYPE="Input"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_ARG>
+				<BUSINESS_SERVICE_METHOD_LOCALE
+				   APPLICATION_CODE="STD"
+				   DISPLAY_NAME="UpdateCapsDetails"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="11/01/2018 13:55:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="11/01/2018 13:55:59"
+				   CREATED_BY="SADMIN">
+				</BUSINESS_SERVICE_METHOD_LOCALE>
+			</BUSINESS_SERVICE_METHOD>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="(declarations)"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="var sExpiryDate = &quot;&quot;;
+var gNewAssetId=&quot;&quot;;
+var sRPC = &quot;&quot;;
+var sCreditCheckFlg = &quot;&quot;;
+"
+			   SEQUENCE="1"
+			   UPDATED="11/23/2020 19:23:21"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:55:59"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="AddCapDetailsInSubmit"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function AddCapDetailsInSubmit(sOrderItmId,sAll,sCustAstIntId)
+{
+ /*
+     * Component Name        : 	VHA Hard Caps Procesing Service
+     * Method Name/Fn         : mGetPreSubmitModify	
+     * Component Information : 	
+     * Modification History  :
+     * Date			Author		Config #			Description
+     * ============ ===========	===========			================================
+     * 26-12-2018  Sathish   19.1 PKE#             IDD/Data in submit XML fixed for BAU to BAU and BAU to HC change prop scenarios
+     */
+
+	try
+	{
+		var sCaps = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_PROD_TYPE&quot;, &quot;Hard Caps&quot;);
+		var sVHACaps = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;, &quot;Vodafone Caps&quot;);		
+		var sBar = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_HC_IDD_DEFAULT&quot;, &quot;Barred&quot;);
+		var sUnbar = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_HC_USAGE_STATUS&quot;, &quot;Unbarred&quot;);
+		var sData = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;TT_AREA&quot;, &quot;Data&quot;);
+		var sIDDVal = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;, &quot;IDD&quot;);
+		var isFirstRec ,sVal=&quot;&quot;;
+		var oThrottleBC = TheApplication().GetBusObject(&quot;VHA Throttle Order&quot;).GetBusComp(&quot;VHA Throttle Details&quot;);		
+						//mDeleteCapsDetails(sOrderItmId);
+					
+						var sLOVBC = TheApplication().GetBusObject(&quot;List Of Values&quot;).GetBusComp(&quot;List Of Values&quot;);
+						with(sLOVBC)
+						{
+							ActivateField(&quot;Type&quot;);
+							ActivateField(&quot;Name&quot;);
+							ActivateField(&quot;Value&quot;);
+							ActivateField(&quot;Sub Type&quot;);
+							ClearToQuery();
+							SetViewMode(AllView);
+
+							if(sAll == &apos;AllUnbar&apos; || sAll == &apos;AllIDDbar&apos;)
+							{
+								SetSearchSpec(&quot;Type&quot;,&quot;VHA_USAGE_PRODUCT&quot;);
+								SetSearchSpec(&quot;Name&quot;,sCaps);
+							}
+							else if(sAll == &apos;Booster&apos;)
+							{
+								SetSearchSpec(&quot;Type&quot;,&quot;VHA_USAGE_PRODUCT&quot;);
+								SetSearchSpec(&quot;Sub Type&quot;, sData);
+							}
+							else if(sAll == &apos;IDD&apos;)
+							{
+								SetSearchSpec(&quot;Type&quot;,&quot;VHA_USAGE_PRODUCT&quot;);
+								SetSearchSpec(&quot;Sub Type&quot;, sIDDVal);
+							}
+							ExecuteQuery(ForwardOnly);
+							isFirstRec = FirstRecord();
+							while(isFirstRec)
+							{
+								sVal = GetFieldValue(&quot;Value&quot;);
+								with(oThrottleBC)
+								{
+									ActivateField(&quot;PCRF Expiry Date&quot;);
+									ActivateField(&quot;Product&quot;);
+									ActivateField(&quot;Status&quot;);
+									NewRecord(NewAfter);
+									if (sAll == &apos;AllUnbar&apos; || sAll == &apos;AllIDDbar&apos;)
+									{
+									mGetPCRFDate(sCustAstIntId);	
+									SetFieldValue(&quot;PCRF Expiry Date&quot;, sExpiryDate);
+									}
+									else if (sAll == &apos;Booster&apos;)
+									{
+										mGetPCRFDate(sCustAstIntId);
+										SetFieldValue(&quot;PCRF Expiry Date&quot;,sExpiryDate);
+									}
+									SetFieldValue(&quot;Product&quot;, sVal);
+									if(sAll == &apos;AllUnbar&apos; || (sAll == &apos;AllIDDbar&apos; &amp;&amp; sVal == sData) || sAll == &apos;Booster&apos; || sAll == &apos;IDD&apos;)
+									{
+										SetFieldValue(&quot;Status&quot;, sUnbar);
+									}
+									else if(sAll == &apos;AllIDDbar&apos; &amp;&amp; sVal == sIDDVal)
+										SetFieldValue(&quot;Status&quot;, sBar);
+									SetFieldValue(&quot;Type&quot;, sCaps);
+									SetFieldValue(&quot;Service Order Id&quot;, sOrderItmId);
+									WriteRecord();
+								}
+								isFirstRec = NextRecord();	
+							}
+						}
+					
+
+}
+catch(e)
+{
+throw(e);
+}
+finally
+{
+oThrottleBC = null;
+}
+
+}"
+			   SEQUENCE="2"
+			   UPDATED="05/20/2019 23:31:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="05/20/2019 23:31:22"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="Service_PreInvokeMethod"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function Service_PreInvokeMethod (MethodName, Inputs, Outputs)
+{
+/*
+ * Modification History  :
+ * Date			Author		Config #	   Description
+ * ============ ===========	=============  =======================
+ * 05/07/2018	Rinu 		18.4 HardCaps    Invoked for Hard Caps
+ * 13/07/2018	Kailash 	18.4 HardCaps  Added for Hard Caps
+ * 17/07/2018	Vinodhini 	18.4 HardCaps  Added for Hard Caps
+ */
+	try
+	{
+		var bsError;
+		var	psErrorInput;
+		var psErrorOutput;
+		switch(MethodName)
+		{
+			case &quot;CreditCheckValidation&quot;:
+			fnCreditCheckValidation(Inputs,Outputs);
+			break;
+			
+			case &quot;CreditCheckValidation_UI&quot;:  // Sachi - 17/Aug/2018 Added for HardCaps
+			fnCreditCheckValidation_UI(Inputs,Outputs);
+			break;
+			
+			case &quot;CapsAccessoryValidation&quot;:	//Sachi - 20/Sep/2018 Added for APP/Non App/Secondary device validation for Hardcaps
+			mCapsAccessoryValidation(Inputs, Outputs)
+			break;
+			
+			case &quot;CheckifCreditCapPropAdded&quot;:
+			mCheckifCreditCapPropAdded(Inputs,Outputs);
+			break;
+			
+			case &quot;IsCappedCustomer&quot;:
+			mIsCappedCustomer(Inputs,Outputs);
+			break;
+			
+			case &quot;IsAccessoryAdded&quot;:
+			mIsAccessoryAdded(Inputs,Outputs);
+			break;
+			
+			case &quot;UpdateCapsDetails&quot;://Kailash-13/Jul/18-Added for HardCaps
+			mUpdateCapsDetails(Inputs);
+			break;
+			
+			//Vinodhini-17/07/2018-Added for HardCaps
+			case &quot;PostOrderHardCapsProcess&quot;:
+			mPostOrderHardCapsProcess(Inputs,Outputs);
+			break;
+			
+			case &quot;IsMoreThanOneServiceAdded&quot;:
+			mIsMoreThanOneServiceAdded(Inputs,Outputs);
+			break;
+			
+			case &quot;ButtonEnable&quot;://Kailash-25/Jul/18-Added for HardCaps
+			mCheckCapsEnable(Inputs, Outputs);
+			break;
+			
+			case &quot;HardCapsValidation&quot;:
+			mHardCapsValidation(Inputs,Outputs);
+			break;
+			
+			//Vinodhini-03/08/2018-Added for HardCaps
+			case &quot;SubmitBarValidation&quot;:
+			mCheckExistingBarring(Inputs, Outputs);
+			mCheckExpiryDate(Inputs, Outputs);
+			mCheckDuplicateBarringRecords(Inputs, Outputs);
+			break;
+			
+			//Vinodhini-17/08/2018-Added for HardCaps
+			case &quot;GetCurrentStatusForIDD&quot;:
+			mGetCurrentStatusForIDD(Inputs,Outputs);
+			break;
+			
+			case &quot;GetPropositionSplType&quot;:  //Sachi - 20/03/2019 - Added for IR01 Interim Release.
+			mGetPropositionSplType(Inputs,Outputs);
+			break;
+
+			case &quot;CheckAmazonPrimeSubscription&quot;:  //Jaya-23/10/2020-Added for Nov Rel-Amazon Prime
+			mCheckAmazonPrimeSubscription(Inputs,Outputs);
+			break;
+
+			case &quot;CheckPrimaryContact&quot;:
+			mCheckPrimaryContact(Inputs,Outputs);
+			break;
+			
+			default:
+			break;
+		}
+		return (CancelOperation);
+	}
+	
+	catch(e)
+	{
+		throw(e);
+	}
+	
+	finally
+	{
+		//nothing
+	}
+	return (ContinueOperation);
+}"
+			   SEQUENCE="27"
+			   UPDATED="11/23/2020 19:23:21"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="fnCreditCheckValidation"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function fnCreditCheckValidation(Inputs,Outputs)
+{
+/*
+ * Component Name        : 	VHA Hard Caps Procesing Service
+ * Function Name         : 	fnCreditCheckValidation
+ * Component Information : 	This function takes a date and adds a specified number of months 
+ *							and throw validation message on submit credit check button
+ * Inputs				 : CreditChkDate, CreditClass
+ * Modification History  :
+ * Date			Author		Config #	Description
+ * ============ ===========	===========	================================
+ * 06/07/2018	RINU					Initial Version
+ */
+ 
+try{
+	var sCreditChkDate = Inputs.GetProperty(&quot;CreditChkDate&quot;);	
+	var sCreditClass = Inputs.GetProperty(&quot;CreditClass&quot;);
+	var dtoday = new Date;
+	var dmonth = dtoday.getMonth ()+1;
+	//var sCreditClassX1 = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VF_CREDIT_CLASS&quot;,&quot;X1&quot;);
+	//var sCreditClassX2 = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VF_CREDIT_CLASS&quot;,&quot;X2&quot;);
+	var sCreditClassCap = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_HARD_CAP_CC&quot;,sCreditClass);
+	
+	if((sCreditChkDate != &quot;&quot; &amp;&amp; sCreditChkDate != null) &amp;&amp; ((sCreditClass != &quot;&quot; &amp;&amp; sCreditClass != null) &amp;&amp; (sCreditClass == sCreditClassCap)))
+	{
+		// Array holding the last day for each month
+		var aLastDays = new Array(31,28,31,30,31,30,31,31,30,31,30,31)
+	
+		// Calculation Variables
+		var iInDays;
+		var iOutDays;
+		var iInMonths;
+		var iOutMonths;
+		var iMonthCarryOver;
+		var iInYears;
+		var iOutYears;
+		var iNumYearsToAdd;
+		var dOutDate;
+		var iMonthReference;
+		var iMonthsToAdd = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VF_CREDIT_CHECK_MONTHS&quot;,sCreditClass);
+		sCreditChkDate = new Date(sCreditChkDate); 
+
+		iInYears = sCreditChkDate.getFullYear();
+		iInMonths = sCreditChkDate.getMonth() + 1 ;
+		iInDays = sCreditChkDate.getDate();
+		iInDays = iInDays + 1;
+		
+		// Find the last day of the month in which the &quot;Out Date&quot; falls.
+		iMonthReference = (iInMonths + ToNumber(iMonthsToAdd));
+		iMonthReference = (iMonthReference % 12);
+		if (iMonthReference == 0)
+			{
+				iMonthReference = 12
+			}
+		
+		
+		if (iInDays &lt;= aLastDays[iMonthReference - 1] )
+		{
+			iOutDays = iInDays;
+			iMonthCarryOver = 0;
+		}
+		else
+		{
+			iOutDays = 1;
+			iMonthCarryOver = 1;
+		}
+	
+		// Calculate the value for the end date month
+		iOutMonths = ((iInMonths + iMonthCarryOver + ToNumber(iMonthsToAdd)) % 12);
+		if (iOutMonths == 0)	{iOutMonths = 12};
+		iOutMonths = iOutMonths - 1;
+	
+		//Calculate the value for the end date year
+		if ((( iInMonths + iMonthCarryOver + ToNumber(iMonthsToAdd) ) % 12) != 0)
+		{
+			iNumYearsToAdd = ToInteger( ( iInMonths + iMonthCarryOver + ToNumber(iMonthsToAdd) ) / 12 );
+		}
+		else
+		{
+			iNumYearsToAdd = (ToInteger( ( iInMonths + iMonthCarryOver + ToNumber(iMonthsToAdd) ) / 12 ) - 1);
+		}
+		iOutYears = iInYears + iNumYearsToAdd;
+		
+		// Create a new date value based on the above calculations
+		dOutDate = new Date (iOutYears, iOutMonths, iOutDays);
+		
+		var sFormattedDate = dOutDate.getDate() + &quot;/&quot; + (dOutDate.getMonth() + 1) + &quot;/&quot; + dOutDate.getFullYear();
+		
+		
+	//Throw validation if the dOutDate is less than today	
+	if(dOutDate &gt;= dtoday)
+		{
+			sCreditCheckFlg = &quot;DISABLE&quot;;
+			if(TheApplication().ActiveViewName() == &quot;VF Connection Wizard View - Credit Check – TBUI&quot; || TheApplication().ActiveViewName() == &quot;VF Com Account Financial Profile View&quot; || TheApplication().ActiveViewName() == &quot;VF Com Account Financial Profile - Edit View&quot;)
+			{
+		    	TheApplication().RaiseErrorText(&quot;Credit Check may not be submitted until &quot; + sFormattedDate + &quot; due to the customer being of credit class &quot; + sCreditClass);
+		    }
+		}
+		else
+			sCreditCheckFlg = &quot;ENABLE&quot;;
+
+}
+}//try
+catch (e){
+	
+	throw(e);
+	
+}finally{
+		aLastDays = null;
+		iInDays = null;
+		iOutDays = null;
+		iInMonths = null;
+		iOutMonths = null;
+		iMonthCarryOver = null;
+		iInYears = null;
+		iOutYears = null;
+		iNumYearsToAdd = null;
+		dOutDate = null;
+		iMonthReference = null;
+		iInYears = null;
+		iInMonths = null;
+		iInDays = null;
+}   
+}"
+			   SEQUENCE="3"
+			   UPDATED="05/20/2019 23:31:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="fnCreditCheckValidation_UI"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function fnCreditCheckValidation_UI(Inputs,Outputs)
+{
+	/*
+ * Component Name        : 	VHA Hard Caps Procesing Service
+ * Function Name         : 	fnCreditCheckValidation_UI
+ * Component Information : 	This function takes a date and adds a specified number of months 
+ *							and show the next eligible date to re-submit credit check in UI
+ * Inputs				 : CreditChkDate, CreditClass
+ * Modification History  :
+ * Date			Author		Config #	Description
+ * ============ ===========	===========	================================
+ * 17/08/2018	Sachi					Initial Version
+ */
+ 
+try{
+	var sCreditChkDate = Inputs.GetProperty(&quot;CreditChkDate&quot;);	
+	var sCreditClass = Inputs.GetProperty(&quot;CreditClass&quot;);
+	var dtoday = new Date;
+	var dmonth = dtoday.getMonth ()+1;
+	var sCreditClassCap = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_HARD_CAP_CC&quot;,sCreditClass);
+	
+	if((sCreditChkDate != &quot;&quot; &amp;&amp; sCreditChkDate != null) &amp;&amp; ((sCreditClass != &quot;&quot; &amp;&amp; sCreditClass != null) &amp;&amp; (sCreditClass == sCreditClassCap)))
+	{
+		// Array holding the last day for each month
+		var aLastDays = new Array(31,28,31,30,31,30,31,31,30,31,30,31)
+	
+		// Calculation Variables
+		var iInDays;
+		var iOutDays;
+		var iInMonths;
+		var iOutMonths;
+		var iMonthCarryOver;
+		var iInYears;
+		var iOutYears;
+		var iNumYearsToAdd;
+		var dOutDate;
+		var iMonthReference;
+		var iMonthsToAdd = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VF_CREDIT_CHECK_MONTHS&quot;,sCreditClass);
+		sCreditChkDate = new Date(sCreditChkDate); 
+
+		iInYears = sCreditChkDate.getFullYear();
+		iInMonths = sCreditChkDate.getMonth() + 1 ;
+		iInDays = sCreditChkDate.getDate();
+		iInDays = iInDays + 1;
+		
+		// Find the last day of the month in which the &quot;Out Date&quot; falls.
+		iMonthReference = (iInMonths + ToNumber(iMonthsToAdd));
+		iMonthReference = (iMonthReference % 12);
+		if (iMonthReference == 0)
+			{
+				iMonthReference = 12
+			}
+		
+		
+		if (iInDays &lt;= aLastDays[iMonthReference - 1] )
+		{
+			iOutDays = iInDays;
+			iMonthCarryOver = 0;
+		}
+		else
+		{
+			iOutDays = 1;
+			iMonthCarryOver = 1;
+		}
+	
+		// Calculate the value for the end date month
+		iOutMonths = ((iInMonths + iMonthCarryOver + ToNumber(iMonthsToAdd)) % 12);
+		if (iOutMonths == 0)	{iOutMonths = 12};
+		iOutMonths = iOutMonths - 1;
+	
+		//Calculate the value for the end date year
+		if ((( iInMonths + iMonthCarryOver + ToNumber(iMonthsToAdd) ) % 12) != 0)
+		{
+			iNumYearsToAdd = ToInteger( ( iInMonths + iMonthCarryOver + ToNumber(iMonthsToAdd) ) / 12 );
+		}
+		else
+		{
+			iNumYearsToAdd = (ToInteger( ( iInMonths + iMonthCarryOver + ToNumber(iMonthsToAdd) ) / 12 ) - 1);
+		}
+		iOutYears = iInYears + iNumYearsToAdd;
+		
+		// Create a new date value based on the above calculations
+		dOutDate = new Date (iOutYears, iOutMonths, iOutDays);
+		
+		var sFormattedDate = (dOutDate.getMonth() + 1) + &quot;/&quot; + dOutDate.getDate()  + &quot;/&quot; + dOutDate.getFullYear();
+		var sFormattedDateMOD = dOutDate.getDate() + &quot;/&quot; + (dOutDate.getMonth() + 1) + &quot;/&quot; + dOutDate.getFullYear();
+		Outputs.SetProperty(&quot;FormattedDate&quot;,sFormattedDate);
+		if(dOutDate &gt;= dtoday)
+		{
+			Outputs.SetProperty(&quot;FormattedDateMod&quot;,sFormattedDateMOD);
+		}
+}
+}//try
+catch (e){
+	
+	throw(e);
+	
+}finally{
+		aLastDays = null;
+		iInDays = null;
+		iOutDays = null;
+		iInMonths = null;
+		iOutMonths = null;
+		iMonthCarryOver = null;
+		iInYears = null;
+		iOutYears = null;
+		iNumYearsToAdd = null;
+		dOutDate = null;
+		iMonthReference = null;
+		iInYears = null;
+		iInMonths = null;
+		iInDays = null;
+} 
+}"
+			   SEQUENCE="4"
+			   UPDATED="05/20/2019 23:31:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mCapsAccessoryValidation"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="/*
+ * Modification History  :
+ * Date			Author		Config #	   Description
+ * ============ ===========	=============  =============================================================================================
+ * 20/09/2018	Kailash 		18.4 HardCaps  Added for APP/Non App/Secondary device validation (if the asset belongs to Vodafone Caps)
+ */
+ 
+function mCapsAccessoryValidation(Inputs, Outputs)
+{
+	try
+	{
+		var sCustIntId = &quot;&quot;, sValidThrow = &quot;N&quot;;
+		var sOrderid = Inputs.GetProperty(&quot;OrderId&quot;);	
+		var sOrdFunction = Inputs.GetProperty(&quot;OrdFunction&quot;);
+		var sSessionId = Inputs.GetProperty(&quot;SessionId&quot;);
+		var boOrder = TheApplication().GetBusObject(&quot;Order Entry (Sales)&quot;);
+		var bcLineItem = boOrder.GetBusComp(&quot;VF Order Entry - Line Items Thin&quot;);		
+		var sVHACaps = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;, &quot;Vodafone Caps&quot;);
+		var sOrdFun = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_FUNCTION&quot;, &quot;UPGRADE&quot;);
+		var bcAsset,bcUpgOffer,bcAPP,boAsset,bcAccessory;
+		if(sOrderid != &quot;&quot;)
+		{
+			with(bcLineItem)
+			{
+				SetViewMode(AllView);
+				ClearToQuery();
+				ActivateField(&quot;Custom Asset Integration Id&quot;);
+				ActivateField(&quot;MSISDN&quot;);
+				SetSearchSpec(&quot;Order Header Id&quot;, sOrderid);
+				SetSearchSpec(&quot;Parent Order Item Id&quot;, &quot;is null&quot;);
+				SetSearchSpec(&quot;Action Code&quot;, &quot;&lt;&gt; &apos;Delete&apos;&quot;);
+				SetSearchSpec(&quot;Special Product Type&quot;,sVHACaps);
+				ExecuteQuery(ForwardOnly);
+				var isrec = FirstRecord();
+				while(isrec)
+				{
+					sCustIntId = GetFieldValue(&quot;Custom Asset Integration Id&quot;);
+					var sMSISDN = GetFieldValue(&quot;MSISDN&quot;);
+					if(sCustIntId != &quot;&quot; &amp;&amp; sCustIntId != null &amp;&amp; sOrdFunction == sOrdFun &amp;&amp; sSessionId != &quot;&quot;)
+					{											
+						bcAsset = boOrder.GetBusComp(&quot;Asset Mgmt - Asset - Header&quot;);
+						bcUpgOffer = boOrder.GetBusComp(&quot;VF Upgrade Offer&quot;);
+					    bcAPP = boOrder.GetBusComp(&quot;VHA Accessory Items Upgrade TBUI&quot;);						
+						bcAsset.SetViewMode(AllView);
+						bcAsset.ClearToQuery();	
+						bcAsset.ActivateField(&quot;VHA Secondary Subscription Flg&quot;);
+						bcUpgOffer.ActivateField(&quot;VHA APP Count Calc&quot;);
+						bcUpgOffer.ActivateField(&quot;VHA Secondary Device Count Calc&quot;);						
+						bcAPP.SetSearchSpec(&quot;Status&quot;,&quot;In Process&quot;);						
+						bcAsset.SetSearchSpec(&quot;Integration Id&quot;,sCustIntId);		
+						bcUpgOffer.SetSearchSpec(&quot;Wizard Session Id&quot;,sSessionId);							
+						bcAsset.ExecuteQuery(ForwardOnly);
+						if(bcAsset.FirstRecord())
+						{
+							if(bcAsset.GetFieldValue(&quot;VHA Secondary Subscription Flg&quot;) == &quot;Y&quot;)	
+								sValidThrow = &quot;Y&quot;;
+							else if(bcUpgOffer.GetFieldValue(&quot;VHA APP Count Calc&quot;)&gt;0 || bcUpgOffer.GetFieldValue(&quot;VHA Secondary Device Count Calc&quot;) &gt;0)
+								sValidThrow = &quot;Y&quot;;								
+							else if(bcAPP.FirstRecord() == true)
+								sValidThrow = &quot;Y&quot;;
+						}											
+					}					
+					else if(sCustIntId != &quot;&quot; &amp;&amp; sCustIntId != null)
+					{
+						boAsset = TheApplication().GetBusObject(&quot;VF Asset&quot;);
+					    bcAsset = boAsset.GetBusComp(&quot;Asset Mgmt - Asset - Header&quot;);
+						bcAsset.SetViewMode(AllView);
+						bcAsset.ClearToQuery();	
+						bcAsset.ActivateField(&quot;VHA Secondary Subscription Flg&quot;);
+						bcAsset.SetSearchSpec(&quot;Integration Id&quot;,sCustIntId);						
+						bcAsset.ExecuteQuery(ForwardOnly);
+
+						if(bcAsset.FirstRecord())
+						{
+							if(bcAsset.GetFieldValue(&quot;VHA Secondary Subscription Flg&quot;) == &quot;Y&quot;)
+								sValidThrow = &quot;Y&quot;;
+							else 
+							{
+								var sAssetId = bcAsset.GetFieldValue(&quot;Id&quot;);
+								bcAccessory = boAsset.GetBusComp(&quot;VHA APP Accessory TBUI BC&quot;);
+								var strSearchExpr = &quot;[Contract End Date] &gt;= Today() AND [Status] = &apos;Active&apos; AND [Root Asset Id] = &apos;&quot; + sAssetId + &quot;&apos;&quot;;
+								bcAccessory.SetViewMode(AllView);
+								bcAccessory.ClearToQuery();	
+								bcAccessory.SetSearchExpr(strSearchExpr);
+								bcAccessory.ExecuteQuery(ForwardOnly);
+							
+								if(bcAccessory.FirstRecord() == true)
+									sValidThrow = &quot;Y&quot;;
+							}
+						}							
+					}
+					if(sValidThrow == &quot;Y&quot;)
+					{
+						TheApplication().RaiseErrorText(&quot;MSISDN # &quot; + sMSISDN + &quot; Please cancel / terminate all the Active APP Contract, Please remove all the new APP Accessories and Secondary Devices purchased, and Please disconnect the Secondary Subscription to purchase the Vodafone Cap Plan.&quot;);
+					}
+					isrec = NextRecord();
+				}
+			}
+		}
+	}
+	
+	catch(e)
+	{
+		throw (e);
+	}
+	
+	finally
+	{		
+		bcAPP = null;
+		bcUpgOffer = null;
+		bcAsset = null;
+		bcLineItem = null;
+		bcAccessory = null;
+		boOrder = null;
+		boAsset = null;
+	}
+}"
+			   SEQUENCE="5"
+			   UPDATED="05/20/2019 23:31:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mCheckAmazonPrimeSubscription"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="//Jaya - created for Nov Rel-Amazon Prime - 23/10/2020
+function mCheckAmazonPrimeSubscription(Inputs,Outputs)
+{
+	try
+	{
+		var oBO = TheApplication().GetBusObject(&quot;Order Entry (Sales)&quot;);
+		var oLineItemBC = oBO.GetBusComp(&quot;VHA Order Entry - Line Items Thin&quot;);
+	
+		var sOrderId = Inputs.GetProperty(&quot;OrderId&quot;);
+		var sRootLineId = Inputs.GetProperty(&quot;Root Order Line Item Id&quot;);
+		var sNewRootId = Inputs.GetProperty(&quot;New Root Order Item Id&quot;);
+		var sOrderSubType = Inputs.GetProperty(&quot;OrderSubType&quot;);
+	
+		var strOldAssetId = Inputs.GetProperty(&quot;Asset Id&quot;);
+		var sBillAccId = Inputs.GetProperty(&quot;Old Billing Account Id&quot;);
+	
+		var sRecExist,sPrimeElig;
+	
+		var sOrderChgProp = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;, &quot;Change Proposition&quot;);
+		var sOrderConnect = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;, &quot;Connect&quot;);
+		var sOrderModify = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;, &quot;Modify&quot;);
+	
+		if(sOrderId != &quot;&quot; &amp;&amp; sOrderId != null)
+		{
+			with(oLineItemBC)
+			{
+				ActivateField(&quot;Order Header Id&quot;);
+				ActivateField(&quot;Special Rating List Type&quot;);
+				ActivateField(&quot;Vendor Part Number&quot;);
+				ActivateField(&quot;Action Code&quot;);
+				SetViewMode(AllView);
+				ClearToQuery();				
+				if(sNewRootId != &quot;&quot; &amp;&amp; sNewRootId != null &amp;&amp; sOrderSubType == sOrderChgProp)
+				{
+					SetSearchExpr(&quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos; AND [Root Order Item Id] = &apos;&quot; + sNewRootId + &quot;&apos; AND [Action Code] = &apos;Add&apos;AND [Special Rating List Type] = &apos;Prime Subscription&apos;&quot;);
+				}
+				else if(sOrderSubType == sOrderConnect || sOrderSubType == sOrderModify)
+				{
+					SetSearchExpr(&quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos; AND [Root Order Item Id] = &apos;&quot; + sRootLineId + &quot;&apos; AND [Action Code] = &apos;Add&apos; AND [Special Rating List Type] = &apos;Prime Subscription&apos;&quot;);
+				}
+				ExecuteQuery(ForwardOnly);
+				sRecExist = FirstRecord();
+				if(sRecExist)
+				{
+				//	var sPrime = GetFieldValue(&quot;Special Rating List Type&quot;);
+					var sVendPrtNum = GetFieldValue(&quot;Vendor Part Number&quot;);
+					var sProdName = GetFieldValue(&quot;Product&quot;);
+	
+					sPrimeElig = &quot;Y&quot;;
+	
+					/*if((sPrime != null || sPrime != &quot;&quot;) &amp;&amp; sPrime == &quot;Prime Subscription&quot;)
+					{
+						sPrimeElig = &quot;Y&quot;;
+					}*/
+	
+					if(sPrimeElig == &quot;Y&quot;)
+					{
+						//Outputs.SetProperty(&quot;sPrimeEligible&quot;, sPrimeElig);
+						Outputs.SetProperty(&quot;PrimeEligible&quot;, sPrimeElig);
+						Outputs.SetProperty(&quot;Product&quot;, sProdName);
+						Outputs.SetProperty(&quot;SAMId&quot;, sVendPrtNum);
+					}	
+					else
+					{
+						Outputs.SetProperty(&quot;sPrimeEligible&quot;, &quot;&quot;);
+					}
+				}
+			}
+		}
+	}
+	catch(e)
+	{
+		throw(e);
+	}
+	finally
+	{
+		oLineItemBC = null;
+		oBO = null;
+	}
+}"
+			   SEQUENCE="6"
+			   UPDATED="11/23/2020 19:23:23"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/23/2020 19:23:23"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mCheckCapsEnable"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="/*
+ * Modification History  :
+ * Date			Author		Config #	   Description
+ * ============ ===========	=============  ==================================================================
+ * 05/07/2018	Kailash 		18.4 HardCaps  Invoked for Button Enable/Disable functionality @ Asset/CA/BA level
+ */
+
+function mCheckCapsEnable(Inputs, Outputs)
+{	
+	try
+	{
+		var sCARowId = &quot;&quot;, sBARowId = &quot;&quot;, sAssetId = &quot;&quot;, sAssetCheck = &quot;&quot;, sAccntCheck = &quot;&quot;,sCreditDateCheck = &quot;&quot;; 
+		var sCreditClass = &quot;&quot;, sCreditModDate = &quot;&quot;;
+		var sAssetBO, sAssetBC, sFinanProfBO, sFinanProfBC;
+		var Inps, Outs;
+				
+		sCARowId = Inputs.GetProperty(&quot;CARowId&quot;);
+		sAssetCheck = Inputs.GetProperty(&quot;sAssetCheck&quot;);
+		sAccntCheck = Inputs.GetProperty(&quot;sAccntCheck&quot;);
+		sCreditClass = Inputs.GetProperty(&quot;sCreditClass&quot;);
+		sCreditModDate = Inputs.GetProperty(&quot;sCreditModDate&quot;); 
+		sAssetId = Inputs.GetProperty(&quot;sAssetId&quot;);	
+			
+		
+		if(sCARowId != &quot;&quot; || sCARowId != null)
+		{			
+			if(sAssetCheck != &quot;Y&quot;)
+			{								
+				sAssetBO = TheApplication().GetBusObject(&quot;VF Asset&quot;);
+				sAssetBC = sAssetBO.GetBusComp(&quot;Asset Mgmt - Asset - Header&quot;);
+				with(sAssetBC)
+				{
+					ActivateField(&quot;Service Account Id&quot;);				
+					ActivateField(&quot;VHA Hard Caps&quot;);
+					ClearToQuery();
+					SetViewMode(AllView);
+					SetSearchSpec(&quot;Service Account Id&quot;,sCARowId);
+					SetSearchSpec(&quot;Status&quot;,&quot;Active&quot;);
+					SetSearchSpec(&quot;Id&quot;,sAssetId);
+					ExecuteQuery(ForwardOnly);
+					if(FirstRecord())
+					{						
+						var sCaps = GetFieldValue(&quot;VHA Hard Caps&quot;);
+						var sVodCaps = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;, &quot;Vodafone Caps&quot;);
+						var xClass = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;, sCaps);								
+						if((sCaps == xClass) &amp;&amp; (sCaps != sVodCaps))										
+							sAssetCheck = &quot;DISABLE&quot;;
+					}
+				}
+			}
+			if(sAccntCheck != &quot;Y&quot;)
+			{				
+				sFinanProfBO = TheApplication().GetBusObject(&quot;VF Com Financial Profile BO&quot;);
+				sFinanProfBC = sFinanProfBO.GetBusComp(&quot;VF Com Financial Profile&quot;);
+				with(sFinanProfBC)
+				{
+					ActivateField(&quot;Account Id&quot;);
+					ActivateField(&quot;Credit Update Date&quot;);					
+					ClearToQuery();
+					SetViewMode(AllView);
+					SetSearchSpec(&quot;Account Id&quot;,sCARowId);
+					ExecuteQuery(ForwardOnly);
+					if(FirstRecord())
+					{						
+						sCreditClass = GetFieldValue(&quot;VF Credit Class&quot;);
+						if(sCreditClass != &quot;&quot;)
+						{						
+							var xClass = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_HARD_CAP_CC&quot;, sCreditClass);						
+							sCreditModDate = GetFieldValue(&quot;Credit Update Date&quot;);												
+							if(sCreditClass == xClass)							
+								sAccntCheck = &quot;DISABLE&quot;;
+						}
+					}	
+				}
+			}
+			
+			if(sCreditDateCheck != &quot;Y&quot;)
+			{				
+				Inps = TheApplication().NewPropertySet();
+				Outs = TheApplication().NewPropertySet();
+				Inps.SetProperty(&quot;CreditChkDate&quot;,sCreditModDate);
+				Inps.SetProperty(&quot;CreditClass&quot;,sCreditClass);
+				fnCreditCheckValidation(Inps,Outs);
+																			
+			}						
+		}	
+
+		Outputs.SetProperty(&quot;DateEnable&quot;,sCreditCheckFlg);
+		
+		if(sAccntCheck == &quot;Y&quot; || sAccntCheck == &quot;DISABLE&quot;)
+			Outputs.SetProperty(&quot;AccountEnable&quot;,&quot;DISABLE&quot;);
+		else
+			Outputs.SetProperty(&quot;AccountEnable&quot;,&quot;ENABLE&quot;);
+		if(sAssetCheck == &quot;Y&quot; || sAssetCheck == &quot;DISABLE&quot;)
+			Outputs.SetProperty(&quot;AssetEnable&quot;,&quot;DISABLE&quot;);
+		else
+			Outputs.SetProperty(&quot;AssetEnable&quot;,&quot;ENABLE&quot;);
+			
+		
+	}
+	
+	catch(e)
+	{
+		throw(e);
+	}
+	
+	finally
+	{
+		sFinanProfBC = null;
+		sAssetBC = null;
+		sFinanProfBO = null;
+		sAssetBO = null;
+		Inps = &quot;&quot;;
+		Outs = &quot;&quot;;
+	}
+}"
+			   SEQUENCE="7"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mCheckDuplicateBarringRecords"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mCheckDuplicateBarringRecords(Inputs, Outputs)
+{
+	/*
+     * Component Name        :  VHA Hardcaps Processing Service
+     * Method Name               :  mCheckDuplicateBarringRecords
+     * Component Information :  This fn is to check the duplicate barring records while submitting
+     * Modification History  :
+     * Date   Author  Config #   Description
+     * ============ =========== ===========   ================================
+     *  02-02-2018   Vinodhini    HardCaps
+     */
+	try
+	{
+		var oBarringBo = TheApplication().GetBusObject(&quot;VF Asset&quot;);
+		var oBarringBC = oBarringBo.GetBusComp(&quot;VHA Current Processing Status BC&quot;);
+		
+		var sRootAssetInteg = Inputs.GetProperty(&quot;RootAssetIntegrationId&quot;);
+		var sBarStatus = Inputs.GetProperty(&quot;BarStatus&quot;);
+		var StrProduct = Inputs.GetProperty(&quot;Service&quot;);
+		var sBarId = Inputs.GetProperty(&quot;CurrentRecId&quot;);
+		var ErrCode = &quot;VHA_HARDCAP_007&quot;;
+	
+		
+     if(sRootAssetInteg != &quot;&quot;)
+	 {
+		 
+		with(oBarringBC) 
+		{
+			ActivateField(&quot;Current Status&quot;);
+			SetViewMode(AllView);
+			ClearToQuery();
+			var strSearchExpr1 = &quot;[Asset Integration Id] = &apos;&quot; + sRootAssetInteg + &quot;&apos; AND &quot; + &quot;[Service] = &apos;&quot; + StrProduct + &quot;&apos; AND &quot; + &quot;[Current Status] = &apos;&quot; + sBarStatus + &quot;&apos; AND [Id] &lt;&gt; &apos;&quot; + sBarId + &quot;&apos;&quot;;
+			SetSearchExpr(strSearchExpr1);
+			ExecuteQuery(ForwardOnly);
+			if(FirstRecord())
+			{
+			    Outputs.SetProperty(&quot;ErrorMessage&quot;,&quot;VFErrorCode#:&quot; + ErrCode + &quot;-&quot; + TheApplication().LookupMessage(&quot;User Defined Errors&quot;, ErrCode,sBarStatus));
+				TheApplication().RaiseErrorText(&quot;VFErrorCode#:&quot; + ErrCode + &quot;-&quot; + TheApplication().LookupMessage(&quot;User Defined Errors&quot;, ErrCode,sBarStatus));
+			}
+		}//with(oBarringBo)
+	 }
+	}
+	catch(e)
+	{
+		throw(e);
+	}
+	finally
+	{
+	oBarringBC = null;
+    oBarringBo = null;	
+	}
+}"
+			   SEQUENCE="8"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mCheckExistingBarring"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mCheckExistingBarring(Inputs, Outputs)
+{
+	 /*
+     * Component Name        :  VHA Hardcaps Processing Service
+     * Method Name           :  mCheckExistingBarring
+     * Component Information :  This is to check the barring records under the asset
+     * Modification History  :
+     * Date   Author  Config #   Description
+     * ============ =========== ===========   ================================
+     *  02-02-2018   Vinodhini    HardCaps
+     */
+	try
+	{
+		var boAsset = TheApplication().GetBusObject(&quot;VF Asset&quot;);
+		var bcHLB = boAsset.GetBusComp(&quot;VF High Level Bars&quot;);
+		var sObar = &quot;OBAR&quot;;
+		var sAbar = &quot;ABAR&quot;;
+		var ABAR_ERROR = &quot;13109&quot;;
+		var OBAR_ERROR = &quot;13112&quot;;
+		var sAssetId = Inputs.GetProperty(&quot;AssetId&quot;);
+		
+		
+		if(sAssetId != &quot;&quot;)
+		{
+			with (bcHLB)
+			{
+				ActivateField(&quot;Bar Type&quot;);
+				ActivateField(&quot;Bar Reason&quot;);
+				SetViewMode(AllView);
+				ClearToQuery();
+				SetSearchExpr(&quot;[Parent Asset Id] = &apos;&quot; + sAssetId + &quot;&apos; AND (([Bar Type] = &apos;&quot; + sAbar + &quot;&apos;) OR ([Bar Type] = &apos;&quot; + sObar + &quot;&apos;))&quot;);
+				ExecuteQuery(ForwardOnly);
+				var isrec = FirstRecord();
+				
+				if(FirstRecord())
+				{
+					if(GetFieldValue(&quot;Bar Type&quot;) == sAbar)
+					{
+					    Outputs.SetProperty(&quot;ErrorMessage&quot;,&quot;VFErrorCode#:&quot; + ABAR_ERROR + &quot;-&quot; + TheApplication().LookupMessage(&quot;User Defined Errors&quot;, ABAR_ERROR) +   &quot; due to&quot; + &quot; &quot; +GetFieldValue(&quot;Bar Reason&quot;));
+						TheApplication().RaiseErrorText (&quot;VFErrorCode#:&quot; + ABAR_ERROR + &quot;-&quot; + TheApplication().LookupMessage(&quot;User Defined Errors&quot;, ABAR_ERROR) +   &quot; due to&quot; + &quot; &quot; +GetFieldValue(&quot;Bar Reason&quot;));
+					}	
+					else
+					{
+						Outputs.SetProperty(&quot;ErrorMessage&quot;,&quot;VFErrorCode#:&quot; + OBAR_ERROR + &quot;-&quot; + TheApplication().LookupMessage(&quot;User Defined Errors&quot;, OBAR_ERROR) +   &quot; due to&quot; + &quot; &quot; +GetFieldValue(&quot;Bar Reason&quot;));
+						TheApplication().RaiseErrorText (&quot;VFErrorCode#:&quot; + OBAR_ERROR + &quot;-&quot; + TheApplication().LookupMessage(&quot;User Defined Errors&quot;, OBAR_ERROR) +   &quot; due to&quot;+ &quot; &quot; +GetFieldValue(&quot;Bar Reason&quot;));
+				    }
+				}
+			}
+	
+		}
+	}
+	catch(e)
+	{
+		throw(e);
+	}
+	finally
+	{
+		bcHLB = null;
+		boAsset = null;
+	}
+}"
+			   SEQUENCE="9"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mCheckExpiryDate"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mCheckExpiryDate(Inputs, Outputs)
+{
+	/*
+     * Component Name        :  VHA Hardcaps Processing Service
+     * Method Name               :  mCheckExpirtDate
+     * Component Information :  This is to check the expiry date of Data Record and update the status.
+     * Modification History  :
+     * Date   Author  Config #   Description
+     * ============ =========== ===========   ================================
+     *  02-02-2018   Vinodhini    HardCaps
+     */
+	try
+	{
+		var oBarringBo = TheApplication().GetBusObject(&quot;VF Asset&quot;);
+		var oBarringBC = oBarringBo.GetBusComp(&quot;VHA Current Processing Status BC&quot;);
+		
+		var sRootAssetInteg = Inputs.GetProperty(&quot;RootAssetIntegrationId&quot;);
+		var sBarStatus = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_HC_USAGE_STATUS&quot;,&quot;Barred&quot;);
+		var sUnBarStatus = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_HC_USAGE_STATUS&quot;,&quot;Unbarred&quot;);
+		var StrProduct = Inputs.GetProperty(&quot;Service&quot;);
+		
+		
+     if((sRootAssetInteg != &quot;&quot;) &amp;&amp; (StrProduct == &quot;Data&quot;))
+	 {
+		 
+		with(oBarringBC) 
+		{
+			ActivateField(&quot;Current Status&quot;);
+			ActivateField(&quot;Transaction Status&quot;);
+			ActivateField(&quot;Reason Code&quot;);
+			ActivateField(&quot;Processed Date&quot;);
+			ActivateField(&quot;Type&quot;);
+			ActivateField(&quot;Channel&quot;);
+			ActivateField(&quot;Inactivated Date&quot;);
+			SetViewMode(AllView);
+			ClearToQuery();
+			var strSearchExpr1 = &quot;[Asset Integration Id] = &apos;&quot; + sRootAssetInteg + &quot;&apos; AND &quot; + &quot;[Service] = &apos;&quot; + StrProduct + &quot;&apos; AND &quot; + &quot;[Current Status] = &apos;&quot; + sBarStatus + &quot;&apos; AND [Expiry Date] &lt;= Timestamp()&quot;;
+			SetSearchExpr(strSearchExpr1);
+			ExecuteQuery(ForwardOnly);
+			if(FirstRecord())
+			{
+				SetFieldValue(&quot;Current Status&quot;,sUnBarStatus);
+				WriteRecord();
+				//TheApplication().RaiseErrorText(&quot;Please change the Current status which is already exists&quot;);
+			}
+		}//with(oBarringBo)
+	 }
+	}
+	catch(e)
+	{
+		TheApplication().RaiseErrorText(e);
+	}
+	finally
+	{
+	oBarringBC = null;
+    oBarringBo = null;	
+	}
+}"
+			   SEQUENCE="10"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mCheckPrimaryContact"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mCheckPrimaryContact(Inputs,Outputs)
+{
+	var PrimaryContactNumber = Inputs.GetProperty(&quot;PrimaryContactNumber&quot;);
+	if((PrimaryContactNumber.substring(0,3) == &quot;614&quot; || PrimaryContactNumber.substring(0,2) == &quot;04&quot;) &amp;&amp; 
+		(PrimaryContactNumber.length == 11 || PrimaryContactNumber.length == 10))
+	{
+		Outputs.SetProperty(&quot;PrimaryContactNumber&quot;,PrimaryContactNumber);
+	}
+	else
+	{
+		Outputs.SetProperty(&quot;PrimaryContactNumber&quot;,&quot;&quot;);
+	}
+}
+"
+			   SEQUENCE="12"
+			   UPDATED="11/23/2020 19:23:23"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/23/2020 19:23:23"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mCheckifCreditCapPropAdded"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="/*
+ * Component Name        : 	VHA Hard Caps Procesing Service
+ * Function Name         : 	mCheckifCreditCapPropAdded
+ * Component Information : 	This function checks if any Hard cap propositions added to specific order.
+ *							
+ * Inputs				 : Order Id
+ * Modification History  :
+ * Date			Author		Config #	Description
+ * ============ ===========	===========	================================
+ * 13/07/2018	Kathambari		Initial Version
+ */
+function mCheckifCreditCapPropAdded(Inputs,Outputs)
+{
+try
+{
+var	CapPropPresent = &quot;N&quot;;
+var OrderId = Inputs.GetProperty(&quot;OrderId&quot;);
+var psInputs = TheApplication().NewPropertySet();
+var psOutputs = TheApplication().NewPropertySet();
+var BO = TheApplication().GetBusObject(&quot;Order Entry (Sales)&quot;);
+var BC = BO.GetBusComp(&quot;VHA Order Entry - Line Items Thin&quot;);
+var SubTypeLOV = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;,&quot;Change Proposition&quot;);
+var ModifyLOV = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;,&quot;Modify&quot;);
+var sTOT = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;,&quot;Change Ownership Connect&quot;);
+
+var LOVBO = TheApplication().GetBusObject(&quot;List Of Values&quot;);
+var LOVBC  = LOVBO.GetBusComp(&quot;List Of Values&quot;);
+with (LOVBC)
+{
+	ActivateField(&quot;Value&quot;);
+	ClearToQuery();
+	SetViewMode(AllView);
+	SetSearchExpr(&quot;[Type] = &apos;VHA_HARD_CAP_SPL_PROD_TYPE&apos;&quot;);
+	ExecuteQuery(ForwardOnly);
+	var frec = FirstRecord();
+	while(frec)
+	{
+		var CapProdTypeLOV = GetFieldValue(&quot;Value&quot;);
+		if(OrderId != &quot;&quot;)
+		{
+		with(BC)
+		{
+		ActivateField(&quot;Special Rating List Type&quot;);
+		ActivateField(&quot;Action Code&quot;);
+		ActivateField(&quot;VF Service Order Sub Type&quot;);
+		ClearToQuery();
+		SetViewMode(AllView);
+		SetSearchExpr(&quot;[Root Order Item Id] = [Id] AND [Order Header Id] = &apos;&quot; + OrderId + &quot;&apos;&quot;);
+		ExecuteQuery(ForwardOnly);
+		var recExits = FirstRecord();
+			while(recExits)
+			{
+				if(CapPropPresent == &quot;N&quot;)
+				{	
+					var SubType = GetFieldValue(&quot;VF Service Order Sub Type&quot;);
+					var SplSiebelProdType = GetFieldValue(&quot;Special Rating List Type&quot;);
+					if((SubType == SubTypeLOV &amp;&amp; SplSiebelProdType == CapProdTypeLOV) ||(SubType == ModifyLOV &amp;&amp; SplSiebelProdType == CapProdTypeLOV))
+					{
+						var actioncode = GetFieldValue(&quot;Action Code&quot;);
+						Outputs.SetProperty(&quot;Actioncode&quot;,actioncode);
+						Outputs.SetProperty(&quot;SubType&quot;,SubType);
+						if(actioncode == &quot;Add&quot;)
+						{
+							CapPropPresent = &quot;Y&quot;;
+						}
+					}
+					else if(SplSiebelProdType == CapProdTypeLOV)
+					{
+					   CapPropPresent = &quot;Y&quot;
+					}
+					recExits = NextRecord();
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+		}
+		
+		frec = NextRecord();
+		
+		
+	}
+
+	Outputs.SetProperty(&quot;CapPropPresent&quot;,CapPropPresent);
+	psInputs.SetProperty(&quot;OrderId&quot;,OrderId);
+	mIsMoreThanOneServiceAdded(psInputs,psOutputs);
+	var ServiceLimitExceeds = psOutputs.GetProperty(&quot;ServiceLimitExceeds&quot;);
+	Outputs.SetProperty(&quot;ServiceLimitExceeds&quot;,ServiceLimitExceeds);
+	
+}
+
+
+}
+catch(e)
+{
+throw(e);
+}
+finally
+{
+OrderId = null;
+BC = null;
+BO = null;
+LOVBC = null;
+LOVBO = null;
+
+}
+
+}"
+			   SEQUENCE="11"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mCreateandUpdateHardcapsProducts"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mCreateandUpdateHardcapsProducts(sRootAssetInteg,sOrderType,StrProduct,sGetModifyTypeOut) 
+{
+    /*
+     * Component Name        :  VHA Hardcaps Processing Service
+     * Method Name               :  mCreateandUpdateHardcapsProducts
+     * Component Information :  This fn is to create new Hardcaps Products under asset
+     * Modification History  :
+     * Date   Author  Config #   Description
+     * ============ =========== ===========   ================================
+     *  23-03-2018   Vinodhini    HardCaps
+     */
+
+    try 
+    {
+        //Object Declarations
+        var oAssetBo = TheApplication().GetBusObject(&quot;VF Asset&quot;);
+        var oAssetBC = oAssetBo.GetBusComp(&quot;Asset Mgmt - Asset - Header&quot;);
+        var oAssetXM = oAssetBo.GetBusComp(&quot;VHA Current Processing Status BC&quot;);
+
+        var dtToday = new Date;
+        var sFormattedTodayDate = (dtToday.getMonth() + 1) + &quot;/&quot; + dtToday.getDate() + &quot;/&quot; + dtToday.getFullYear();
+        var sFormattedTodayDateTime = sFormattedTodayDate + &quot; &quot; + dtToday.getHours() + &quot;:&quot; + dtToday.getMinutes() + &quot;:&quot; + dtToday.getSeconds();
+        var sTransactionStatus = &quot;&quot;;
+		var sProdType = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VF_PROD_TYPE&quot;,&quot;Hard Caps&quot;);
+        var sChannel = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_CHANNEL_TP&quot;, &quot;CRM&quot;);
+		var sCompletedStatus = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_USAGE_PRODUCT_STATUS&quot;, &quot;Completed&quot;);
+		var sInprogressStatus = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_USAGE_PRODUCT_STATUS&quot;, &quot;In Progress&quot;);
+        var sInactiveStatus = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_USAGE_PRODUCT_STATUS&quot;, &quot;Inactive&quot;);
+		var sFailedStatus = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_USAGE_PRODUCT_STATUS&quot;, &quot;Failed&quot;);
+		var sUnbar = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_HC_USAGE_STATUS&quot;,&quot;Unbarred&quot;);
+		var sbar = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_HC_USAGE_STATUS&quot;,&quot;Barred&quot;);
+		var sIDDInput = TheApplication().NewPropertySet();
+		var sIDDOut = TheApplication().NewPropertySet();
+	
+		var InactivateCaps = sGetModifyTypeOut.GetProperty(&quot;sInactivateCapsRequired&quot;);
+		var ActivateCaps = sGetModifyTypeOut.GetProperty(&quot;sActivateCapsRequired&quot;);
+
+        with(oAssetBC) 
+        {
+            SetViewMode(AllView);
+            ClearToQuery();
+            SetSearchSpec(&quot;Integration Id&quot;, sRootAssetInteg);
+            ExecuteQuery(ForwardOnly);
+
+            var isAssetRec = FirstRecord();
+            if (isAssetRec) 
+            {
+                var sAssetId = GetFieldValue(&quot;Id&quot;);
+                with(oAssetXM) 
+                {
+					ActivateField(&quot;Asset Id&quot;);
+					ActivateField(&quot;Asset Integration Id&quot;);
+					ActivateField(&quot;Service&quot;);
+					ActivateField(&quot;Current Status&quot;);
+					ActivateField(&quot;Transaction Status&quot;);
+					ActivateField(&quot;Reason Code&quot;);
+					ActivateField(&quot;Processed Date&quot;);
+					ActivateField(&quot;Type&quot;);
+					ActivateField(&quot;Channel&quot;);
+					ActivateField(&quot;Inactivated Date&quot;);
+					SetViewMode(AllView);
+					//Vinodhini-09/10/2018-Added order type condition to inactivate already created Products while reprocessing.
+					if (InactivateCaps == &quot;Y&quot; || sOrderType == &quot;Connect&quot; ||sOrderType == &quot;Change Ownership Connect&quot; || sOrderType == &quot;Reactivate&quot; || sOrderType == &quot;Decon/Con Transfer TO&quot;)
+					{
+						ClearToQuery();
+						var strSearchExpr1 = &quot;[Asset Integration Id] = &apos;&quot; + sRootAssetInteg + &quot;&apos; AND &quot; + &quot;[Service] = &apos;&quot; + StrProduct + &quot;&apos; AND (([Transaction Status] = &apos;&quot; + sCompletedStatus + &quot;&apos;) OR ([Transaction Status] = &apos;&quot; + sInprogressStatus + &quot;&apos;))&quot;;
+						SetSearchExpr(strSearchExpr1);
+						ExecuteQuery(ForwardOnly);
+						var isPassesRec = FirstRecord();					
+					//Below logic will add passes							
+						while(isPassesRec)
+						{
+							
+							sTransactionStatus = GetFieldValue(&quot;Transaction Status&quot;);
+							
+							if (sTransactionStatus == sCompletedStatus)
+							{
+								SetFieldValue(&quot;Transaction Status&quot;, sInactiveStatus);
+								SetFieldValue(&quot;Inactivated Date&quot;, sFormattedTodayDateTime);
+							}
+							if(sTransactionStatus == sInprogressStatus)
+							{
+								SetFieldValue(&quot;Transaction Status&quot;, sFailedStatus);
+							}
+								SetFieldValue(&quot;Reason Code&quot;, sOrderType);
+								WriteRecord();
+								
+								isPassesRec = NextRecord();
+						}//isPassesRec = NextRecord();		
+					}
+					
+					if(ActivateCaps == &quot;Y&quot;)
+					{
+						//FnCall is to decide the Current Status Of IDD Product
+						if(StrProduct == &quot;IDD&quot;)
+						{
+							if (sOrderType == &quot;Change Proposition&quot; &amp;&amp; gNewAssetId != &quot;&quot;) 
+							{
+							sIDDInput.SetProperty(&quot;Asset Id&quot;,gNewAssetId);
+							}
+							else
+							sIDDInput.SetProperty(&quot;Asset Id&quot;,sAssetId);
+						
+							mGetCurrentStatusForIDD(sIDDInput,sIDDOut);
+						}
+					   
+						NewRecord(NewAfter);
+						if (sOrderType == &quot;Change Proposition&quot; &amp;&amp; gNewAssetId != &quot;&quot;) 
+						{
+						SetFieldValue(&quot;Asset Id&quot;, gNewAssetId);
+						}
+						SetFieldValue(&quot;Asset Integration Id&quot;, sRootAssetInteg);
+						SetFieldValue(&quot;Service&quot;,StrProduct);
+						if(sIDDOut.GetProperty(&quot;IDDExists&quot;) == &quot;Y&quot; || StrProduct != &quot;IDD&quot;)
+						SetFieldValue(&quot;Current Status&quot;,sUnbar);
+						else
+						SetFieldValue(&quot;Current Status&quot;,sbar);
+						SetFieldValue(&quot;Transaction Status&quot;,sCompletedStatus);
+						SetFieldValue(&quot;Reason Code&quot;,sOrderType);
+						SetFieldValue(&quot;Processed Date&quot;,sFormattedTodayDateTime);
+						SetFieldValue(&quot;Type&quot;,sProdType);
+						SetFieldValue(&quot;Channel&quot;,sChannel);
+						WriteRecord();
+					}										            
+                }//with(oAssetXM) 
+
+            }//isAssetRec
+
+        }//with(oAssetBC) 
+
+    } //try
+    catch (e) 
+    {
+        throw (e);
+    } 
+    finally 
+    {
+
+        oAssetXM = null;
+        oAssetBC = null;
+        oAssetBo = null;
+        sIDDInput = null;
+        sIDDOut  = null;
+    }
+
+}"
+			   SEQUENCE="13"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mDeleteCapsDetails"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="//Written by Kailash for deleting any hard caps records already exists for order item id.
+
+function mDeleteCapsDetails(sOrderItmId)
+{
+	try
+	{
+		var sCaps = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_PROD_TYPE&quot;, &quot;Hard Caps&quot;);
+	//	var sOrderId=Inputs.GetProperty(&quot;Order Id&quot;);
+	//	var sOrderItmId=Inputs.GetProperty(&quot;Root Line Item Id&quot;);
+		var oThrottleBC = TheApplication().GetBusObject(&quot;VHA Throttle Order&quot;).GetBusComp(&quot;VHA Throttle Details&quot;);
+		if(sOrderItmId != &quot;&quot; &amp;&amp; sCaps != &quot;&quot;)
+		{
+			with(oThrottleBC)
+			{
+				SetViewMode(AllView);
+				ClearToQuery();
+				SetSearchSpec(&quot;Service Order Id&quot;, sOrderItmId);
+				SetSearchSpec(&quot;Type&quot;,sCaps);
+				ExecuteQuery(ForwardOnly);
+				while(FirstRecord())
+				{
+					DeleteRecord();
+				}
+			}
+		}
+	}
+	catch (e)
+	{
+		throw(e);
+	}
+	finally
+	{
+		oThrottleBC = null;
+	}
+}"
+			   SEQUENCE="14"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mGetCurrentStatusForIDD"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mGetCurrentStatusForIDD(Inputs,Outputs)
+{
+    /*
+     * Component Name        : 	VHA Hard Caps Procesing Service
+     * Method Name/Fn         : mGetCurrentStatusForIDD	
+     * Component Information : 	To Check IDD Product Present in Asset Level or Not.
+     * Modification History  :
+     * Date			Author		Config #			Description
+     * ============ ===========	===========			================================
+     *  17-08-2018  Vinodhini   Hardcaps
+     */
+    try {
+
+        //Object Declarations
+        var oAssetBo = TheApplication().GetBusObject(&quot;VF Asset&quot;);
+        var oAssetComponent = oAssetBo.GetBusComp(&quot;VHA Asset Mgmt - Asset (Order Mgmt)&quot;);
+       
+        var sIDDExists = &quot;N&quot;;
+		var sIDD = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;,&quot;IDD&quot;);
+		var sAssetId = Inputs.GetProperty(&quot;Asset Id&quot;);
+
+       var strSearchExpr = &quot;[Root Asset Id] = &apos;&quot; + sAssetId + &quot;&apos; AND &quot; + &quot; [Status] = &apos;Active&apos; &quot; + &quot; AND &quot; + &quot;[VHA Spl Siebel Rate Type] = &apos;&quot; + sIDD + &quot;&apos;&quot;;
+
+		if(sAssetId != &quot;&quot;)
+		{
+			with(oAssetComponent) 
+			{
+				SetViewMode(AllView);
+				ClearToQuery();
+				SetSearchExpr(strSearchExpr);
+				ExecuteQuery(ForwardOnly);
+				var isPrimRec = FirstRecord();
+				if(isPrimRec) 
+				{
+					sIDDExists = &quot;Y&quot;;	
+				}
+			}
+			Outputs.SetProperty(&quot;IDDExists&quot;,sIDDExists);
+		}
+    } 
+    catch (e) 
+    {
+        throw (e);
+
+    } 
+    finally 
+    {
+        oAssetComponent = null;
+        oAssetBo = null;
+    }
+}"
+			   SEQUENCE="15"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mGetModifyType"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mGetModifyType(sOrderId, sRootLineId, sGetModifyTypeOut)
+{
+    /*
+     * Component Name        : 	VHA Hard Caps Procesing Service
+     * Method Name/Fn         : mGetModifyType	
+     * Component Information : 	
+     * Modification History  :
+     * Date			Author		Config #			Description
+     * ============ ===========	===========			================================
+     *  23-07-2018  Vinodhini   Hardcaps
+     */
+    try {
+
+        //Object Declarations
+        var boOrder = TheApplication().GetBusObject(&quot;Order Entry UNISIM BO&quot;);
+		var bcOrderItemsSimple = boOrder.GetBusComp(&quot;VF Order Entry - Line Item - Primary Product&quot;);
+        var bcOrderItems = boOrder.GetBusComp(&quot;VHA Order Entry - Line Items Thin&quot;);
+       
+        var sBooster = &quot;N&quot;, sRPC = &quot;N&quot;, sIDD = &quot;N&quot;;
+		var sMaxSpeedBooster = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_PROD_TYPE&quot;, &quot;Hard Caps Data Booster&quot;);
+		var sIDDProdType = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;,&quot;IDD&quot;);
+
+        var strSearchExpr = &quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos;AND &quot; + &quot;[Root Order Item Id] = &apos;&quot; + sRootLineId + &quot;&apos;AND &quot; + &quot;[Primary Product Flag] = &apos;Y&apos; AND &quot; + &quot;[Action Code] = &apos;Add&apos;&quot;;
+	   
+        with(bcOrderItemsSimple) 
+        {
+            ClearToQuery();
+            ActivateField(&quot;Action Code&quot;);
+            SetSearchExpr(strSearchExpr);
+            ExecuteQuery(ForwardOnly);
+            var isPrimRec = FirstRecord();
+            if(isPrimRec) 
+            { 
+				  sRPC = &quot;Y&quot;;			
+			}
+        }
+		
+		if(sRPC != &quot;Y&quot;)
+		{
+			var strSearchExpr1 = &quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos; AND &quot; + &quot; [Root Order Item Id] = &apos;&quot; + sRootLineId + &quot;&apos;AND &quot; + &quot; (([Siebel Product Type] = &apos;&quot; + sMaxSpeedBooster +&quot;&apos; OR [Special Rating List Type] = &apos;&quot; + sIDDProdType +&quot;&apos;) AND [Action Code] = &apos;Add&apos;)&quot;;
+			
+			with(bcOrderItems) 
+			{
+				ClearToQuery();
+				ActivateField(&quot;Action Code&quot;);
+				ActivateField(&quot;Siebel Product Type&quot;);
+				ActivateField(&quot;Special Rating List Type&quot;);
+				SetSearchExpr(strSearchExpr1);
+				ExecuteQuery(ForwardOnly);
+				var isPrimRec = FirstRecord();
+				while (isPrimRec) 
+				{
+				  if (GetFieldValue(&quot;Siebel Product Type&quot;) == sMaxSpeedBooster)
+					  sBooster = &quot;Y&quot;;
+				  else
+					  sIDD = &quot;Y&quot;;
+				  
+				 isPrimRec = NextRecord();			
+				}
+			}
+	    }//sRPC != &quot;Y&quot;
+		sGetModifyTypeOut.SetProperty(&quot;Booster&quot;, sBooster);
+		sGetModifyTypeOut.SetProperty(&quot;RPC&quot;, sRPC);
+		sGetModifyTypeOut.SetProperty(&quot;IDD&quot;, sIDD);
+    } 
+    catch (e) 
+    {
+        throw (e);
+
+    } 
+    finally 
+    {
+		bcOrderItems = null;
+        bcOrderItemsSimple = null;
+        boOrder = null;
+    }
+}"
+			   SEQUENCE="16"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mGetPCRFDate"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="//Written by Kailash for getting PCRF End Date for submit XMl.
+
+function mGetPCRFDate(sCustAstIntId)
+{
+ try
+ {
+
+  var oBO = TheApplication().GetBusObject(&quot;VF Asset&quot;);
+  var oBC = oBO.GetBusComp(&quot;VHA Current Processing Status BC&quot;);
+  var sdata = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;TT_AREA&quot;, &quot;Data&quot;);
+
+  if(sCustAstIntId != &quot;&quot; &amp;&amp; sdata != &quot;&quot;)
+  {
+
+   with (oBC)
+   {
+    ActivateField(&quot;Asset Integration Id&quot;);  
+    ActivateField(&quot;Expiry Date&quot;); 
+    ActivateField(&quot;Service&quot;);
+    SetViewMode(AllView);
+    ClearToQuery();
+    SetSearchSpec(&quot;Asset Integration Id&quot;,sCustAstIntId);
+    SetSearchSpec(&quot;Service&quot;,sdata);
+    ExecuteQuery(ForwardOnly);
+    if(FirstRecord())
+{
+
+     sExpiryDate = GetFieldValue(&quot;Expiry Date&quot;);
+}
+
+   }
+  }
+ }
+ 
+ catch(e)
+ {
+  throw(e);
+ }
+ 
+ finally
+ {
+  oBC = null;
+  oBO = null;
+ }
+}"
+			   SEQUENCE="17"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mGetPreSubmitDetails"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mGetPreSubmitDetails(sOrderId, sRootLineId, sOrderType, sGetModifyTypeOut,sCustAstIntId)
+{
+    /*
+     * Component Name        : 	VHA Hard Caps Procesing Service
+     * Method Name/Fn         : mGetPreSubmitModify	
+     * Component Information : 	
+     * Modification History  :
+     * Date			Author		Config #			Description
+     * ============ ===========	===========			================================
+     *  23-08-2018  Kailash   Hardcaps				This function will check if RPC/Booster/IDD added for order types
+	 *  26-12-2018  Sathish   19.1 PKE#             IDD/Data in submit XML fixed for BAU to BAU and BAU to HC change prop scenarios
+     */
+    try {
+
+        //Object Declarations
+        var boOrder = TheApplication().GetBusObject(&quot;Order Entry UNISIM BO&quot;);
+		var bcOrderItemsSimple = boOrder.GetBusComp(&quot;VF Order Entry - Line Item - Primary Product&quot;);
+        var bcOrderItems = boOrder.GetBusComp(&quot;VHA Order Entry - Line Items Thin&quot;);
+       
+		var sBooster = &quot;N&quot;, sRPC = &quot;N&quot;, sIDD = &quot;N&quot;;
+		var sAll = &quot;&quot;;
+		var sNewRootId = &quot;&quot;;
+		var sRootSplTypeToProp,sCapsTypeTarget=&quot;&quot;;
+		var sMaxSpeedBooster = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_PROD_TYPE&quot;, &quot;Hard Caps Data Booster&quot;);
+		var sIDDProdType = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;,&quot;IDD&quot;);
+		var sDeconFrom = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;, &quot;Decon/Con Transfer FROM&quot;);
+		var sChnDscnt = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;, &quot;Change Ownership Disconnect&quot;);
+		
+		
+		if (sOrderType == sChnDscnt || sOrderType ==sDeconFrom   )
+		{
+		
+			var strSearchExpr = &quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos;AND &quot; + &quot;[Root Order Item Id] = &apos;&quot; + sRootLineId + &quot;&apos;AND &quot; + &quot;[Primary Product Flag] = &apos;Y&apos;&quot;;
+		
+		}
+		if (sOrderType == &quot;Change Proposition&quot;)
+		{
+		
+			var strSearchExpr = &quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos;AND &quot; + &quot;[Cust Asset Integration Id] = &apos;&quot; + sCustAstIntId + &quot;&apos;AND &quot; + &quot;[Primary Product Flag] = &apos;Y&apos; AND &quot; + &quot;[Action Code] = &apos;Add&apos;&quot;;
+		
+		}
+			if (sOrderType  == &quot;Modify&quot;)
+		{
+		
+			var strSearchExpr = &quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos;AND &quot; + &quot;[Root Order Item Id] = &apos;&quot; + sRootLineId + &quot;&apos;AND &quot; + &quot;[Primary Product Flag] = &apos;Y&apos; AND &quot; + &quot;[Action Code] = &apos;Add&apos;&quot;;
+		}
+
+	   //SG : Below query to identify RPC
+        with(bcOrderItemsSimple) 
+        {
+        	SetViewMode(AllView);
+            ClearToQuery();
+            ActivateField(&quot;Action Code&quot;);
+			if(sOrderId != &quot;&quot; &amp;&amp; sRootLineId != &quot;&quot;)
+			SetSearchExpr(strSearchExpr);
+            ExecuteQuery(ForwardOnly);
+            var isPrimRec = FirstRecord();
+
+
+			if(isPrimRec) 
+			{ 
+			sRPC = &quot;Y&quot;;
+			sNewRootId= GetFieldValue(&quot;Root Order Item Id&quot;);
+			if (sNewRootId != &quot;&quot;)
+			{
+				bcOrderItems.SetViewMode(AllView);
+				bcOrderItems.ActivateField(&quot;Special Rating List Type&quot;);
+				bcOrderItems.ClearToQuery();
+				bcOrderItems.SetSearchSpec(&quot;Id&quot;,sNewRootId);
+				bcOrderItems.ExecuteQuery(ForwardOnly);
+				if(bcOrderItems.FirstRecord())
+				{
+				sRootSplTypeToProp = bcOrderItems.GetFieldValue(&quot;Special Rating List Type&quot;);
+				sCapsTypeTarget = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;, sRootSplTypeToProp);								
+				}
+
+			}
+        }
+	 }
+
+		
+		
+		if(sOrderType == sDeconFrom || sOrderType == sChnDscnt)
+		{
+
+		var strSearchExpr1 = &quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos; AND &quot; + &quot; [Root Order Item Id] = &apos;&quot; + sRootLineId + &quot;&apos;AND &quot; + &quot; ([Siebel Product Type] = &apos;&quot; + sMaxSpeedBooster +&quot;&apos; OR [Special Rating List Type] = &apos;&quot; + sIDDProdType +&quot;&apos;)&quot;;
+		}
+		if (sOrderType == &quot;Change Proposition&quot;)
+		{
+		var strSearchExpr1 = &quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos; AND &quot; + &quot; [Custom Asset Integration Id] = &apos;&quot; + sCustAstIntId + &quot;&apos;AND &quot; + &quot; (([Siebel Product Type] = &apos;&quot; + sMaxSpeedBooster +&quot;&apos; OR [Special Rating List Type] = &apos;&quot; + sIDDProdType +&quot;&apos;) AND [Action Code] = &apos;Add&apos;)&quot;;
+		
+		}
+		
+		if (sOrderType  == &quot;Modify&quot;)
+		{
+		var strSearchExpr1 = &quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos; AND &quot; + &quot; [Root Order Item Id] = &apos;&quot; + sRootLineId + &quot;&apos;AND &quot; + &quot; (([Siebel Product Type] = &apos;&quot; + sMaxSpeedBooster +&quot;&apos; OR [Special Rating List Type] = &apos;&quot; + sIDDProdType +&quot;&apos;) AND [Action Code] = &apos;Add&apos;)&quot;;
+		}
+
+		//SG : Below query to identify IDD/Booster added
+			
+		with(bcOrderItems) 
+		{
+			ClearToQuery();
+			ActivateField(&quot;Action Code&quot;);
+			ActivateField(&quot;Siebel Product Type&quot;);
+			ActivateField(&quot;Special Rating List Type&quot;);
+			if(sOrderId != &quot;&quot; &amp;&amp; sRootLineId != &quot;&quot;)
+				SetSearchExpr(strSearchExpr1);
+			ExecuteQuery(ForwardOnly);
+			var isPrimRec = FirstRecord();
+			while (isPrimRec) 
+			{
+				if (GetFieldValue(&quot;Siebel Product Type&quot;) == sMaxSpeedBooster)
+					sBooster = &quot;Y&quot;;
+				else
+					sIDD = &quot;Y&quot;;
+		  
+				isPrimRec = NextRecord();			
+			}
+		}
+
+
+
+	if(sRPC == &apos;Y&apos;)
+	{					
+		if (sRootSplTypeToProp == sCapsTypeTarget &amp;&amp; ( sRootSplTypeToProp !=&quot;&quot; &amp;&amp; sRootSplTypeToProp != null)&amp;&amp; sIDD == &apos;N&apos;)
+		{
+		sAll = &apos;AllIDDbar&apos;;
+		}
+		else if (sRootSplTypeToProp == sCapsTypeTarget &amp;&amp; ( sRootSplTypeToProp !=&quot;&quot; &amp;&amp; sRootSplTypeToProp != null)&amp;&amp; (sIDD == &apos;Y&apos;))
+		{					
+		sAll = &apos;AllUnbar&apos;;
+		}
+
+		else if(sIDD == &apos;N&apos;)
+		{					
+		sAll = &apos;AllUnbar&apos;;
+		}					
+						
+	}
+	
+					
+	if(sRPC == &apos;N&apos;)
+	{
+	if(sBooster == &apos;Y&apos; &amp;&amp; sIDD == &apos;Y&apos;)
+	sAll = &apos;AllUnbar&apos;;
+	else if(sBooster == &apos;Y&apos; &amp;&amp; sIDD == &apos;N&apos;)
+	sAll = &apos;Booster&apos;;
+	else if(sIDD == &apos;Y&apos; &amp;&amp; sBooster == &apos;N&apos;)
+	sAll = &apos;IDD&apos;;
+	}
+sGetModifyTypeOut.SetProperty(&quot;sAll&quot;, sAll);
+sGetModifyTypeOut.SetProperty(&quot;NewRootId&quot;, sNewRootId);
+
+    } 
+    catch (e) 
+    {
+        throw (e);
+
+    } 
+    finally 
+    {
+		bcOrderItems = null;
+        bcOrderItemsSimple = null;
+        boOrder = null;
+    }
+}"
+			   SEQUENCE="18"
+			   UPDATED="11/23/2020 19:23:21"
+			   UPDATED_BY="SADMIN"
+			   CREATED="05/20/2019 23:31:22"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mGetPropositionSplType"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mGetPropositionSplType(Inputs,Outputs)
+{
+	try
+	{	
+		var oBO = TheApplication().GetBusObject(&quot;VF Order Entry - Line Items Thin&quot;);
+		var oLineItemBC = oBO.GetBusComp(&quot;VF Order Entry - Line Items Thin&quot;);
+		var sOLISpecialProdType = &quot;&quot;, sRecExist = &quot;&quot;, sHardCaps = &quot;&quot;;
+		var sOrderId = Inputs.GetProperty(&quot;Order Id&quot;);
+		var sRootLineId = Inputs.GetProperty(&quot;Root Line Item Id&quot;);
+		var sNewRootId = Inputs.GetProperty(&quot;New Root Order Item Id&quot;);
+		var sOrderSubType = Inputs.GetProperty(&quot;Order Sub Type&quot;);
+		var sActionCode = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;DELTA_ACTION_CODE&quot;, &quot;New&quot;);
+		var sOrderChgProp = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;, &quot;Change Proposition&quot;);
+		var sChnCnt = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;, &quot;Change Ownership Connect&quot;);
+		var sOLIStatus = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;FS_ORDER_STATUS&quot;, &quot;Complete&quot;);
+		
+		
+		
+		if(sOrderId != &quot;&quot; &amp;&amp; sOrderId != null)
+		{
+			with(oLineItemBC)
+			{
+				ActivateField(&quot;Order Header Id&quot;);
+				ActivateField(&quot;Special Product Type&quot;);
+				ActivateField(&quot;VF Service Order Sub Type&quot;);
+				ActivateField(&quot;Action Code&quot;);
+				ActivateField(&quot;Status&quot;);
+				SetViewMode(AllView);
+				ClearToQuery();				
+				if(sNewRootId != &quot;&quot; &amp;&amp; sNewRootId != null &amp;&amp; sOrderSubType == sOrderChgProp)
+				{
+					SetSearchExpr(&quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos; AND [Id] = &apos;&quot; + sNewRootId + &quot;&apos; AND [Action Code] = &apos;&quot; + sActionCode + &quot;&apos; AND [Status] = &apos;&quot; + sOLIStatus + &quot;&apos;&quot;);
+				}
+				else
+				{
+					SetSearchExpr(&quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos; AND [Id] = &apos;&quot; + sRootLineId + &quot;&apos; AND [Action Code] = &apos;&quot; + sActionCode + &quot;&apos; AND [Status] = &apos;&quot; + sOLIStatus + &quot;&apos; AND [VF Service Order Sub Type] = &apos;&quot; + sChnCnt + &quot;&apos;&quot;);
+				}
+				
+				ExecuteQuery(ForwardOnly);
+				sRecExist = FirstRecord();
+				if(sRecExist)
+				{
+					sOLISpecialProdType = GetFieldValue(&quot;Special Product Type&quot;);				
+					
+					if(sOLISpecialProdType != &quot;&quot; &amp;&amp; sOLISpecialProdType!= null)
+					{
+						var sCapsType = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_HARD_CAP_AUTO_TXT&quot;, sOLISpecialProdType);
+						if(sCapsType == &quot;Y&quot;)
+						{
+							sHardCaps = &quot;Y&quot;;
+						}
+						
+					}
+					if(sHardCaps == &quot;Y&quot;)
+					{
+						Outputs.SetProperty(&quot;IsHardCaps&quot;, sHardCaps);
+					}	
+					else
+					{
+						Outputs.SetProperty(&quot;IsHardCaps&quot;, &quot;&quot;);
+					}					
+				}				
+			}			
+		}
+	}
+	catch(e)
+	{
+		throw(e);
+	}
+	finally
+	{
+		oLineItemBC = null;	
+		oBO = null;
+	}
+}"
+			   SEQUENCE="19"
+			   UPDATED="11/23/2020 19:23:21"
+			   UPDATED_BY="SADMIN"
+			   CREATED="05/20/2019 23:31:22"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mHardCapsValidation"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mHardCapsValidation(Inputs,Outputs)
+{
+try
+{
+var OrderId = Inputs.GetProperty(&quot;OrderId&quot;);
+var AccountId = Inputs.GetProperty(&quot;AccountId&quot;);
+var sOrderType = Inputs.GetProperty(&quot;sOrderType&quot;);
+var psInputs = TheApplication().NewPropertySet();
+var psOutputs = TheApplication().NewPropertySet();
+psInputs.SetProperty(&quot;AccountId&quot;,AccountId);
+mIsCappedCustomer(psInputs,psOutputs);
+var IsCapCust = psOutputs.GetProperty(&quot;IsCapCust&quot;);
+psInputs = TheApplication().NewPropertySet();
+psOutputs = TheApplication().NewPropertySet();
+psInputs.SetProperty(&quot;OrderId&quot;, OrderId);
+mCheckifCreditCapPropAdded(psInputs,psOutputs);
+var CapPropPresent = psOutputs.GetProperty(&quot;CapPropPresent&quot;);
+var ServiceLimitExceeds = psOutputs.GetProperty(&quot;ServiceLimitExceeds&quot;);
+var CredicapPropErrmsg;
+var ErrorMsg = &quot;&quot;;
+//VHA Sneha - Added below script for 19.1 TOT CIR
+var sSet = &quot;N&quot;;
+var sAssetBO, sAssetBC;
+if(AccountId != &quot;&quot; &amp;&amp; AccountId != null)
+		{
+	sAssetBO = TheApplication().GetBusObject(&quot;VF Asset&quot;);
+	sAssetBC = sAssetBO.GetBusComp(&quot;Asset Mgmt - Asset - Header&quot;);
+	with(sAssetBC)
+			{
+			ActivateField(&quot;Service Account Id&quot;);				
+			ActivateField(&quot;Capped Service Type&quot;);
+			ClearToQuery();
+			SetViewMode(AllView);
+			SetSearchSpec(&quot;Service Account Id&quot;,AccountId);
+			SetSearchSpec(&quot;Status&quot;,&quot;Active&quot;);
+			SetSearchSpec(&quot;Capped Service Type&quot;,&quot;Assured Cap&quot;);
+			ExecuteQuery(ForwardOnly);
+					if(FirstRecord())
+					{						
+						/*var sCaps = GetFieldValue(&quot;Capped Service Type&quot;);
+						var sCapsLov = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;,&quot;Assured Cap&quot;);
+						if(sCaps == sCapsLov)
+						{*/
+							sSet = &quot;Y&quot;;
+							
+					}
+							
+			}
+
+		}
+if(IsCapCust == &quot;Y&quot;)
+{
+	var CapTypeLOV = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_HARD_CAP_ORDER_TYPE&quot;,sOrderType);
+				if(sOrderType==CapTypeLOV)
+				{
+					if(CapPropPresent == &quot;N&quot;)
+					{
+					 CredicapPropErrmsg = TheApplication().LookupMessage(&quot;User Defined Errors&quot;, &quot;VHA_HARDCAP_009&quot;);
+					}
+					//VHA Sneha - Added below script for 19.1 TOT CIR
+					if(CapPropPresent == &quot;Y&quot; &amp;&amp; sSet == &quot;Y&quot;)
+					{
+					 CredicapPropErrmsg = TheApplication().LookupMessage(&quot;User Defined Errors&quot;, &quot;VHA_HARDCAP_002&quot;);
+					}
+					if (ServiceLimitExceeds == &quot;Y&quot;)
+					{
+						var servicelimiterrmsg = TheApplication().LookupMessage(&quot;User Defined Errors&quot;, &quot;VHA_HARDCAP_002&quot;);
+					}
+				var InputsPS = TheApplication().NewPropertySet();
+				var outputsPS = TheApplication().NewPropertySet();
+				InputsPS.SetProperty(&quot;OrderId&quot;, OrderId);
+				mIsAccessoryAdded(InputsPS,outputsPS);
+				var AccessoryPresent = outputsPS.GetProperty(&quot;AccessoryPresent&quot;);
+				
+				if(AccessoryPresent == &quot;Y&quot;)
+				{
+					var ErrMsgAccessory = TheApplication().LookupMessage(&quot;User Defined Errors&quot;, &quot;VHA_HARDCAP_004&quot;);
+				}
+				}
+}
+else
+{
+	var BAUTypeLOV = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_BAU_ORDER_TYPE&quot;,sOrderType);
+				if(sOrderType==BAUTypeLOV)
+				{
+					if(CapPropPresent == &quot;Y&quot;)
+					{
+					CredicapPropErrmsg = TheApplication().LookupMessage(&quot;User Defined Errors&quot;, &quot;VHA_HARDCAP_003&quot;);
+					//TheApplication().RaiseErrorText(CredicapPropErrmsg);
+					//throw(CredicapPropErrmsg);
+					}
+					//Vinodhini-21/09/2018-Added code for restrict the accessory for vodafone caps
+					if(BAUTypeLOV == TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;,&quot;Change Proposition&quot;))
+					{
+					 mCapsAccessoryValidation(Inputs, Outputs);
+					}
+				}
+}		
+			if(CredicapPropErrmsg != &quot;&quot; &amp;&amp; CredicapPropErrmsg != null)
+			{
+				ErrorMsg = CredicapPropErrmsg;
+			}
+			else if (servicelimiterrmsg != &quot;&quot; &amp;&amp; servicelimiterrmsg != null)
+			{
+				ErrorMsg = servicelimiterrmsg;
+			}
+			else if(ErrMsgAccessory != &quot;&quot; &amp;&amp; ErrMsgAccessory != null)
+			{
+				ErrorMsg = ErrMsgAccessory;
+			}
+			if(ErrorMsg != &quot;&quot;)
+			Outputs.SetProperty(&quot;ErrorMsg&quot;,ErrorMsg);
+}
+catch(e)
+{
+/*	if (!defined(e.errText))
+		{
+		TheApplication().RaiseErrorText(e.toString());
+		}
+		else
+		{
+		TheApplication().RaiseErrorText(e.errText);
+		}*/
+throw(e);
+}
+finally
+{
+	sAssetBC = null;
+	sAssetBO =  null;
+}
+}"
+			   SEQUENCE="20"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mIsAccessoryAdded"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="/*
+ * Component Name        : 	VHA Hard Caps Procesing Service
+ * Function Name         : 	mIsAccessoryAdded
+ * Component Information : 	This function checks if any accessories are added to specific order.
+ *							
+ * Inputs				 : Order Id
+ * Modification History  :
+ * Date			Author		Config #	Description
+ * ============ ===========	===========	================================
+ * 13/07/2018	Kathambari		Initial Version
+ */
+
+function mIsAccessoryAdded(Inputs,Outputs)
+{
+try
+{
+var OrderId = Inputs.GetProperty(&quot;OrderId&quot;);
+var	AccessoryPresent = &quot;N&quot;;
+var BO = TheApplication().GetBusObject(&quot;Order Entry (Sales)&quot;);
+var LineItemBC = BO.GetBusComp(&quot;VHA Order Entry - Line Items Thin&quot;);
+var FulfillmentBc = BO.GetBusComp(&quot;VHA AOA Fulfilment Items&quot;);
+var AccessBC = BO.GetBusComp(&quot;VHA Accessory Items&quot;);
+if(OrderId != &quot;&quot;)
+{
+with(LineItemBC)
+{
+	ClearToQuery();
+	SetViewMode(AllView);
+	SetSearchExpr(&quot;[Root Order Item Id] = [Id] AND [Order Header Id] = &apos;&quot; + OrderId + &quot;&apos;&quot;);
+	ExecuteQuery(ForwardOnly);
+	var fr = FirstRecord();
+	while(fr)
+	{
+		var RelServOrderId = GetFieldValue(&quot;Id&quot;);
+		with(FulfillmentBc)
+		{
+		SetSearchExpr(&quot;[Related Service Order Id] = &apos;&quot; + RelServOrderId + &quot;&apos;&quot;);
+		ExecuteQuery(ForwardOnly);
+		var frec = FirstRecord();
+		if(frec)
+		{
+			AccessoryPresent = &quot;Y&quot;;
+		}
+		}
+		with(AccessBC)
+		{
+			SetSearchExpr(&quot;[Related Service Order Id] = &apos;&quot; + RelServOrderId + &quot;&apos;&quot;);
+			ExecuteQuery(ForwardOnly);
+			var faccrec = FirstRecord();
+			if(faccrec)
+			{
+				AccessoryPresent = &quot;Y&quot;;
+			}
+		}
+	fr = NextRecord();
+	}
+	Outputs.SetProperty(&quot;AccessoryPresent&quot;,AccessoryPresent);
+}
+}
+}
+catch(e)
+{
+throw(e);
+}
+finally
+{
+LineItemBC = null;
+FulfillmentBc = null;
+AccessBC = null;
+BO = null;
+}
+}"
+			   SEQUENCE="21"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mIsCappedCustomer"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="/*
+ * Component Name        : 	VHA Hard Caps Procesing Service
+ * Function Name         : 	mIsCappedCustomer
+ * Component Information : 	This function checks if customer is credit capped customer.
+ *							
+ * Inputs				 : Account Id
+ * Modification History  :
+ * Date			Author		Config #	Description
+ * ============ ===========	===========	================================
+ * 13/07/2018	Kathambari		Initial Version
+ */
+
+
+
+function mIsCappedCustomer(Inputs,Outputs)
+{
+try{
+var	IsCapCust = &quot;N&quot;;
+var AccountId = Inputs.GetProperty(&quot;AccountId&quot;);
+//var class2 = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_CREDIT_CLASS&quot;,&quot;X2&quot;);
+var BO = TheApplication().GetBusObject(&quot;Order Entry (Sales)&quot;);
+var Accntbc = BO.GetBusComp(&quot;VF Account Thin TBUI&quot;);
+var finprof = BO.GetBusComp(&quot;VF Com Financial Profile TBUI&quot;);
+if(AccountId != &quot;&quot;)
+{
+	with(Accntbc)
+	{
+		ClearToQuery();
+		SetViewMode(AllView);
+		SetSearchExpr(&quot;[Id] = &apos;&quot; + AccountId + &quot;&apos;&quot;);
+		ExecuteQuery(ForwardOnly);
+		var fr = FirstRecord();
+		if(fr)
+		{
+		 with(finprof)
+		 {
+			var finanrec =  FirstRecord();
+			if(finanrec)
+			{
+			 var creditclass = GetFieldValue(&quot;VF Credit Class&quot;);
+			 var class1 = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_HARD_CAP_CC&quot;,creditclass);
+				 if(creditclass == class1 &amp;&amp; class1 != &quot;&quot; &amp;&amp; class1 != null)
+				 {
+					 IsCapCust = &quot;Y&quot;;
+				 }		
+			 }
+		 }
+		}
+		Outputs.SetProperty(&quot;IsCapCust&quot;,IsCapCust);
+	}
+}
+}
+catch(e)
+{
+throw(e);
+}
+finally
+{
+Accntbc = null;
+finprof = null;
+BO = null;
+}
+}"
+			   SEQUENCE="22"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mIsMoreThanOneServiceAdded"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="/*
+ * Component Name        : 	VHA Hard Caps Procesing Service
+ * Function Name         : 	mIsMoreThanOneServiceAdded
+ * Component Information : 	This function checks if any accessories are added to specific order.
+ *							
+ * Inputs				 : Order Id
+ * Modification History  :
+ * Date			Author		Config #	Description
+ * ============ ===========	===========	================================
+ * 13/07/2018	Kathambari		Initial Version
+ */
+
+function mIsMoreThanOneServiceAdded(Inputs,Outputs)
+{
+try
+{
+var ServiceLimitExceeds = &quot;N&quot;;
+var OrderId = Inputs.GetProperty(&quot;OrderId&quot;);
+var BO = TheApplication().GetBusObject(&quot;Order Entry (Sales)&quot;);
+var BC = BO.GetBusComp(&quot;VHA Order Entry - Line Items Thin&quot;);
+if(OrderId != &quot;&quot;)
+{
+with(BC)
+{
+	ClearToQuery();
+	SetViewMode(AllView);
+	SetSearchExpr(&quot;[Root Order Item Id] = [Id] AND [Order Header Id] = &apos;&quot; + OrderId + &quot;&apos;&quot;);
+	ExecuteQuery(ForwardOnly);
+	var NoOfService = CountRecords();
+	if(NoOfService &gt; 1)
+	{
+		ServiceLimitExceeds = &quot;Y&quot;;
+	}
+	Outputs.SetProperty(&quot;ServiceLimitExceeds&quot;,ServiceLimitExceeds);
+}
+}
+}
+catch(e)
+{
+throw(e);
+}
+finally
+{
+OrderId = null;
+NoOfService = null;
+BC = null;
+BO = null;
+}
+
+
+}"
+			   SEQUENCE="23"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mPostOrderHardCapsProcess"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mPostOrderHardCapsProcess(Inputs, Outputs) 
+{
+    /*
+     * Component Name        :  VHA Hard Caps Procesing Service
+     * Method Name/Fn         : mPostOrderHardCapsProcess 
+     * Component Information :  This fn is to create new Hardcaps Products under asset
+     * Modification History  :
+     * Date   Author  Config #   Description
+     * ============ =========== ===========   ================================
+     *  10-07-2018   Vinodhini   HardCaps
+     */
+    try 
+    {
+        //Declare Variables 
+        var sOrderType, sRootAssetInteg;
+
+        //Objects Declaration section 
+        var oOrderBo = TheApplication().GetBusObject(&quot;Order Entry UNISIM BO&quot;);
+        var oOrderLineBC = oOrderBo.GetBusComp(&quot;VHA Order Entry - Line Items Thin&quot;);
+		
+		var sLOVBC = TheApplication().GetBusObject(&quot;List Of Values&quot;).GetBusComp(&quot;List Of Values&quot;);
+				
+		var isRec = &quot;&quot;, StrProduct = &quot;&quot;, sSplSiebelRatingList = &quot;&quot;, sActionCd = &quot;&quot;, sFromPropType = &quot;&quot;;
+		var sInactivateCapsRequired = &quot;N&quot;, sActivateCapsRequired = &quot;N&quot;;
+		
+        var sOrderId = Inputs.GetProperty(&quot;Order Id&quot;);
+        var sRootLineId = Inputs.GetProperty(&quot;Root Line Item Id&quot;);
+        var sNewRootId = Inputs.GetProperty(&quot;New Root Order Item Id&quot;);
+		var sOrderType = Inputs.GetProperty(&quot;Order Sub Type&quot;);
+				
+		var sCreditCaps = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;,&quot;Credit Caps&quot;);
+		var sVodafoneCaps = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;,&quot;Vodafone Caps&quot;);
+		//NROY 20-Sep-2023 Added for eSIM Carrier App Trial Customer
+		var sTrialSubscription = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;,&quot;Trial Subscription&quot;);
+		
+		var sSiebelProdType = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VF_PROD_TYPE&quot;,&quot;Hard Caps&quot;);
+		var sGetModifyTypeOut = TheApplication().NewPropertySet();
+
+        if(sOrderId != &quot;&quot; &amp;&amp; sRootLineId != &quot;&quot;) 
+        {
+			with(oOrderLineBC) 
+			{
+				ActivateField(&quot;Root Asset Integration Id&quot;);
+				ActivateField(&quot;Custom Asset Integration Id&quot;);
+				ActivateField(&quot;Special Rating List Type&quot;);
+				ActivateField(&quot;VHA Spl Rating List Type Calc&quot;);
+				ActivateField(&quot;Action Code&quot;);
+				SetViewMode(AllView);
+				ClearToQuery();
+				if(sOrderType == &quot;Change Proposition&quot; &amp;&amp; sNewRootId != &quot;&quot; &amp;&amp; sNewRootId != null) 
+				{						
+				SetSearchExpr(&quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos; AND ([Id] = &apos;&quot; + sRootLineId + &quot;&apos; OR [Id] = &apos;&quot; + sNewRootId + &quot;&apos;)&quot;);
+				}
+				else
+				{
+				SetSearchExpr(&quot;[Order Header Id] = &apos;&quot; + sOrderId + &quot;&apos; AND [Id] = &apos;&quot; + sRootLineId + &quot;&apos;&quot;);
+				}
+				ExecuteQuery(ForwardOnly);
+				var irec = FirstRecord();
+				
+				while(irec)
+				{
+					sActionCd = GetFieldValue(&quot;Action Code&quot;);
+					if(sActionCd == &quot;Delete&quot;)
+					{
+						sFromPropType = GetFieldValue(&quot;VHA Spl Rating List Type Calc&quot;);
+						sRootAssetInteg = GetFieldValue(&quot;Root Asset Integration Id&quot;);
+						
+					}
+					else
+					{
+						if (sOrderType == &quot;Change Proposition&quot;) 
+							sRootAssetInteg = GetFieldValue(&quot;Custom Asset Integration Id&quot;);
+						else
+							sRootAssetInteg = GetFieldValue(&quot;Root Asset Integration Id&quot;);
+						sSplSiebelRatingList = GetFieldValue(&quot;VHA Spl Rating List Type Calc&quot;);
+						
+					}
+					irec = NextRecord();					
+				}
+				  
+			} //line bc
+			if((sRootAssetInteg != &quot;&quot;) &amp;&amp; (sRootAssetInteg!= null))
+			{
+				if(sFromPropType == sCreditCaps || sFromPropType == sVodafoneCaps)
+				{
+					sInactivateCapsRequired = &quot;Y&quot;;					
+				}
+				if(sSplSiebelRatingList == sCreditCaps || sSplSiebelRatingList == sVodafoneCaps || sSplSiebelRatingList == sTrialSubscription)
+				{
+					sActivateCapsRequired = &quot;Y&quot;;
+				}						
+						
+				if(sOrderType == &quot;Change Proposition&quot;)
+				{
+					mUpdateOldAssetXMRRef(sOrderId,sRootLineId,sNewRootId);				
+				}				
+				else if(sOrderType == &quot;Modify&quot; &amp;&amp; sRootLineId != &quot;&quot; &amp;&amp; sActivateCapsRequired == &quot;Y&quot;)
+				{
+					mGetModifyType(sOrderId, sRootLineId, sGetModifyTypeOut);
+					
+					if (sGetModifyTypeOut.GetProperty(&quot;Booster&quot;) == &quot;Y&quot; || sGetModifyTypeOut.GetProperty(&quot;RPC&quot;) == &quot;Y&quot; || 
+					sGetModifyTypeOut.GetProperty(&quot;IDD&quot;) == &quot;Y&quot;)
+					{
+						sInactivateCapsRequired = &quot;Y&quot;;
+					}
+					else
+					{
+						sActivateCapsRequired = &quot;N&quot;;
+					}
+					
+					//To Handle the Booster and IDD scenerio.
+					if(sGetModifyTypeOut.GetProperty(&quot;Booster&quot;) == &quot;Y&quot; &amp;&amp; sGetModifyTypeOut.GetProperty(&quot;IDD&quot;) == &quot;Y&quot;)
+					{
+						sGetModifyTypeOut.SetProperty(&quot;Booster&quot;,&quot;N&quot;);
+						sGetModifyTypeOut.SetProperty(&quot;IDD&quot;,&quot;N&quot;);
+					}
+				}
+				
+				if (sInactivateCapsRequired == &quot;Y&quot; || sActivateCapsRequired == &quot;Y&quot;)
+				{
+				  sLOVBC.SetViewMode(AllView);
+				  sLOVBC.ClearToQuery();
+				  sLOVBC.ActivateField(&quot;Type&quot;);
+				  sLOVBC.ActivateField(&quot;Name&quot;);
+				  sLOVBC.ActivateField(&quot;Value&quot;);
+				  sLOVBC.SetSearchSpec(&quot;Type&quot;, &quot;VHA_USAGE_PRODUCT&quot;);
+				  sLOVBC.SetSearchSpec(&quot;Name&quot;,sSiebelProdType);
+				  sLOVBC.ExecuteQuery(ForwardOnly);
+				  isRec = sLOVBC.FirstRecord();
+  
+				  while(isRec)
+				  {
+					  StrProduct = sLOVBC.GetFieldValue(&quot;Value&quot;);
+					  
+					 
+					   if(StrProduct !=&quot;&quot; &amp;&amp; StrProduct !=null)
+					   {
+						if(((sGetModifyTypeOut.GetProperty(&quot;Booster&quot;) == &quot;Y&quot; &amp;&amp; StrProduct != &quot;Data&quot;) || 
+						(sGetModifyTypeOut.GetProperty(&quot;IDD&quot;) == &quot;Y&quot; &amp;&amp; StrProduct != &quot;IDD&quot;)) &amp;&amp; 
+						sGetModifyTypeOut.GetProperty(&quot;RPC&quot;) != &quot;Y&quot;)
+						{
+							//Do Nothing
+						}
+						else
+						{
+							sGetModifyTypeOut.SetProperty(&quot;sInactivateCapsRequired&quot;,sInactivateCapsRequired);
+							sGetModifyTypeOut.SetProperty(&quot;sActivateCapsRequired&quot;,sActivateCapsRequired);
+							mCreateandUpdateHardcapsProducts(sRootAssetInteg,sOrderType,StrProduct,sGetModifyTypeOut);
+						}
+					   }					   
+					isRec = sLOVBC.NextRecord();
+				  }
+				}
+			}//if((sRootAssetInteg != &quot;&quot;) &amp;&amp; (sRootAssetInteg!= null))
+        }//if(sOrderId != &quot;&quot;) 
+
+    } //try
+       
+    catch (e) 
+    {
+        throw (e);
+
+    } 
+    finally 
+    {
+        oOrderLineBC = null;
+        sLOVBC = null;
+        oOrderBo = null;
+		sGetModifyTypeOut = null;        
+    }
+
+
+}"
+			   SEQUENCE="24"
+			   UPDATED="10/10/2023 19:21:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mUpdateCapsDetails"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mUpdateCapsDetails(Inputs)
+{
+ /*
+     * Component Name        : 	VHA Hard Caps Procesing Service
+     * Method Name/Fn         : mGetPreSubmitModify	
+     * Component Information : 	
+     * Modification History  :
+     * Date			Author		Config #			Description
+     * ============ ===========	===========			================================
+     *  23-08-2018  Kailash   Hardcaps				This function will check if RPC/Booster/IDD added for order types
+	 *  26-12-2018  Sathish   19.1 PKE#             IDD/Data in submit XML fixed for BAU to BAU and BAU to HC change prop scenarios
+     */
+	try
+	{
+
+
+		var sOrderId = Inputs.GetProperty(&quot;Order Id&quot;);
+		var sOrderItmId = Inputs.GetProperty(&quot;Root Line Item Id&quot;);
+				
+		var sOrderChgProp = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;, &quot;Change Proposition&quot;);
+		var sOrderModify = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;, &quot;Modify&quot;);				
+		var sDeconFrom = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;, &quot;Decon/Con Transfer FROM&quot;);
+		var sChnDscnt = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_SUB_TYPE&quot;, &quot;Change Ownership Disconnect&quot;);
+		
+		var sDelActnCd = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;DELTA_ACTION_CODE&quot;, &quot;Deleted&quot;);		
+		var sCaps = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_PROD_TYPE&quot;, &quot;Hard Caps&quot;);
+		var sVHACaps = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;, &quot;Vodafone Caps&quot;);		
+		
+		var isRec=&apos;N&apos;, sRPC, sBooster, sIDD, sActnCd=&apos;&apos;, sRootActnCd=&apos;&apos;, isFirstRec=&apos;&apos;, sVal=&apos;&apos;, sRootSplType, sCustAstIntId=&apos;&apos;, sOrderType, sAll, sTotIDD ;
+		var	oOrderBO = TheApplication().GetBusObject(&quot;VHA Throttle Order Details&quot;);
+		var oOrderLineBC = oOrderBO.GetBusComp(&quot;VHA Order Item Throttle Sharing Group Details&quot;);				
+		
+		with (oOrderLineBC)
+		{
+			if(sOrderId != &quot;&quot; &amp;&amp; sOrderId != null)
+			{
+
+				ActivateField(&quot;Action Code&quot;);			
+				ActivateField(&quot;Root Custom Asset Int Id&quot;);
+				ActivateField(&quot;Display Reason&quot;);
+				ActivateField(&quot;Root Order Item Action Code&quot;);
+				ActivateField(&quot;Root Order Item Id&quot;);
+				ActivateField(&quot;Root Special Siebel Type&quot;);
+				ActivateField(&quot;VHA Service Order Sub Type&quot;);
+				ClearToQuery();
+				SetViewMode(AllView);
+				if(sOrderItmId !=&quot;&quot; &amp;&amp; sOrderItmId !=null)
+				SetSearchSpec(&quot;Root Order Item Id&quot;, sOrderItmId);
+				SetSearchSpec(&quot;Order Header Id&quot;, sOrderId);			
+				ExecuteQuery(ForwardOnly);
+				isRec = FirstRecord();
+				
+				while(isRec)
+				{				
+					
+					sActnCd = GetFieldValue(&quot;Action Code&quot;);
+					sRootActnCd = GetFieldValue(&quot;Root Order Item Action Code&quot;);				
+					sRootSplType = GetFieldValue(&quot;Root Special Siebel Type&quot;);
+					sOrderType = GetFieldValue(&quot;VHA Service Order Sub Type&quot;);			
+					var sCapsType = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VHA_CAP_SPLSBL_PROD_TYPE&quot;, sRootSplType);								
+					sCustAstIntId = GetFieldValue(&quot;Root Custom Asset Int Id&quot;);				
+					sOrderItmId = GetFieldValue(&quot;Root Order Item Id&quot;);			
+					
+					//SG 26-12-2018 Modified Below section for PKE# TOT/ConDecon scenario
+					if((sOrderType == sDeconFrom || sOrderType == sChnDscnt )&amp;&amp; sRootSplType == sCapsType &amp;&amp; (sRootSplType !=&quot;&quot; &amp;&amp; sRootSplType != null))
+					{
+
+						var sGetModifyTypeOut = TheApplication().NewPropertySet();							
+						if(sOrderItmId != &quot;&quot; &amp;&amp; sOrderItmId != null)
+						{
+
+						 mGetPreSubmitDetails(sOrderId, sOrderItmId, sOrderType, sGetModifyTypeOut,sCustAstIntId);
+						//SG: Modified for PKE# Generic function for AddCapdetailsInSubmit used
+						sAll = sGetModifyTypeOut.GetProperty(&quot;sAll&quot;);					
+						var sNewRootId = sGetModifyTypeOut.GetProperty(&quot;NewRootId&quot;);
+
+						if(sAll == &apos;AllUnbar&apos; || sAll == &apos;AllIDDbar&apos; || sAll == &apos;Booster&apos; || sAll == &apos;IDD&apos;)
+						{
+						AddCapDetailsInSubmit(sOrderItmId ,sAll,sCustAstIntId);
+						
+						}
+	
+						}
+					}
+				
+					//SG 26-12-2018:Added Below section for PKE# change Prop scenario
+					//if(sCapsType == &quot;&quot; &amp;&amp; (sOrderType == sOrderChgProp &amp;&amp; sCustAstIntId !=&quot;&quot; &amp;&amp;(sRootActnCd != sDelActnCd)))
+					if(sRootSplType == sCapsType &amp;&amp; ( sRootSplType !=&quot;&quot; &amp;&amp; sRootSplType != null) &amp;&amp; sOrderType == sOrderChgProp &amp;&amp; sCustAstIntId !=&quot;&quot; &amp;&amp; sRootActnCd == sDelActnCd)
+					{
+
+						var sGetModifyTypeOut = TheApplication().NewPropertySet();
+						//mGetPreSubmitChangeProp(sOrderId, sOrderItmId, sOrderType, sGetModifyTypeOut,sCustAstIntId);
+						mGetPreSubmitDetails(sOrderId, sOrderItmId, sOrderType, sGetModifyTypeOut,sCustAstIntId);
+						sAll = sGetModifyTypeOut.GetProperty(&quot;sAll&quot;);
+						var sNewRootId = sGetModifyTypeOut.GetProperty(&quot;NewRootId&quot;);
+						if(sAll == &apos;AllUnbar&apos; || sAll == &apos;AllIDDbar&apos; || sAll == &apos;Booster&apos; || sAll == &apos;IDD&apos;)
+						{
+						AddCapDetailsInSubmit(sNewRootId,sAll,sCustAstIntId);
+						
+						}
+					 }
+
+					//SG 26-12-2018 Modified Below section for PKE# modify scenario
+					/*if ((sRootSplType == sCapsType &amp;&amp; sRootSplType != &quot;&quot; &amp;&amp; sRootSplType != null) &amp;&amp; ((sOrderType == sOrderChgProp &amp;&amp; sCustAstIntId !=&quot;&quot; &amp;&amp;(sRootActnCd != sDelActnCd)) || (sOrderType == sOrderModify &amp;&amp; sOrderItmId !=&apos;&apos; &amp;&amp; (sActnCd != sDelActnCd))))*/
+					if (sRootSplType == sCapsType &amp;&amp; ( sRootSplType !=&quot;&quot; &amp;&amp; sRootSplType != null) &amp;&amp; sOrderType == sOrderModify &amp;&amp; sOrderItmId !=&apos;&apos; &amp;&amp; sActnCd != sDelActnCd)
+					{
+						var sGetModifyTypeOut = TheApplication().NewPropertySet();	
+						if(sOrderItmId != &quot;&quot; &amp;&amp; sOrderItmId != null)
+						{							
+						mGetPreSubmitDetails(sOrderId, sOrderItmId, sOrderType, sGetModifyTypeOut,sCustAstIntId);
+						sAll = sGetModifyTypeOut.GetProperty(&quot;sAll&quot;);
+
+						if(sAll == &apos;AllUnbar&apos; || sAll == &apos;AllIDDbar&apos; || sAll == &apos;Booster&apos; || sAll == &apos;IDD&apos;)
+						{
+						AddCapDetailsInSubmit(sOrderItmId,sAll,sCustAstIntId );
+						}
+
+
+						}
+
+					}			
+		
+
+				isRec = NextRecord();
+
+		}				
+		
+        }
+	}
+
+}
+	
+	catch (e)
+	{
+		throw(e);
+	}
+	
+	finally
+	{
+		//sLOVBC = null;
+		oOrderLineBC = null;				
+		oOrderBO = null;
+		sGetModifyTypeOut = null;
+	}
+}"
+			   SEQUENCE="25"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+			<BUSINESS_SERVICE_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mUpdateOldAssetXMRRef"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mUpdateOldAssetXMRRef(sOrderId ,sRootLineId,sNewRootId)
+{
+/*
+ * Component Name        :  VHA Buffet Processing Service
+ * Method Name/Fn         : mUpdateOldAssetXMRRef 
+ * Component Information :  This fn updates existing asset xm par asset id reference for change prop
+ * Modification History  :
+ * Date   Author  Config #   Description
+ * ============ =========== ===========   ================================
+ *  13-04-2018   Vinodhini   Hardcaps
+ */
+
+try
+{
+		var bContinue,strNewIAId,strOldIAId,sNewAssetId=&quot;&quot;;
+
+		var boOrder = TheApplication().GetBusObject(&quot;MACD Performance Order&quot;);
+		var bcOrder = boOrder.GetBusComp(&quot;MACD Order Entry - Orders&quot;);
+		var bcOrderLineItems = boOrder.GetBusComp(&quot;MACD Order Entry - Line Items&quot;);
+
+		var boAsset = TheApplication().GetBusObject(&quot;VF Asset&quot;);
+		var bcAsset = boAsset.GetBusComp(&quot;Asset Mgmt - Asset - Header Simple&quot;);
+		var bcPasses = boAsset.GetBusComp(&quot;VHA Current Processing Status BC&quot;);
+		var bcTransaction = boAsset.GetBusComp(&quot;VHA Transaction History BC&quot;);
+			
+			
+			bcOrder.ClearToQuery();
+			bcOrder.SetViewMode(AllView);
+			bcOrder.SetSearchSpec( &quot;Id&quot;, sOrderId );
+			bcOrder.ExecuteQuery( ForwardOnly );
+			
+			if (bcOrder.FirstRecord())
+			{
+				bcOrderLineItems.ClearToQuery();
+				bcOrderLineItems.ActivateField( &quot;Root Asset Integration Id&quot; );		
+				bcOrderLineItems.ActivateField(	&quot;Action Code&quot; );
+				
+				if(sRootLineId != &quot;&quot; &amp;&amp; sNewRootId != &quot;&quot;)
+				bcOrderLineItems.SetSearchExpr(&quot;[Id] = &apos;&quot; + sRootLineId + &quot;&apos; OR [Id] = &apos;&quot; + sNewRootId + &quot;&apos;&quot;);
+				else
+				bcOrderLineItems.SetSearchSpec( &quot;Parent Order Item Id&quot;, &quot;= &apos;&apos;&quot; );
+				bcOrderLineItems.ExecuteQuery(ForwardOnly);
+				bContinue = bcOrderLineItems.FirstRecord();
+				while ( bContinue )
+				{
+				
+					if ( bcOrderLineItems.GetFieldValue( &quot;Action Code&quot; ) == &quot;Add&quot; )
+					{
+						// Asset Id of the new reparented IA
+						strNewIAId = bcOrderLineItems.GetFieldValue( &quot;Root Asset Integration Id&quot; );
+						
+					}
+					else
+					{
+
+						strOldIAId = bcOrderLineItems.GetFieldValue( &quot;Root Asset Integration Id&quot; );
+						
+					}
+					
+					bContinue = bcOrderLineItems.NextRecord();
+				}
+			
+			}
+
+			
+			if(strNewIAId != &quot;&quot; &amp;&amp; strOldIAId != &quot;&quot;)
+			{				
+				bcAsset.ClearToQuery();
+				bcAsset.SetViewMode( AllView );	
+				//bcAsset.ActivateField( &quot;Integration Id&quot; );
+				bcAsset.SetSearchSpec( &quot;Integration Id&quot;, strNewIAId );
+				bcAsset.ExecuteQuery( ForwardOnly );
+				if(bcAsset.FirstRecord())
+				{
+				
+				gNewAssetId = bcAsset.GetFieldValue(&quot;Id&quot;);
+				
+				}
+				if (gNewAssetId != &quot;&quot;)
+				{
+					
+					bcAsset.ClearToQuery();
+					bcAsset.SetViewMode( AllView );	
+					bcAsset.SetSearchSpec( &quot;Integration Id&quot;, strOldIAId );
+					bcAsset.ExecuteQuery( ForwardOnly );
+					if(bcAsset.FirstRecord())
+					{
+					
+					    bcPasses.ActivateField(&quot;Asset Id&quot;);
+						bcPasses.ClearToQuery();
+						bcPasses.SetViewMode(AllView);
+						bcPasses.SetSearchSpec(&quot;Asset Integration Id&quot;, strOldIAId );
+						bcPasses.ExecuteQuery( ForwardOnly );
+						var isRecFound = bcPasses.FirstRecord();
+						
+						while(isRecFound)
+						{
+						bcPasses.SetFieldValue(&quot;Asset Id&quot;,gNewAssetId);	
+						isRecFound = bcPasses.NextRecord();
+						}
+						
+						bcTransaction.ActivateField(&quot;Asset Id&quot;);
+						bcTransaction.ClearToQuery();
+						bcTransaction.SetViewMode(AllView);
+						bcTransaction.SetSearchSpec(&quot;Asset Integration Id&quot;, strOldIAId );
+						bcTransaction.ExecuteQuery( ForwardOnly );
+						var isRec = bcTransaction.FirstRecord();
+						
+						while(isRec)
+						{
+						bcTransaction.SetFieldValue(&quot;Asset Id&quot;,gNewAssetId);	
+						isRec = bcTransaction.NextRecord();
+						}
+					
+					}
+				
+				}
+			
+			}	
+}
+catch(e)
+{
+ throw(e);
+}
+finally
+{
+	bcOrderLineItems = null;
+	bcOrder = null;
+	boOrder = null;
+	bcPasses = null;
+	bcTransaction = null;
+	bcAsset = null;
+	boAsset = null;
+
+}	
+}"
+			   SEQUENCE="26"
+			   UPDATED="11/23/2020 19:23:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="11/01/2018 13:56:00"
+			   CREATED_BY="SADMIN">
+			</BUSINESS_SERVICE_SERVER_SCRIPT>
+		</BUSINESS_SERVICE>
+	</PROJECT>
+</REPOSITORY>
+
+
+
