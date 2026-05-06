@@ -613,6 +613,11 @@ if (typeof(SiebelAppFacade.VHASSJNavigationPR) === "undefined") {
                         segment = applet.GetBusComp().GetFieldValue("VF Customer Segment");
                     }
 
+                    // Defect fix: overwrite Remaining Equipment Limit on Prepayment and Sharing page
+                    if (sView === "VF SSJ Prepayments View-TBUI") {
+                        setTimeout(updatePrepayEquipmentLimit, 300);
+                    }
+
                     //Customer Deatils
                     if (sView === "VF Capture Exst Customer Details Postpay TBUI - SSJ") {
                         if (segment === "Consumer") {
@@ -782,6 +787,21 @@ if (typeof(SiebelAppFacade.VHASSJNavigationPR) === "undefined") {
                             }
                         }
                     });
+                }
+
+                // Defect fix: update "Remaining equipment limit" on Prepayment and Sharing page
+                // to reflect the actual remaining limit after cart items have been added.
+                function updatePrepayEquipmentLimit() {
+                    var savedLimit = sessionStorage.getItem("ssjUpdEquipmentLimit");
+                    if (savedLimit === null || savedLimit === "") return;
+                    var prepayHeaderApplet = SiebelApp.S_App.GetActiveView().GetAppletMap()['VF SSJ Prepayment Header Applet'];
+                    if (!prepayHeaderApplet) return;
+                    var prepCtrls = prepayHeaderApplet.GetPModel().Get("GetControls");
+                    if (!prepCtrls || !prepCtrls['Remaining equipment limit']) return;
+                    var limitVal = parseFloat(savedLimit) || 0;
+                    var formattedLimit = "$" + limitVal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    var inputName = prepCtrls['Remaining equipment limit'].GetInputName();
+                    $("input[name='" + inputName + "']").val(formattedLimit);
                 }
 
                 function normalizeText(s) {

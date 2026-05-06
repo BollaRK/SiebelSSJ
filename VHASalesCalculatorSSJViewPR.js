@@ -2972,6 +2972,7 @@ console.log("SB Add Cart");
                             //dhana
                             if (SiebelApp.S_App.GetActiveView().GetAppletMap()["VHA SSJ Parent Order Form Applet"].GetBusComp().GetFieldValue("Account Id")) {
                                 updEquipmentLimitCheck = updatedEquipmentLimitCheck("addToCart");
+                                sessionStorage.setItem("ssjUpdEquipmentLimit", updEquipmentLimitCheck);
                             }
                             //update cart
                             var container = "";
@@ -6592,6 +6593,7 @@ console.log("SB upd cart new");
                             EquipmentLimitRemaining = parseFloat(EquipmentLimitRemaining).toFixed(2);
                             remainingEquipmentLimitCheck = parseFloat(EquipmentLimitRemaining) || 0;
                             updEquipmentLimitCheck = parseFloat(EquipmentLimitRemaining) || 0;
+                            sessionStorage.setItem("ssjUpdEquipmentLimit", updEquipmentLimitCheck);
                             /*sushma*/// sushma add new variables
                             var EquipmentLimitNum = parseFloat(EquipmentLimitRemaining);
                             if (isNaN(EquipmentLimitNum)) {
@@ -15788,6 +15790,7 @@ Header.SetProperty("RetrieveNBNBusiness", (document.getElementById('retrievenbnp
                         if (SiebelApp.S_App.GetActiveView().GetAppletMap()["VHA SSJ Parent Order Form Applet"].GetBusComp().GetFieldValue("Account Id")) {
                             let updsrvdetails = currExtService.update;
                             updEquipmentLimitCheck = updatedEquipmentLimitCheck("updateCart", updsrvdetails);
+                            sessionStorage.setItem("ssjUpdEquipmentLimit", updEquipmentLimitCheck);
                         }
                         //Marvin: Added to update the Array for line Creation
                         currExtService.update.Proposition = currentRLI[0].Proposition;
@@ -17361,6 +17364,7 @@ console.log("SB upd cart exist");
                         //dhana
                         if (SiebelApp.S_App.GetActiveView().GetAppletMap()["VHA SSJ Parent Order Form Applet"].GetBusComp().GetFieldValue("Account Id")) {
                             updEquipmentLimitCheck = updatedEquipmentLimitCheck("removeService");
+                            sessionStorage.setItem("ssjUpdEquipmentLimit", updEquipmentLimitCheck);
                             $(`.vha-scj-tabs-cont-main .validation-warning-box`).addClass("displaynone");
                         }
                         //Marvi: Added for Cart Numbering
@@ -17406,6 +17410,7 @@ console.log("SB upd cart exist");
                         //dhana
                         if (SiebelApp.S_App.GetActiveView().GetAppletMap()["VHA SSJ Parent Order Form Applet"].GetBusComp().GetFieldValue("Account Id")) {
                             updEquipmentLimitCheck = updatedEquipmentLimitCheck("removeNewServices");
+                            sessionStorage.setItem("ssjUpdEquipmentLimit", updEquipmentLimitCheck);
                             $(`.vha-scj-tabs-cont-main .validation-warning-box`).addClass("displaynone");
                         }
                         isRemoveAllNewServices = false;
@@ -17489,6 +17494,7 @@ console.log("SB upd cart exist");
                             $('#prod-list-' + sExitServMsisdn).children().removeClass('strike');
                             $('#cart-container-' + sExitServMsisdn).removeClass('edited');
                             updEquipmentLimitCheck = updatedEquipmentLimitCheck("extstRemoveAllChanges", service.update);
+                            sessionStorage.setItem("ssjUpdEquipmentLimit", updEquipmentLimitCheck);
                             service.update = [];
                             service.updlog = [];
                             manageCartButtons("extstRemoveAllChanges");
@@ -18022,6 +18028,7 @@ console.log("SB Flag exist");
                         //dhana
                         if (SiebelApp.S_App.GetActiveView().GetAppletMap()["VHA SSJ Parent Order Form Applet"].GetBusComp().GetFieldValue("Account Id")) {
                             updEquipmentLimitCheck = updatedEquipmentLimitCheck("removeService");
+                            sessionStorage.setItem("ssjUpdEquipmentLimit", updEquipmentLimitCheck);
                             $(`.vha-scj-tabs-cont-main .validation-warning-box`).addClass("displaynone");
                         }
                         //Marvi: Added for Cart Numbering
