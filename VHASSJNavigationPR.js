@@ -453,10 +453,36 @@ if (typeof(SiebelAppFacade.VHASSJNavigationPR) === "undefined") {
                             returnStructure["CancelOperation"] = true;
                             SiebelApp.S_App.uiStatus.Free();
                         }
+                        // Issue 2: Block SubmitTask when Out of Stock items have no Shipping/Pick Store Address
+                        if (methodName === "SubmitTask") {
+                            if (!validateOrderReviewShipping()) {
+                                returnStructure["CancelOperation"] = true;
+                                SiebelApp.S_App.uiStatus.Free();
+                            }
+                        }
                     }, {
                         sequence: true,
                         scope: this
                     });
+                }
+
+                // Issue 2: Validate that Out of Stock items have a Shipping/Pick Store Address on Order Review page
+                function validateOrderReviewShipping() {
+                    if ($("#shippingDetails").length > 0) {
+                        var shipApplet = activeView.GetAppletMap()["VHA SSJ Order Review Shipping Address Form Applet"];
+                        if (shipApplet) {
+                            try {
+                                var calFullAddr = shipApplet.GetBusComp().GetFieldValue("Cal Full Address");
+                                if (!calFullAddr || calFullAddr.trim() === "") {
+                                    alert("Out of Stock items require a Shipping Address or Pick Store Address. Please select one before proceeding.");
+                                    return false;
+                                }
+                            } catch (e) {
+                                console.warn("Could not validate Order Review shipping address:", e);
+                            }
+                        }
+                    }
+                    return true;
                 }
 
                 function nextButton(currentIndex, lastIndex) {
@@ -514,6 +540,23 @@ if (typeof(SiebelAppFacade.VHASSJNavigationPR) === "undefined") {
                         }
                         proceedFlg = validateSpeed();
 
+                        // Issue 1: Validate Stock Indicator for all Accessories and Wearables
+                        // Note: returning true in nextButton() is the existing convention meaning "block navigation"
+                        var accApplet = activeView.GetAppletMap()["VHA SSJ Accessories List Applet TBUI"];
+                        if (accApplet) {
+                            var accPM = accApplet.GetPModel();
+                            var accRecordSet = accPM.Get("GetRecordSet");
+                            if (accRecordSet && accRecordSet.length > 0) {
+                                for (var j = 0; j < accRecordSet.length; j++) {
+                                    var sStockInd = accRecordSet[j]["VHA_App_Stock_Indicator"];
+                                    if (!sStockInd || sStockInd.trim() === "") {
+                                        alert("Please select Stock Indicator for all Accessories and Wearables before proceeding.");
+                                        return true; // block navigation (existing convention)
+                                    }
+                                }
+                            }
+                        }
+
                         if (!isDFAFlow) 
                         {
                             if (String(activeStepperName).toLowerCase().includes("proposition") &&
@@ -533,7 +576,14 @@ if (typeof(SiebelAppFacade.VHASSJNavigationPR) === "undefined") {
                         }
 
                     }
-                    if (appletMap['VF SSJ Prepayment Header Applet']) { 
+                    // Issue 2: Validate shipping/pick store address for Out of Stock items on Order Review page
+                    if (activeViewName == "VF New Connect MSO Order Summary View TBUI SSJ - eSIM Details" ||
+                        String(activeStepperName).toLowerCase().includes("order review")) {
+                        if (!validateOrderReviewShipping()) {
+                            return true;
+                        }
+                    }
+                    if (appletMap['VF SSJ Prepayment Header Applet']) {
                         sCalcpaymtbtnvalidation();
                     }
 
