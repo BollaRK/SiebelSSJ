@@ -242,7 +242,7 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                 SiebelAppFacade.VHASSJBillingDetailViewPR.superclass.BindEvents.apply(this, arguments);
                 $(document).off("click.vhaSSJLayout").on("click.vhaSSJLayout", "button, a", function () {
                     var txt = ($(this).text() || "").trim().toLowerCase();
-                    if (txt === "edit" || txt === "save" || txt === "discard") {
+                    if (txt === "edit" || txt === "save" || txt === "discard" || txt === "new") {
                         setTimeout(refreshBillingLayout, 500);
                     }
                 });
