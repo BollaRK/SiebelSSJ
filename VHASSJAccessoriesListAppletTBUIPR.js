@@ -96,7 +96,40 @@ if (typeof(SiebelAppFacade.VHASSJAccessoriesListAppletTBUIPR) === "undefined") {
 		$(this).html(html);
 		$(this).data('done', true);
 	});
-	
+
+	// Issue 1: Auto-default Stock Indicator to "Out of Stock" for any empty rows.
+	// sCnt guard prevents re-entrant calls triggered by PositionOnRow inside the timeout.
+	if (sCnt === 0) {
+		sCnt = 1;
+		setTimeout(function() {
+			try {
+				var accAppletRef = SiebelApp.S_App.GetActiveView().GetAppletMap()["VHA SSJ Accessories List Applet TBUI"];
+				if (!accAppletRef) { sCnt = 0; return; }
+				var accPM = accAppletRef.GetPModel();
+				var accBC = accAppletRef.GetBusComp();
+				var recordSet = accPM.Get("GetRecordSet");
+				if (recordSet && recordSet.length > 0) {
+					var savedSel = accPM.Get("GetSelection") || 0;
+					var anyDefaulted = false;
+					for (var i = 0; i < recordSet.length; i++) {
+						var sStockInd = recordSet[i]["VHA_App_Stock_Indicator"];
+						if (!sStockInd || sStockInd.trim() === "") {
+							accPM.ExecuteMethod("PositionOnRow", i);
+							accBC.SetFieldValue("VHA App Stock Indicator", "Out of Stock");
+							accBC.WriteRecord();
+							anyDefaulted = true;
+						}
+					}
+					if (anyDefaulted) {
+						accPM.ExecuteMethod("PositionOnRow", savedSel);
+					}
+				}
+			} catch(e) {
+				console.warn("Issue 1: Could not auto-default Stock Indicator:", e);
+			}
+			sCnt = 0;
+		}, 200);
+	}
 	  
     }
 

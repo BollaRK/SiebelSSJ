@@ -540,24 +540,7 @@ if (typeof(SiebelAppFacade.VHASSJNavigationPR) === "undefined") {
                         }
                         proceedFlg = validateSpeed();
 
-                        // Issue 1: Validate Stock Indicator for all Accessories and Wearables
-                        // Note: returning true in nextButton() is the existing convention meaning "block navigation"
-                        var accApplet = activeView.GetAppletMap()["VHA SSJ Accessories List Applet TBUI"];
-                        if (accApplet) {
-                            var accPM = accApplet.GetPModel();
-                            var accRecordSet = accPM.Get("GetRecordSet");
-                            if (accRecordSet && accRecordSet.length > 0) {
-                                for (var j = 0; j < accRecordSet.length; j++) {
-                                    var sStockInd = accRecordSet[j]["VHA_App_Stock_Indicator"];
-                                    if (!sStockInd || sStockInd.trim() === "") {
-                                        alert("Please select Stock Indicator for all Accessories and Wearables before proceeding.");
-                                        return true; // block navigation (existing convention)
-                                    }
-                                }
-                            }
-                        }
-
-                        if (!isDFAFlow) 
+                        if (!isDFAFlow)
                         {
                             if (String(activeStepperName).toLowerCase().includes("proposition") &&
                                 listOfActiveStepperNames.some(function(x) {
