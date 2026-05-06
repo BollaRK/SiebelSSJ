@@ -47,7 +47,30 @@ if (typeof(SiebelAppFacade.VHASalesCalculatorSSJViewPR) === "undefined") {
 
         var scJson = "";
         var currentRLI = [];
+		//Sowmya - 10912
+        function getMonthlyRepaymentValue(value) {
+            if (typeof value === 'string') {
+                value = value.replace(/[^0-9.-]+/g, '');
+            }
+            return parseFloat(value) || 0;
+        }
 
+        function normalizeMonthlyRepayments(node) {
+            if (node && typeof node === 'object') {
+                if (Array.isArray(node)) {
+                    node.forEach(normalizeMonthlyRepayments);
+                } else {
+                    Object.keys(node).forEach(function (key) {
+                        if (key === 'Monthly__Repayment' && node[key] != null && typeof node[key] !== 'string') {
+                            node[key] = String(node[key]);
+                        } else {
+                            normalizeMonthlyRepayments(node[key]);
+                        }
+                    });
+                }
+            }
+        }
+		//Sowmya end
         let jsonplans;
         let jsonTabletMbbPlans;
         let jsonFixedPlans;
@@ -949,14 +972,40 @@ if (typeof(SiebelAppFacade.VHASalesCalculatorSSJViewPR) === "undefined") {
                     }, 1000);
 
                 }); // ended button
-                //cart summary accrodion
-                $('.accordion-header').click(function () {
-                    const Accrbody = $(this).next('.accordion-body');
-                    const Accrarrow = $(this).find('.arrow-icon');
+                //cart summary accrodion 10416
+                // $('.accordion-header').click(function () {
+                //    const Accrbody = $(this).next('.accordion-body');
+                //    const Accrarrow = $(this).find('.arrow-icon');
 
-                    Accrbody.slideToggle('fast');//vinay: added for CM-10416
-                    Accrarrow.toggleClass('rotate');
-                });
+                //    Accrbody.slideToggle('fast');//vinay: added for CM-10416
+                //    Accrarrow.toggleClass('rotate');
+                // });
+			   /* =====================================================
+			   Cart Summary Accordion – REMOVE slideToggle animation
+			   Scope: .vha-scj-cart-summary only 10416
+			   ===================================================== */
+				(function () {
+				
+				    const CART_SCOPE = '.vha-scj-cart-summary';
+				    $(document).off('click', CART_SCOPE + ' .accordion-header');				    
+				    $(document).on('click', CART_SCOPE + ' .accordion-header', function () {
+				
+				        const $header = $(this);
+				        const $body   = $header.next('.accordion-body');
+				        const $arrow  = $header.find('.arrow-icon');
+				
+				        /* Instant open / close */
+				        if ($body.is(':visible')) {
+				            $body.hide();
+				            $arrow.removeClass('rotate');
+				        } else {
+				            $body.show();
+				            $arrow.addClass('rotate');
+				        }
+				    });
+				
+				})();
+
                 //no results found
                 $('.vha-scj-step3-searchicon').on('click', function () {
                     if (ActiveTab === "mobile") {
@@ -1534,6 +1583,8 @@ $(".vha-scj-check-str-popup-input").on("input", function () {
                         if (matchedDevice) {
                             const matchedVariant = matchedDevice.variants.find((variant) => variant['VHA SMS Colour'] === selectedColor && variant['VHA Band'] === band && variant['VHA Band Size'] === bandsize && variant['VHA Case Size'] === casesize);
                             if (matchedVariant) {
+                                const totalRRP = parseFloat(matchedVariant['VHA RRP Inc GST']) || 0; //Sowmya - 10912
+                                const calculatedMonthlyPrice = (totalRRP / parseInt(paymentTerm)).toFixed(2); //Sowmya - 10912
                                 let matchedDeviceObj = {
                                     Type: "SecondaryDevice",
                                     Action: "Add",
@@ -1541,7 +1592,7 @@ $(".vha-scj-check-str-popup-input").on("input", function () {
                                     ProdIntegrationId: "",
                                     Wearble__Code: matchedVariant['Product Code'],
                                     Term: paymentTerm,
-                                    RRP__Inc__GST: matchedVariant['VHA RRP Inc GST'],
+                                    RRP__Inc__GST: totalRRP, //Sowmya - 10912
                                     BandSize: matchedVariant['VHA Band Size'],
                                     Band: matchedVariant['VHA Band'],
                                     CaseSize: matchedVariant['VHA Case Size'],
@@ -1550,7 +1601,7 @@ $(".vha-scj-check-str-popup-input").on("input", function () {
                                     Category: matchedVariant['VHA Category'],
                                     Insurance: "",
                                     InsPri: "",
-                                    Monthly__Repayment: monthlyPrice
+                                    Monthly__Repayment: parseFloat(calculatedMonthlyPrice) //Sowmya - 10912
                                 };
                                 if (currentRLI[0].SecondaryItem.length < 5)
                                     currentRLI[0].SecondaryItem.push(matchedDeviceObj);
@@ -2462,15 +2513,19 @@ $(".vha-scj-check-str-popup-input").on("input", function () {
                         sMspButtonCheckPopup();
                     } else {
 						triggerCreateQuoteFlg = "Y";//Marvin: Added for CM-8948
-                        if (scJson.QuoteHeader.ExistingServices.length > 0 && (scJson.QuoteHeader.ExistingServices[0][0])) {
-                            scJson.QuoteHeader.ExistingServices[0].forEach(function (exist) {
+                        const existingServices = scJson?.QuoteHeader?.ExistingServices || []; //Sowmya - 10912
+                        const rootItems = scJson?.QuoteHeader?.RootItem || []; //Sowmya - 10912
+						//Updated by Sowmya - 10912
+                        if (existingServices.length > 0 && existingServices[0]?.[0]) {
+                            existingServices[0].forEach(function (exist) {
                                 if (exist.update) {
                                     countExist = countExist + 1;
                                 }
                             });
                         }
-                        if (scJson.QuoteHeader.RootItem.length > 0) {
-                            countNew = scJson.QuoteHeader.RootItem.length;
+						//Updated by Sowmya - 10912
+                        if (rootItems.length > 0) {
+                            countNew = rootItems.length;
                         }
                         totalLine = countExist + countNew;
                         //if (totalLine > SiebelApp.S_App.GetActiveView().GetApplet("VHA SSJ Order Entry Line Item List Applet").GetNumRows()) {
@@ -2485,8 +2540,10 @@ $(".vha-scj-check-str-popup-input").on("input", function () {
 								$('#s_'+SiebelApp.S_App.GetActiveView().GetAppletMap()['VHA SSJ Asset Form Applet'].GetFullId() + '_div').before(`<div class = "vha-scj-asset-border"><div>`);
 							}
                         }
+                        scJson.QuoteHeader = scJson.QuoteHeader || {}; //Sowmya - 10912
                         scJson.QuoteHeader.QuoteNumber = SiebelApp.S_App.GetActiveView().GetApplet("VHA SSJ Parent Order Form Applet").GetBusComp().GetFieldValue("Order Number");
-                        scJson.QuoteHeader.QuoteId = sQuoteId;
+                        scJson.QuoteHeader.QuoteId = sQuoteId || scJson.QuoteHeader.QuoteId || ""; //Sowmya - 10912
+                        normalizeMonthlyRepayments(scJson); //Sowmya - 10912
                         var doc = SiebelAppFacade.VHANSASalesCalcUpgradePDFPR.createPDF(scJson, '');
                         var base64PDF = doc.output("datauristring").split(",")[1];
                         var ser = SiebelApp.S_App.GetService("VF BS Process Manager");
@@ -2665,15 +2722,17 @@ $(".vha-scj-check-str-popup-input").on("input", function () {
                         if(SiebelApp.S_App.GetActiveView().GetAppletMap()['VHA SSJ Asset Form Applet']){//added by vinay
                             $('#s_'+SiebelApp.S_App.GetActiveView().GetAppletMap()['VHA SSJ Asset Form Applet'].GetFullId() + '_div').before(`<div class = "vha-scj-asset-border"><div>`);
                         }
+                        scJson.QuoteHeader = scJson.QuoteHeader || {}; //Sowmya - 10912
                         scJson.QuoteHeader.QuoteNumber = SiebelApp.S_App.GetActiveView().GetApplet("VHA SSJ Parent Order Form Applet").GetBusComp().GetFieldValue("Order Number");
-                        scJson.QuoteHeader.QuoteId = sQuoteId;
+                        scJson.QuoteHeader.QuoteId = sQuoteId || scJson.QuoteHeader.QuoteId || ""; //Sowmya - 10912
+                        normalizeMonthlyRepayments(scJson); //Sowmya - 10912
                         var doc = SiebelAppFacade.VHANSASalesCalcUpgradePDFPR.createPDF(scJson, '');
                         var base64PDF = doc.output("datauristring").split(",")[1];
                         var ser = SiebelApp.S_App.GetService("VF BS Process Manager");
                         var Inputs = SiebelApp.S_App.NewPropertySet();
                         Inputs.SetProperty("Service Name", "VHA Sales Calculator BS");
                         Inputs.SetProperty("Method Name", "DeleteOrderEntryAttachment");
-                        Inputs.SetProperty("Order Id", scJson.QuoteHeader.QuoteId);
+                        Inputs.SetProperty("Order Id", scJson.QuoteHeader.QuoteId || ""); //Sowmya - 10912
                         var Output = ser.InvokeMethod("Run Process", Inputs);
                         insertPDF(base64PDF,"CreateOrder");
                     }
@@ -3029,12 +3088,13 @@ console.log("SB Add Cart");
                                             </div>`;
                                         }
                                     });
+									//Updated item-list-price by Sowmya - 10912
                                     $.map(itm.DeviceItem, function (dev) {
                                         if (dev.Name) {
                                             container += `<div id="prod" class="prod row">
                                             <img src="` + VHAAppUtilities.GetDeviceIcon(dev.Type) + `" alt="img" class="header-icon cart-icon mr-3">
                                                 <span class="item">` + dev.UI__Source_Product_Name + ", " + dev.UI__Color + ", " + dev.UI__Capacity + `</span>
-                                                <span class="item-list-price toAdd">$` + formatNumber(dev.Monthly__Repayment.split('$')[1]) + `</span>
+                                                <span class="item-list-price toAdd">$` + formatNumber(getMonthlyRepaymentValue(dev.Monthly__Repayment)) + `</span>
                                             </div>`;
                                         }
                                         /*sowmya - 7542(27/01/2026)*/
@@ -3053,7 +3113,7 @@ console.log("SB Add Cart");
                                             container += `<div id="prod" class="prod row">
                                                 <img src="` + VHAAppUtilities.GetDeviceIcon("tablet") + `" alt="img" class="header-icon cart-icon mr-3">
                                                     <span class="item">` + SD.UI__Source_Product_Name + `</span>
-                                                    <span class="item-list-price toAdd">$` + formatNumber(SD.Monthly__Repayment.split('$')[1]) + `</span>
+                                                    <span class="item-list-price toAdd">$` + formatNumber(getMonthlyRepaymentValue(SD.Monthly__Repayment)) + `</span>
                                                 </div>`;
                                         }
                                         if (SD.Insurance) {
@@ -3064,12 +3124,13 @@ console.log("SB Add Cart");
                                                 </div>`;
                                         }
                                     });
+									//Updated item-list-price by Sowmya - 10912
                                     $.map(itm.SecondaryItem, function (SD) { //Jeeten: CM-7572 : UPdated the price mapping to show monthly price.
                                         if (SD.Item__Name) {
                                             container += `<div id="prod" class="prod row">
                                                 <img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
                                                     <span class="item">` + SD.Item__Name + `</span>
-                                                    <span class="item-list-price toAdd">` + formatNumber(SD.Monthly__Repayment) + `</span>
+                                                    <span class="item-list-price toAdd">$` + formatNumber(SD.Monthly__Repayment) + `</span>
                                                 </div>`;
                                         }
                                         if (SD.Insurance) {
@@ -3104,10 +3165,16 @@ console.log("SB Add Cart");
 
                                     //Marvin: Added  for after Prod Config
                                     if(productConfig === "Y") {
+									let actCode = "";
                                     $.map(itm.PackItem, function (pitem) {
                                         if (pitem.Name) {
-												container += `<div id="prod" class="prod row">
-                                            <img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
+												if(pitem.Action){
+													actCode = `<div id="AddOn-` + itm.Id + `" class="prod row">`;
+												}else{
+													actCode = `<div id="Offer-` + itm.Id + `"  class="prod row">`;
+												}
+												container += ``+actCode+`
+												<img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
                                                 <span class="item">` + pitem.Name + `</span>
                                                 <span class="item-list-price toSubtract">-$` + parseFloat(pitem.Price).toFixed(2) + `</span>
                                             </div>`;
@@ -3115,7 +3182,12 @@ console.log("SB Add Cart");
                                     });
 										 $.map(itm.CreditItem, function (citem) {
 											 if (citem.Name) {
-												 container += `<div id="prod" class="prod row">
+												if(citem.Action){
+													actCode = `<div id="AddOn-` + itm.Id + `" class="prod row">`;
+												}else{
+													actCode = `<div id="Offer-` + itm.Id + `" class="prod row">`;
+												}
+												 container += ``+actCode+`
 												 <img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
 													 <span class="item">` + citem.Name + `</span>
 													 <span class="item-list-price toSubtract">-$` + parseFloat(citem.Price).toFixed(2) + `</span>
@@ -3125,13 +3197,18 @@ console.log("SB Add Cart");
 										 $.map(itm.BonusItem, function (bitem) {
 											 if (bitem.Name) {
 												 let bonusPrice = "";
+												if(bitem.Action){
+													actCode = `<div id="AddOn-` + itm.Id + `" class="prod row">`;
+												}else{
+													actCode = `<div id="Offer-` + itm.Id + `" class="prod row">`;
+												}
 												 if(bitem.GPI === "Bonus IDD"){
 													 bonusPrice = `<span class="item-list-price toSubtract"></span>`;
 												 }else{
 													 bonusPrice = `<span class="item-list-price toSubtract">-$` + parseFloat(bitem.Price).toFixed(2) + `</span>`;
 												 }
-												 container += `<div id="prod" class="prod row">
-												 <img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
+												container += ``+actCode+`
+												<img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
 													 <span class="item">` + bitem.Name + `</span>
 													 `+ bonusPrice +`
 												 </div>`;
@@ -3139,7 +3216,12 @@ console.log("SB Add Cart");
 										 });
 										 $.map(itm.DDItem, function (ditem) {
 											 if (ditem.Name) {
-												 container += `<div id="prod" class="prod row">
+												if(ditem.Action){
+													actCode = `<div id="AddOn-` + itm.Id + `" class="prod row">`;
+												}else{
+													actCode = `<div id="Offer-` + itm.Id + `" class="prod row">`;
+												}
+												 container += ``+actCode+`
 												 <img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
 													 <span class="item">` + ditem.Name + `</span>
 													 <span class="item-list-price toSubtract">-$` + parseFloat(ditem.Price).toFixed(2) + `</span>
@@ -3660,12 +3742,13 @@ console.log("SB upd cart new");
                                                 <span class="item-list-price toAdd">$` + itm.FixedPlanItem.Price + `</span>
                                             </div>`;
                                     }
+									//Updated item-list-price by Sowmya - 10912
                                     $.map(itm.DeviceItem, function (dev) {
                                         if (dev.Name) {//jeeten: updated to monthly Repayment | UAT defect
                                             container += `<div id="prod" class="prod row">
                                            <img src="` + VHAAppUtilities.GetDeviceIcon(dev.Type) + `" alt="img" class="header-icon cart-icon mr-3">
                                                <span class="item">` + dev.UI__Source_Product_Name + ", " + dev.UI__Color + ", " + dev.UI__Capacity + `</span>
-                                               <span class="item-list-price toAdd">$` + formatNumber(dev.Monthly__Repayment.split('$')[1]) + `</span>
+                                               <span class="item-list-price toAdd">$` + formatNumber(getMonthlyRepaymentValue(dev.Monthly__Repayment)) + `</span>
                                            </div>`;
                                         }
                                     });
@@ -3678,12 +3761,13 @@ console.log("SB upd cart new");
                                             </div>`;
                                         }
                                     });
+									//Updated item-list-price by Sowmya - 10912
                                     $.map(itm.TabletItem, function (SD) {
                                         if (SD.UI__Source_Product_Name) { //Jeeten: 14-jan25: UAT issue: monthly recurring
                                             container += `<div id="prod" class="prod row">
                                             <img src="` + VHAAppUtilities.GetDeviceIcon("tablet") + `" alt="img" class="header-icon cart-icon mr-3">
                                                 <span class="item">` + SD.UI__Source_Product_Name + `</span>
-                                                <span class="item-list-price toAdd">$` + formatNumber(SD.Monthly__Repayment.split('$')[1]) + `</span>
+                                                <span class="item-list-price toAdd">$` + formatNumber(getMonthlyRepaymentValue(SD.Monthly__Repayment)) + `</span>
                                             </div>`;
                                         }
                                         if (SD.Insurance) {
@@ -6021,7 +6105,7 @@ console.log("SB upd cart new");
 												 const WearablesTab = $('.carosuel-main[data-id="Wearble"]');
 												 const toggle = WearablesTab.find('.current-plan-toggle-switch');
 												 toggle.removeClass('displaynone');
-												 const $cardsContainer = WearablesTab.find('.existing-current-wearables');
+												 const $cardsContainer = WearablesTab.find('.ssj-existing-ser-wear');
 
 												 $cardsContainer.empty();
 
@@ -6052,18 +6136,18 @@ console.log("SB upd cart new");
                                                 <div class="existing-ser-info-subheading">${item.Brand || "Brand name"}</div>
                                                 <div class="existing-ser-info-product-description">${name}</div>
                                                 <div class="existing-ser-info-price-info">$${price}/mo</div>
-                                                <div class="existing-ser-info-checkbox-container">
+                                                <div class="existing-ser-info-checkbox-container row px-4">
                                                   <input type="checkbox"
 												         data-payout-type="wearable"
                                                          id="payOutDevice_${index}"
-                                                         class="payOutDevice"
+                                                         class="payOutDevice m-1"
                                                          ${checkboxAttr}
                                                          ${extraStyle}
                                                          data-name="${name || ''}"
                                                          data-integrationId="${IntegrationId || ''}">
                                                   <label for="payOutDevice_${index}">Pay out device</label>
                                                 </div>
-                                                <div class="dashed-hr"></div>
+                                                <div class="ssj-dashed-hr"></div>
                                               </div>
                                             `;
 													$cardsContainer.append(html);
@@ -6082,7 +6166,7 @@ console.log("SB upd cart new");
 												 const AccessoriesTab = $('.carosuel-main[data-id="accessory"]');
 												 const toggle = AccessoriesTab.find('.current-plan-toggle-switch');
 												 toggle.removeClass('displaynone');
-												 const $cardsContainer = AccessoriesTab.find('.existing-current-accessories');
+												 const $cardsContainer = AccessoriesTab.find('.ssj-existing-ser-acc');
 
 												 $cardsContainer.empty();
 
@@ -6112,18 +6196,19 @@ console.log("SB upd cart new");
                                                 <div class="existing-ser-info-subheading">${item.Brand || "Brand name"}</div>
                                                 <div class="existing-ser-info-product-description">${name}</div>
                                                 <div class="existing-ser-info-price-info">$${price}/mo</div>
-                                                <div class="existing-ser-info-checkbox-container">
+                                                <div class="existing-ser-info-checkbox-container row px-4">
                                                   <input type="checkbox"
 												         data-payout-type="wearable"
                                                          id="payOutDevice_${index}"
-                                                         class="payOutDevice"
+                                                         class="payOutDevice m-1"
                                                          ${checkboxAttr}
                                                          ${extraStyle}
                                                          data-name="${name || ''}"
                                                          data-integrationId="${IntegrationId || ''}">
                                                   <label for="payOutDevice_${index}">Pay out device</label>
                                                 </div>
-                                                <div class="dashed-hr"></div>
+                                                <div class="ssj-dashed-hr"></div>
+												<div>
                                               </div>
                                             `;
 													$cardsContainer.append(html);
@@ -6485,6 +6570,7 @@ console.log("SB upd cart new");
                     psInputs1.SetProperty("Service Name", "VHA SSJ Generic Utility Service");
                     psInputs1.SetProperty("Method Name", "GetAddressExstAsset");
                     psInputs1.SetProperty("RootAssetId", filteredExistingServices.AssetId);
+		    psInputs1.SetProperty("OrderId",SiebelApp.S_App.GetProfileAttr("SSJParentOrderId"));
                     psOutputs1 = bsRespCheck1.InvokeMethod("Run Process", psInputs1);
                     if(psOutputs1){
                         var obj = {}
@@ -7542,6 +7628,8 @@ populatePropositionDropdown(jsonTabletMbbPlans, 'tablet'); //juhi 10400
                                     $(this).addClass("selected-card-btn");
                                     currentRLI[0].AccItem.push(matchedDeviceObj);
                                     $('.vha-ssj-items-num').text(currentRLI[0].AccItem.length);
+									$('.mbPlanCounter').addClass('displaynone');//vinay: added for CM-10657
+									$('.planCount').val(1);
                                 } else {
                                     $(this).text("Select");
                                     $card.removeClass('selected-card');
@@ -7656,6 +7744,8 @@ populatePropositionDropdown(jsonTabletMbbPlans, 'tablet'); //juhi 10400
                                         insurName = deviceCare;
                                     }
 
+                                    const totalRRP = parseFloat(matchedVariant['VHA RRP Inc GST']) || 0; //Sowmya - 10912
+                                    const calculatedMonthlyPrice = (totalRRP / parseInt(paymentTerm)).toFixed(2); //Sowmya - 10912
                                     let matchedDeviceObj = {
                                         Type: "SecondaryDevice",
                                         Action: "Add",
@@ -7663,8 +7753,8 @@ populatePropositionDropdown(jsonTabletMbbPlans, 'tablet'); //juhi 10400
                                         ProdIntegrationId: "",
                                         Wearble__Code: matchedVariant['Product Code'],
                                         Term: paymentTerm,
-										RRP__Exc__GST: matchedVariant['VHA RRP Exc GST'],
-                                        RRP__Inc__GST: matchedVariant['VHA RRP Inc GST'],
+										RRP__Exc__GST: parseFloat(matchedVariant['VHA RRP Exc GST']) || 0, //Sowmya - 10912
+                                        RRP__Inc__GST: totalRRP, //Sowmya - 10912
                                         BandSize: matchedVariant['VHA Band Size'],
                                         Band: matchedVariant['VHA Band'],
                                         CaseSize: matchedVariant['VHA Case Size'],
@@ -7674,7 +7764,7 @@ populatePropositionDropdown(jsonTabletMbbPlans, 'tablet'); //juhi 10400
                                         Insurance: insurName,
                                         InsPri: insurPrice,
                                         insurId: insurId,
-                                        Monthly__Repayment: monthlyPrice
+                                        Monthly__Repayment: parseFloat(calculatedMonthlyPrice) //Sowmya - 10912
                                     };//Marvin : Added RRP__Exc__GST for CM-8877.
                                     if (currentRLI[0].SecondaryItem.length < 5) {
                                         $card.find(".vha-scj-quantity").removeClass('displaynone');
@@ -7682,6 +7772,8 @@ populatePropositionDropdown(jsonTabletMbbPlans, 'tablet'); //juhi 10400
                                         $card.addClass('selected-card');
                                         $(this).addClass("selected-card-btn");
                                         currentRLI[0].SecondaryItem.push(matchedDeviceObj);
+										$('.mbPlanCounter').addClass('displaynone');//vinay: added for CM-10657
+										$('.planCount').val(1);
                                     } else {
                                         $(this).text("Select");
                                         $card.removeClass('selected-card');
@@ -11625,7 +11717,8 @@ function sortStorageArray(storageArr) {
                 let updatedRemainingEquipmentLimitCheck = 0;
                 let sPayoutAmount = 0.00;
                 if (status === "addToCart" || status === "removeService" || status === "removeNewServices") {
-                    let newServicesHeader = scJson?.QuoteHeader?.RootItem?.[0];
+                    //let newServicesHeader = scJson?.QuoteHeader?.RootItem?.[0];
+					let newServicesHeader = scJson?.QuoteHeader?.RootItem;//scJson?.QuoteHeader?.RootItem10914
                     if (scJson?.QuoteHeader?.RootItem?.length > 0) {
                         let newServicesMobileCost = 0;
                         let newServicesTabletCost = 0;
@@ -11633,7 +11726,48 @@ function sortStorageArray(storageArr) {
                         let newServicesAccessoryCost = 0;
                         let fixedServicesModemCost = 0;
                         let fixedServicesAccessoryCost = 0;
-                        if (newServicesHeader?.DeviceItem?.length > 0) {
+						//10914
+						newServicesHeader?.forEach(rootItem =>
+						  rootItem.DeviceItem?.forEach(device =>
+						    newServicesMobileCost += Number(device?.UI__RRP__Inc__GST) || 0
+						  )
+						);
+						newServicesHeader?.forEach(rootItem =>
+						  rootItem.TabletItem?.forEach(tablet =>
+						    newServicesTabletCost += Number(tablet?.UI__RRP__Inc__GST) || 0
+						  )
+						);
+						
+						newServicesHeader?.forEach(rootItem => {
+						  if (rootItem?.SecondaryItem?.length > 0) {
+						    newServicesWearableCost += rootItem.SecondaryItem
+						      .map(item => Number(item?.RRP__Inc__GST) || 0)
+						      .reduce((a, b) => a + b, 0);
+						  }
+						});
+						
+					newServicesHeader?.forEach(rootItem => {
+					  if (rootItem?.AccItem?.length > 0) {
+					    newServicesAccessoryCost += rootItem.AccItem
+					      .map(a => Number(a?.Accessory__RRP__Inc__GST) || 0)
+					      .reduce((a, b) => a + b, 0);
+					  }
+					});
+					newServicesHeader?.forEach(rootItem =>
+						  rootItem.FixedmodemItem?.forEach(FixedmodemItem =>
+						    fixedServicesModemCost += Number(FixedmodemItem?.UI__RRP__Inc__GST) || 0
+						  )
+						);
+						
+					newServicesHeader?.forEach(rootItem => {
+					  if (rootItem?.fixedAccItem?.length > 0) { // Dhana_19feb
+					    fixedServicesAccessoryCost += rootItem.fixedAccItem
+					      .map(a => Number(a?.Accessory__RRP__Inc__GST) || 0)
+					      .reduce((a, b) => a + b, 0);
+					  }
+					});
+                   //ended for 10914
+                        /*if (newServicesHeader?.DeviceItem?.length > 0) {
                             newServicesMobileCost = parseFloat(newServicesHeader?.DeviceItem?.[0]?.UI__RRP__Inc__GST) || 0;
                         }
                         if (newServicesHeader?.TabletItem?.length > 0) {
@@ -11650,9 +11784,9 @@ function sortStorageArray(storageArr) {
                         }
                         if (newServicesHeader?.fixedAccItem?.length > 0) { // Dhana_19feb
                             fixedServicesAccessoryCost = parseFloat(newServicesHeader?.fixedAccItem?.map((a) => +a?.Accessory__RRP__Inc__GST || 0).reduce((a, b) => a + b, 0)) || 0;
-                        }
+                        }*/
                         let totalNewServices = newServicesMobileCost + newServicesTabletCost + newServicesWearableCost + newServicesAccessoryCost + fixedServicesModemCost + fixedServicesAccessoryCost; // Dhana_19feb
-                        updatedRemainingEquipmentLimitCheck = parseFloat(updEquipmentLimitCheck - totalNewServices) || 0;
+                        updatedRemainingEquipmentLimitCheck = parseFloat(remainingEquipmentLimitCheck - totalNewServices) || 0;//10914
                     }
                 }
 
@@ -13190,18 +13324,25 @@ function sortStorageArray(storageArr) {
 						let strCartId = "";
 						let jsonRoot = "";
 						let jsonTempRoot = "";
+						let setPostFulfilchg = "";
 						existConfigMSISDN = wfOutput.GetChildByType("ResultSet").GetChild(0).GetChild(0).GetChild(e).propArray.MSISDN;
 						
 						if(sCartItemId.length > 0){
 							jsonRoot = scJson.QuoteHeader.RootItem;
 							jsonTempRoot = sTempscJson.QuoteHeader.RootItem;
 							strCartId = sCartItemId;
+							setPostFulfilchg = scJson.QuoteHeader?.RootItem?.filter(root => root.Id === sCartItemId)[0];
+							setPostFulfilchg.PostFulFillChange = "N";
 						}else{
 							jsonRoot = scJson.QuoteHeader.ExistingServices[0];
 							jsonTempRoot = sTempscJson.QuoteHeader.ExistingServices[0];
 							strCartId = sMSISDNId;
+							scJson.QuoteHeader?.ExistingServices[0]?.filter(root => root.MSISDN === sMSISDNId)[0];
+							setPostFulfilchg.update.PostFulFillChange = "N";
 						}
-
+						scJson.QuoteHeader.BackFromFulfill = "Y";
+						//let existAddOn = document.querySelectorAll("#AddOn-"+ strCartId);
+						//existAddOn.forEach(addon => addon.remove());
                         if (sPackItems.GetChildCount() > 0) {
                             for (let p = 0; p <= sPackItems.GetChildCount() - 1; p++) {
                                 for (let a = 0; a <= jsonRoot.length - 1; a++) {
@@ -13218,7 +13359,7 @@ function sortStorageArray(storageArr) {
                                                 Price: sPackItems.GetChild(p).propArray["RecurringCharge"]
                                             };
                                         if(strReqType === "Y"){
-                                            existConfigCont += `<div id="` + cartId + `_` + sPackItems.GetChild(p).propArray["ProductId"] + `" class="prod row">
+                                            existConfigCont += `<div id="AddOn-` + cartId + `" class="prod row">
                                             <img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
                                                 <span class="item">` + sPackItems.GetChild(p).propArray["Name"] + `</span>
                                                 <span class="item-list-price toAdd">$` + parseFloat(sPackItems.GetChild(p).propArray["RecurringCharge"]).toFixed(2) + `</span>
@@ -13258,7 +13399,7 @@ function sortStorageArray(storageArr) {
                                                 Price: sCreditItems.GetChild(p).propArray["RecurringCharge"]
                                             };
                                         if(strReqType === "Y"){
-                                            existConfigCont +=`<div id="` + cartId + `_` + sCreditItems.GetChild(p).propArray["ProductId"] + `" class="prod row">
+                                            existConfigCont +=`<div id="AddOn-` + cartId + `" class="prod row">
                                             <img src="` + VHAAppUtilities.GetDeviceIcon("discount") + `" alt="img" class="header-icon cart-icon mr-3">
                                                 <span class="item">` + sCreditItems.GetChild(p).propArray["Name"] + `</span>
                                                 <span class="item-list-price toSubtract">` + formatNegativeCurrency(parseFloat(sCreditItems.GetChild(p).propArray["RecurringCharge"])) + `</span>
@@ -13297,7 +13438,7 @@ function sortStorageArray(storageArr) {
                                                 Price: sBonusItems.GetChild(p).propArray["RecurringCharge"]
                                             };
                                         if(strReqType === "Y"){
-                                            existConfigCont += `<div id="` + scartId + `_` + sBonusItems.GetChild(p).propArray["ProductId"] + `" class="prod row">
+                                            existConfigCont += `<div id="AddOn-` + cartId + `" class="prod row">
                                             <img src="` + VHAAppUtilities.GetDeviceIcon("discount") + `" alt="img" class="header-icon cart-icon mr-3">
                                                 <span class="item">` + sBonusItems.GetChild(p).propArray["Name"] + `</span>
                                                 <span class="item-list-price toSubtract">` + formatNegativeCurrency(parseFloat(sBonusItems.GetChild(p).propArray["RecurringCharge"])) + `</span>
@@ -13337,7 +13478,7 @@ function sortStorageArray(storageArr) {
                                                 Price: sDvcDiscItems.GetChild(p).propArray["RecurringCharge"]
                                             };
                                         if(strReqType === "Y"){
-                                            existConfigCont += `<div id="` + cartId + `_` + sDvcDiscItems.GetChild(p).propArray["ProductId"] + `" class="prod row">
+                                            existConfigCont += `<div id="AddOn-` + cartId + `" class="prod row">
                                             <img src="` + VHAAppUtilities.GetDeviceIcon("discount") + `" alt="img" class="header-icon cart-icon mr-3">
                                                 <span class="item">` + sDvcDiscItems.GetChild(p).propArray["Name"] + `</span>
                                                 <span class="item-list-price toSubtract">$` + parseFloat(sDvcDiscItems.GetChild(p).propArray["RecurringCharge"]).toFixed(2) + `</span>
@@ -16052,9 +16193,15 @@ console.log("SB upd cart exist");
                     });
 					//Marvin: Added  for after Prod Config
 					if(productConfig === "Y") {
+					let actCode = ""; 
 					$.map(itm.PackItem, function (pitem) {
 						if (pitem.Name) {
-							container += `<div id="prod" class="prod row mr-auto">
+								if(pitem.Action){
+									actCode = `<div id="AddOn-` + eid + `" class="prod row mr-auto">`;
+								}else{
+									actCode = `<div id="Offer-` + eid + `"  class="prod row mr-auto">`;
+								}
+								container += ``+actCode+`
 							<img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
 								<span class="item">` + pitem.Name + `</span>
 								<span class="item-list-price toSubtract">-$` + parseFloat(pitem.Price).toFixed(2) + `</span>
@@ -16063,7 +16210,12 @@ console.log("SB upd cart exist");
 					});
 						$.map(itm.CreditItem, function (citem) {
 							if (citem.Name) {
-								container += `<div id="prod" class="prod row mr-auto">
+								if(citem.Action){
+									actCode = `<div id="AddOn-` + eid + `" class="prod row mr-auto">`;
+								}else{
+									actCode = `<div id="Offer-` + eid + `"  class="prod row mr-auto">`;
+								}
+								container += ``+actCode+`
 								<img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
 									<span class="item">` + citem.Name + `</span>
 									<span class="item-list-price toSubtract">-$` + parseFloat(citem.Price).toFixed(2) + `</span>
@@ -16072,13 +16224,18 @@ console.log("SB upd cart exist");
 						});
 						$.map(itm.BonusItem, function (bitem) {
 							if (bitem.Name) {
+								if(bitem.Action){
+									actCode = `<div id="AddOn-` + eid + `" class="prod row mr-auto">`;
+								}else{
+									actCode = `<div id="Offer-` + eid + `"  class="prod row mr-auto">`;
+								}
 								let bonusPrice = "";
 								if(bitem.GPI === "Bonus IDD"){
 									bonusPrice = `<span class="item-list-price toSubtract"></span>`;
 								}else{
 									bonusPrice = `<span class="item-list-price toSubtract">-$` + parseFloat(bitem.Price).toFixed(2) + `</span>`;
 								}
-								container += `<div id="prod" class="prod row mr-auto">
+								container += ``+actCode+`
 								<img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
 									<span class="item">` + bitem.Name + `</span>
 									`+ bonusPrice +`
@@ -16087,7 +16244,12 @@ console.log("SB upd cart exist");
 						});
 						$.map(itm.DDItem, function (ditem) {
 							if (ditem.Name) {
-								container += `<div id="prod" class="prod row mr-auto">
+								if(pitem.Action){
+									actCode = `<div id="AddOn-` + eid + `" class="prod row mr-auto">`;
+								}else{
+									actCode = `<div id="Offer-` + eid + `"  class="prod row mr-auto">`;
+								}
+								container += ``+actCode+`
 								<img src="` + VHAAppUtilities.GetDeviceIcon("accessory") + `" alt="img" class="header-icon cart-icon mr-3">
 									<span class="item">` + ditem.Name + `</span>
 									<span class="item-list-price toSubtract">-$` + parseFloat(ditem.Price).toFixed(2) + `</span>
@@ -17490,7 +17652,8 @@ console.log("SB upd cart exist");
                     existService.forEach(function (service) {
                         if (service.MSISDN === sExitServMsisdn) {
                             $('#vha-existing-box-' + sExitServMsisdn).find('#prod').remove();
-                            $('#vha-existing-box-' + sExitServMsisdn).find('#prod-list-title').remove()
+                            $('#vha-existing-box-' + sExitServMsisdn).find('#prod-list-title').remove();
+							$('#vha-existing-box-' + sExitServMsisdn).removeAttr('style');/*raju-05052026-CM-10669*/
                             $('#prod-list-' + sExitServMsisdn).children().removeClass('strike');
                             $('#cart-container-' + sExitServMsisdn).removeClass('edited');
                             updEquipmentLimitCheck = updatedEquipmentLimitCheck("extstRemoveAllChanges", service.update);
