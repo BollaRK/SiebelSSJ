@@ -1,0 +1,5842 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<REPOSITORY
+   NAME="Siebel Repository"
+   UPDATED="02/11/2019 19:21:26"
+   UPDATED_BY="SADMIN"
+   CREATED="02/11/2019 18:54:57"
+   CREATED_BY="SADMIN"
+   FIO_PLACEHOLDER_FIO="TRUE">
+	<PROJECT
+	   ALLOW_OBJECT_LOCKING="Y"
+	   COMMENTS="LOCKED BY VTAO UI UPGRADE (Control Alignment)"
+	   INACTIVE="N"
+	   LANGUAGE_LOCKED="ENU"
+	   LOCKED="Y"
+	   LOCKED_DATE="09/03/2019 17:21:09"
+	   NAME="Account"
+	   UI_FREEZE="N"
+	   LOCKED_BY_NAME="SADMIN"
+	   UPDATED="09/03/2019 17:21:09"
+	   UPDATED_BY="SADMIN"
+	   CREATED="01/01/1980 11:00:00"
+	   CREATED_BY="SADMIN"
+	   FIO_PLACEHOLDER_FIO="TRUE">
+		<APPLET
+		   BUSINESS_COMPONENT="VFDfa Order Entry Line Items"
+		   CLASS="CSSSWEFrameListQuoteItemEC"
+		   DISABLE_DATALOSS_WARNING="N"
+		   HTML_NUMBER_OF_ROWS="1"
+		   HEIGHT="4"
+		   INACTIVE="N"
+		   NAME="VFDFA Line Item Form Apple Propt"
+		   NO_DELETE="N"
+		   NO_INSERT="N"
+		   NO_MERGE="N"
+		   NO_UPDATE="N"
+		   SCRIPTED="Y"
+		   TYPE="Standard"
+		   UPGRADE_BEHAVIOR="Admin"
+		   WIDTH="2"
+		   UPDATED="01/20/2026 00:41:47"
+		   UPDATED_BY="GOPALJ"
+		   CREATED="01/09/2026 15:49:20"
+		   CREATED_BY="SADMIN">
+			<APPLET_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="WebApplet_PreCanInvokeMethod"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function WebApplet_PreCanInvokeMethod (MethodName, &amp;CanInvoke)
+{
+switch (MethodName)
+	{
+		
+	case &quot;DeallocateNewMSISDN&quot;:
+		
+			
+			
+				if(this.BusComp().GetFieldValue(&quot;VF MSISDN TBUI&quot;) != &quot;&quot;)
+				{
+					CanInvoke = &quot;TRUE&quot;;
+				    return(CancelOperation);
+				}
+				else
+				{
+				CanInvoke = &quot;FALSE&quot;;
+				 return(CancelOperation);
+				}
+							
+			break;
+					
+		case &quot;DeallocateSIM&quot;:
+			
+			if (this.BusComp().GetFieldValue(&quot;VF SIM TBUI&quot;) != &quot;&quot;)
+			{
+				CanInvoke = &quot;TRUE&quot;;
+				return(CancelOperation);
+			}
+			else
+				{
+				CanInvoke = &quot;FALSE&quot;;
+				 return(CancelOperation);
+				}				
+			break;
+				
+		case &quot;DeallocateIMEI&quot;:
+			
+			if (this.BusComp().GetFieldValue(&quot;VF IMEI TBUI&quot;) != &quot;&quot;)
+			{
+				CanInvoke = &quot;TRUE&quot;;
+				return(CancelOperation);
+			}
+			else
+				{
+				CanInvoke = &quot;FALSE&quot;;
+				 return(CancelOperation);
+				}				
+			break;
+
+		case &quot;ReserveStoreStock&quot;:
+			
+			if ((this.BusComp().GetFieldValue(&quot;VF IMEI TBUI&quot;) != &quot;&quot; || this.BusComp().GetFieldValue(&quot;VF Device TBUI&quot;) != &quot;&quot;) &amp;&amp; this.BusComp().GetFieldValue(&quot;VF Stock Indicator TBUI&quot;) == &quot;In Stock&quot;)
+			{
+				CanInvoke = &quot;TRUE&quot;;
+				return(CancelOperation);
+			}
+			else
+				{
+				CanInvoke = &quot;FALSE&quot;;
+				 return(CancelOperation);
+				}			
+			break;
+		case &quot;eSIMAllocate&quot;:    //Added by Sachi for R19.1 Atom Phase 2
+			this.BusComp().ActivateField(&quot;VF Root Siebel Product Type&quot;);
+			this.BusComp().ActivateField(&quot;Shipping&quot;);
+			this.BusComp().ActivateField(&quot;VF SIM TBUI&quot;);
+			this.BusComp().ActivateField(&quot;VF Stock Indicator TBUI&quot;);
+			var sSiebelProdType = this.BusComp().GetFieldValue(&quot;VF Root Siebel Product Type&quot;);
+			var sSIMType = this.BusComp().GetFieldValue(&quot;Shipping&quot;);
+			var sSIM = this.BusComp().GetFieldValue(&quot;VF SIM TBUI&quot;);
+			var sStockIndi = this.BusComp().GetFieldValue(&quot;VF Stock Indicator TBUI&quot;);
+			var sVoiceProp = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_PROD_TYPE&quot;, &quot;Voice&quot;);
+			var sMBBProp = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_PROD_TYPE&quot;, &quot;MBB&quot;);
+			var sEsim= TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_SIM_TYPE&quot;,&quot;eSIM&quot;);
+			var sStockIndiLOV = TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_ORDER_STOCK_INDICATOR&quot;, &quot;Out of Stock - Connect Later&quot;);
+			
+			if(sSIMType == sEsim &amp;&amp; (sSiebelProdType == sVoiceProp || sSiebelProdType == sMBBProp) &amp;&amp; (sSIM == &quot;&quot; || sSIM == null) &amp;&amp; (sStockIndi != sStockIndiLOV))
+			{
+				CanInvoke = &quot;TRUE&quot;;
+				return(CancelOperation);
+			}
+			else
+			{
+				CanInvoke = &quot;FALSE&quot;;
+				return(CancelOperation);
+			}
+			break;	
+		
+
+		default:
+			break;
+	}
+	return (ContinueOperation);
+}
+"
+			   SEQUENCE="3"
+			   UPDATED="03/06/2026 22:17:19"
+			   UPDATED_BY="SWATANTRAS"
+			   CREATED="01/09/2026 16:01:51"
+			   CREATED_BY="SADMIN">
+			</APPLET_SERVER_SCRIPT>
+			<APPLET_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="WebApplet_PreInvokeMethod"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function WebApplet_PreInvokeMethod (MethodName)
+{
+try {
+	var retval;
+	var QuoteId = &quot;&quot;;
+	var inputPropSet = null;
+	var outputPropSet = null;
+	var taskUIsvc = null;
+	switch (MethodName)
+	{
+		case &quot;VFDeleteRecord&quot;: //subramanian: added to cancel the order
+			var strordertype = this.BusComp().ParentBusComp().GetFieldValue(&quot;VF Order Type TBUI&quot;);
+			if(strordertype == &quot;Pre to Post transfer&quot;)//Added for Pre to Post scenario
+			{
+				this.BusComp().DeleteRecord();
+			}
+			else
+			{
+				this.BusComp().WriteRecord();
+				mCancelServiceOrder(MethodName);
+				TheApplication().GetService(&quot;FINS Teller UI Navigation&quot;).InvokeMethod (&quot;RefreshCurrentApplet&quot;, TheApplication(). NewPropertySet(),TheApplication().NewPropertySet());	
+			}
+			retval = CancelOperation;
+			break;
+		case &quot;AddToPromotion&quot;: // Nikhil Joshi: 19.05.2014: Added for Promotion Bundling
+			if(this.BusComp().NextSelected())
+				TheApplication().RaiseErrorText(&quot;Please Select only One Service Order at a time to add into a Promotion.&quot;);
+			this.BusComp().ActivateField(&quot;Billing Account Id&quot;);
+			TheApplication().SetProfileAttr(&quot;VFPromotionBillingAccount&quot;, this.BusComp().GetFieldValue(&quot;Billing Account Id&quot;));
+			TheApplication().SetProfileAttr(&quot;VFAddToPromotionFromUI&quot;, &quot;Y&quot;);
+			break;
+		case &quot;GotoCart&quot;:
+		     var valswitchin=TheApplication().InvokeMethod (&quot;LookupValue&quot;,&quot;VF_SSJ_PROP_EDITCART&quot;,&quot;EDITCART&quot;);
+			    if(valswitchin == &quot;Y&quot;)
+				  {
+				  this.BusComp().ParentBusComp().ActivateField(&quot;Parent Order Id&quot;);
+		        QuoteId=this.BusComp().ParentBusComp().GetFieldValue(&quot;Parent Order Id&quot;);
+					if(QuoteId == &quot;&quot; || QuoteId == null)
+						QuoteId = TheApplication().GetProfileAttr(&quot;QuoteId&quot;);
+
+                TheApplication().SetProfileAttr(&quot;FromResumeQuote&quot;,&quot;Y&quot;);
+				TheApplication().SetProfileAttr(&quot;SSJParentOrderId&quot;,QuoteId);
+				TheApplication().SetProfileAttr(&quot;FromProdConfig&quot;,QuoteId);
+				TheApplication().SetProfileAttr(&quot;EditinCart&quot;,&quot;Y&quot;);
+				TheApplication().SetProfileAttr(&quot;BackToCartSSJ&quot;,&quot;Y&quot;);
+				taskUIsvc = TheApplication().GetService(&quot;Shopping Service&quot;);
+				inputPropSet = TheApplication().NewPropertySet();
+				outputPropSet = TheApplication().NewPropertySet();
+				inputPropSet.SetProperty(&quot;View&quot;, &quot;VHA Sales Calculator SSJ View&quot;);
+				inputPropSet.SetProperty(&quot;Business Component&quot;, &quot;Order Entry - Orders&quot;);
+				inputPropSet.SetProperty(&quot;Row Id&quot;, QuoteId);
+				taskUIsvc.InvokeMethod(&quot;GotoView&quot;, inputPropSet, outputPropSet);
+				return (CancelOperation);
+				  }
+				break;
+		case &quot;eSIMAllocate&quot;:
+			//Added for tree project
+			this.BusComp().ActivateField(&quot;EID&quot;);
+			this.BusComp().ActivateField(&quot;eSIM Download&quot;);
+			var sEID = this.BusComp().GetFieldValue(&quot;EID&quot;);
+			var seSIM = this.BusComp().GetFieldValue(&quot;eSIM Download&quot;);
+			var sIMEI = this.BusComp().GetFieldValue(&quot;VF IMEI TBUI&quot;);
+			var sType = this.BusComp().GetFieldValue(&quot;Shipping&quot;);
+			var sConType = this.BusComp().GetFieldValue(&quot;VF ConnectionType&quot;);
+			if( (seSIM == null || seSIM == &quot;&quot;) &amp;&amp; ( sEID == null || sEID == &quot;&quot;))
+			{
+				TheApplication().RaiseErrorText(&quot;eSIM Download and EID are mandatory. Please enter eSIM Download and EID to proceed further with eSIM allocation&quot;);
+			}
+			else if( seSIM == null || seSIM == &quot;&quot;)
+			{
+				TheApplication().RaiseErrorText(&quot;eSIM Download is mandatory. Please enter eSIM Download to proceed further with eSIM allocation&quot;);
+			}
+			else if((sEID == null || sEID == &quot;&quot;)&amp;&amp; seSIM == &quot;Push&quot; )
+			{
+				if((sIMEI == &quot;&quot; || sIMEI == null) &amp;&amp; sConType == &quot;Plan and Device&quot;)
+				{
+					TheApplication().RaiseErrorText(&quot;An IMEI is required. Please enter a value for this field.&quot;)
+				}
+				else
+				{
+					TheApplication().RaiseErrorText(&quot;EID is mandatory. Please enter EID to proceed further with eSIM allocation&quot;);
+				}
+			}
+			//Added for tree project
+				
+			//Added by Sachi for R19.1 Atom Phase 2
+			   
+			this.BusComp().ParentBusComp().ActivateField(&quot;VHA Confirmation Code&quot;);
+			//var sConfirmationCode = this.BusComp().ParentBusComp().GetFieldValue(&quot;VHA Confirmation Code&quot;);
+			var sConfirmationCode = mGetConfirmationCode();
+				
+			if((sConfirmationCode == &quot;&quot; || sConfirmationCode == null) &amp;&amp; (sEID == null || sEID == &quot;&quot;) &amp;&amp; seSIM == &quot;QR Code&quot;)
+			{
+				/*var sCCode = Clib.rand();
+				var len = &quot;&quot;;
+				sCCode = sCCode.toString();
+				if (TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;VHA_CONFIRM_CODE&quot;,&quot;LastFour&quot;) == &quot;Y&quot;)
+				{
+					len = sCCode.length;
+					 sCCode = sCCode.substring(len-4,len);
+				}
+				else
+				{
+				 	sCCode = sCCode.substring(0,4);             
+				}*/ //VHA 19.3/PKE/NIRMAL/20JUN2019/Commeneted above logic and added below block for PKE000000076341
+				var svc = TheApplication().GetService(&quot;VHA ATOM eSIM Processing Service&quot;);
+				var input = TheApplication().NewPropertySet();
+				var output = TheApplication().NewPropertySet();
+				input.SetProperty(&quot;Seed&quot;, this.BusComp().GetFieldValue(&quot;Id&quot;));
+				svc.InvokeMethod(&quot;GenerateRandomCode&quot;, input, output);
+				var sCCode = output.GetProperty(&quot;Code&quot;);
+				
+				this.BusComp().ParentBusComp().SetFieldValue(&quot;VHA Confirmation Code&quot;, sCCode);
+				this.BusComp().ParentBusComp().WriteRecord();
+			}
+			try
+			{
+				var psInputs,psOutputs,bsInvokeWorkflow;
+	            psInputs = TheApplication().NewPropertySet();
+				psOutputs = TheApplication().NewPropertySet();
+				this.BusComp().WriteRecord();
+				sConfirmationCode = mGetConfirmationCode(); // Sachi - 14/02/2019 - R19.1 added for SIT defect 324
+				this.BusComp().ActivateField(&quot;VF MSISDN TBUI&quot;);
+				this.BusComp().ParentBusComp().ActivateField(&quot;VHA Confirmation Code&quot;);
+				psInputs.SetProperty(&quot;ProcessName&quot;, &quot;VHA Manage eSIM Process&quot;);
+				psInputs.SetProperty(&quot;Object Id&quot;, this.BusComp().GetFieldValue(&quot;Id&quot;));
+				psInputs.SetProperty(&quot;RequestId&quot;, this.BusComp().GetFieldValue(&quot;Id&quot;));
+				psInputs.SetProperty(&quot;Order Id&quot;, this.BusComp().GetFieldValue(&quot;Order Header Id&quot;));
+				psInputs.SetProperty(&quot;OrderSubType&quot;, this.BusComp().GetFieldValue(&quot;VF Order Sub Type TBUI&quot;));
+				psInputs.SetProperty(&quot;Confirmation Code&quot;,sConfirmationCode);
+				psInputs.SetProperty(&quot;MSISDN&quot;,this.BusComp().GetFieldValue(&quot;VF MSISDN TBUI&quot;));
+				psInputs.SetProperty(&quot;EID&quot;,this.BusComp().GetFieldValue(&quot;EID&quot;));
+				//this.BusComp().ParentBusComp().GetFieldValue(&quot;VHA Confirmation Code&quot;));
+				psInputs.SetProperty(&quot;Action Code&quot;, &quot;Allocate&quot;);
+				bsInvokeWorkflow = TheApplication().GetService(&quot;Workflow Process Manager&quot;);
+				//refreshScreen();
+				bsInvokeWorkflow.InvokeMethod(&quot;RunProcess&quot;, psInputs, psOutputs);				
+				//this.BusComp().WriteRecord();
+				//this.BusComp().ExecuteQuery(ForwardOnly);
+				
+				//NROY: 15-JUl-2022 Added for Project Tree
+                if(psOutputs.GetProperty(&quot;Error Message&quot;) == &quot;&quot;)
+				{
+					var sActView = TheApplication().ActiveViewName();
+					if(sIMEI != null &amp;&amp; sIMEI != &quot;&quot; &amp;&amp; sEID != null &amp;&amp; sEID != &quot;&quot; &amp;&amp; sActView == &quot;VF Connection Wizard View – Shopping Cart – TBUI&quot; &amp;&amp; sConType == &quot;Plan and Device&quot;)
+					{
+						var oBO = TheApplication().GetBusObject(&quot;VF IMEI List&quot;);
+						var oBC = oBO.GetBusComp(&quot;VF IMEI List&quot;);
+						with(oBC)
+						{
+							SetViewMode(AllView);
+							ClearToQuery();
+							ActivateField(&quot;IMEI&quot;);			
+							ActivateField(&quot;EID&quot;);
+							SetSearchSpec(&quot;IMEI&quot;, sIMEI);
+							ExecuteQuery(ForwardOnly);
+							var isRec = FirstRecord();
+							if(isRec)
+							{
+								if(GetFieldValue(&quot;EID&quot;) == null || GetFieldValue(&quot;EID&quot;) == &quot;&quot;)
+								{
+									SetFieldValue(&quot;EID&quot;,sEID);
+									WriteRecord();
+								}
+							}
+						}
+					}
+				}
+				
+				retval = CancelOperation;			
+			}
+			
+			catch(e)
+			{
+				var sErrorMsg = psOutputs.GetProperty(&quot;Error Message&quot;);
+                if(sErrorMsg != &quot;&quot;)
+                {
+                    var sErrMsg = mTrimErrorMessage(sErrorMsg);
+                    TheApplication().RaiseErrorText (sErrMsg);
+                } 				
+			}
+			finally
+			{
+				TheApplication().GetService(&quot;FINS Teller UI Navigation&quot;).InvokeMethod (&quot;RefreshCurrentApplet&quot;, TheApplication(). NewPropertySet(),TheApplication().NewPropertySet());	
+			}
+			//retval = CancelOperation;
+			
+			break;
+		case &quot;DeallocateSIM&quot;:
+			retval = ContinueOperation;
+			this.BusComp().ActivateField(&quot;Shipping&quot;);
+			this.BusComp().ActivateField(&quot;Root Order Item Id&quot;);
+			this.BusComp().ActivateField(&quot;Order Sub Type&quot;);
+			this.BusComp().ActivateField(&quot;EID&quot;);
+			//this.BusComp().ParentBusComp().ActivateField(&quot;VHA Confirmation Code&quot;);
+			var sSIMType = this.BusComp().GetFieldValue(&quot;Shipping&quot;);
+			var eSIMType = TheApplication().InvokeMethod(&quot;LookupValue&quot;,&quot;FM_SHIPPING&quot;,&quot;eSIM&quot;);
+			var sEID = this.BusComp().GetFieldValue(&quot;EID&quot;);
+			if(sSIMType == eSIMType)//VHA Muthushankari - 5/12/2018 - Added for R19.1 ATOM Phase2
+			{
+				var psInputs,psOutputs,bsInvokeWorkflow;
+		        psInputs = TheApplication().NewPropertySet();
+				psOutputs = TheApplication().NewPropertySet();
+				psInputs.SetProperty(&quot;ProcessName&quot;, &quot;VHA Manage eSIM Process&quot;);
+				psInputs.SetProperty(&quot;SuppressError&quot;,&quot;N&quot;);
+				psInputs.SetProperty(&quot;RequestId&quot;, this.BusComp().GetFieldValue(&quot;Root Order Item Id&quot;));
+				psInputs.SetProperty(&quot;Action Code&quot;, &quot;Deallocate&quot;);
+				psInputs.SetProperty(&quot;OrderSubType&quot;, this.BusComp().GetFieldValue(&quot;Order Sub Type&quot;));
+				//Added below TREE phase 2
+				psInputs.SetProperty(&quot;EID&quot;, sEID);
+				
+				//psInputs.SetProperty(&quot;Confirmation Code&quot;, this.BusComp().ParentBusComp().GetFieldValue(&quot;VHA Confirmation Code&quot;));
+				try
+				{
+					bsInvokeWorkflow = TheApplication().GetService(&quot;Workflow Process Manager&quot;);
+					bsInvokeWorkflow.InvokeMethod(&quot;RunProcess&quot;, psInputs, psOutputs);
+				}
+				catch(e)
+				{
+					var sErrorMsg = psOutputs.GetProperty(&quot;Error Message&quot;);
+	                if(sErrorMsg != &quot;&quot;)
+	                {
+	                    var sErrMsg = mTrimErrorMessage(sErrorMsg);
+	                    TheApplication().RaiseErrorText (sErrMsg);
+	                }		
+				}
+				finally
+				{
+					var psInputs,psOutputs,bsInvokeBS;
+					psInputs = TheApplication().NewPropertySet();
+					psOutputs = TheApplication().NewPropertySet();
+					psInputs.SetProperty(&quot;OrderLineItemId&quot;, this.BusComp().GetFieldValue(&quot;Id&quot;));
+					bsInvokeBS = TheApplication().GetService(&quot;VF Postpay Utilities TBUI&quot;);
+					bsInvokeBS.InvokeMethod(&quot;NullifySIM&quot;, psInputs, psOutputs);
+					TheApplication().GetService(&quot;FINS Teller UI Navigation&quot;).InvokeMethod (&quot;RefreshCurrentApplet&quot;, TheApplication(). NewPropertySet(),TheApplication().NewPropertySet());	
+				}
+				retval = CancelOperation;
+			}		
+			break;
+		/*case &quot;ReconfigureCxProd&quot;:
+			this.BusComp().ActivateField(&quot;VF Configuration Status&quot;);
+			this.BusComp().SetFieldValue(&quot;VF Configuration Status&quot;, TheApplication().InvokeMethod(&quot;LookupValue&quot;, &quot;VF_CONFIG_STATUS&quot;, &quot;Customized&quot;));
+			this.BusComp().WriteRecord();
+			break;*/
+			case &quot;DeallocateIMEI&quot;:
+				var bc = this.BusComp();
+				bc.ActivateField(&quot;VF SIM TBUI&quot;);
+				bc.ActivateField(&quot;Shpping&quot;);
+				bc.ActivateField(&quot;eSIM Download&quot;);
+				if(bc.GetFieldValue(&quot;Shipping&quot;) == &quot;eSIM&quot; &amp;&amp; bc.GetFieldValue(&quot;eSIM Download&quot;) == &quot;Push&quot; &amp;&amp; (bc.GetFieldValue(&quot;VF SIM TBUI&quot;) != &quot;&quot; &amp;&amp; bc.GetFieldValue(&quot;VF SIM TBUI&quot;) != null))
+				{ 
+					TheApplication().RaiseErrorText(&quot;Please De-Allocate SIM first and then proceed with IMEI De-Allocation&quot;);	
+				}
+				break;
+			
+	case &quot;Accessories&quot;:
+    try {
+        var app = TheApplication();
+        var bo  = app.GetBusObject(&quot;Order Entry (Sales)&quot;);
+		
+
+        // Get Order Header Id from the current applet record
+        var parentOrderId = this.BusComp().GetFieldValue(&quot;Order Header Id&quot;);
+		
+		var accBC = bo.GetBusComp(&quot;VHA SSJ Accessory Items&quot;);
+        
+        // --- To check if accessories and werables were already inserted for resume task scenario to avid duplicate inserts 
+        accBC.SetViewMode(AllView);
+        accBC.ClearToQuery();
+        accBC.SetSearchSpec(&quot;Order Id&quot;, parentOrderId);
+        accBC.ExecuteQuery(ForwardOnly);
+        
+        // If records already exist for this order, STOP processing
+        if (accBC.FirstRecord()) {
+            // app.SetStatusText(&quot;Accessories already processed for this order.&quot;);
+            return (CancelOperation); 
+        }
+		// --- Deduplication logic END ---
+        if (parentOrderId == null || parentOrderId == &quot;&quot;) {
+            app.RaiseErrorText(&quot;Order Header Id is required on the current record.&quot;);
+        }
+
+        // BCs
+        var rootBC = bo.GetBusComp(&quot;VHA Order Line Items - Sharing Thin&quot;); // root discovery
+        var oliBC  = bo.GetBusComp(&quot;VF Order Line Item - Light&quot;);          // OLI queries
+        var xaBC   = bo.GetBusComp(&quot;Order Item XA&quot;);                       // attributes
+        var accBC  = bo.GetBusComp(&quot;VHA SSJ Accessory Items&quot;);             // target BC
+
+        var processed = 0;
+
+        // Find all ROOT OLIs for this Order Id
+        with (rootBC) {
+            SetViewMode(AllView);
+            ClearToQuery();
+            ActivateField(&quot;Id&quot;);
+            ActivateField(&quot;Order Id&quot;);
+            ActivateField(&quot;Parent Order Item Id&quot;);
+            SetSearchExpr(&quot;[Order Id] = &apos;&quot; + parentOrderId + &quot;&apos; AND [Parent Order Item Id] IS NULL&quot;);
+            ExecuteQuery(ForwardOnly);
+
+            var recRoot = FirstRecord();
+            while (recRoot) {
+                var parentOliId = GetFieldValue(&quot;Id&quot;);
+
+                // -------------------------------------------------------------------
+                // 0) Device Care Wearables check (any occurrence under this root OLI)
+                // -------------------------------------------------------------------
+                var deviceCareFound = false;
+                with (oliBC) {
+                    SetViewMode(AllView);
+                    ClearToQuery();
+                    ActivateField(&quot;Id&quot;);
+                    ActivateField(&quot;Root Order Item Id&quot;);
+                    ActivateField(&quot;Product&quot;);
+                    SetSearchSpec(&quot;Root Order Item Id&quot;, parentOliId);
+                    SetSearchSpec(&quot;Product&quot;, &quot;Vodafone Device Care Wearables&quot;);
+                    ExecuteQuery(ForwardOnly);
+                    if (FirstRecord()) {
+                        deviceCareFound = true;
+                    }
+                }
+
+                // -------------------------------------------------------------------
+                // 1) Collect ALL Accessory/Wearable items under the same root OLI
+                // -------------------------------------------------------------------
+                var wearList = new Array(); // {RelatedSOId, Name, Code, RRP, Prepay, Term, Type}
+                var accList  = new Array();
+
+                with (oliBC) {
+                    SetViewMode(AllView);
+                    ClearToQuery();
+                    ActivateField(&quot;Id&quot;);
+                    ActivateField(&quot;Root Order Item Id&quot;);
+                    ActivateField(&quot;Product Type&quot;);
+                    ActivateField(&quot;Product&quot;);
+                    SetSearchSpec(&quot;Root Order Item Id&quot;, parentOliId);
+                    SetSearchSpec(&quot;Product Type&quot;, &quot;Accessory&quot;);
+                    ExecuteQuery(ForwardOnly);
+
+                    var recA = FirstRecord();
+                    while (recA) {
+                        var accOliId = GetFieldValue(&quot;Id&quot;);
+                        var prodLbl  = GetFieldValue(&quot;Product&quot;); // fallback for name/code
+
+                        var pName = &quot;&quot;, pCode = &quot;&quot;, pRRP = &quot;&quot;, pPre = &quot;&quot;, pTerm = &quot;&quot;, pCat = &quot;&quot;;
+
+                        // Read attribute XAs
+                        with (xaBC) {
+                            SetViewMode(AllView);
+                            ClearToQuery();
+                            ActivateField(&quot;Name&quot;);
+                            ActivateField(&quot;Value&quot;);
+                            ActivateField(&quot;Text Value&quot;);
+                            ActivateField(&quot;Object Id&quot;);
+                            try { 
+                                ActivateField(&quot;Created&quot;); 
+                                SetSortSpec(&quot;Created(ASC)&quot;); 
+                            } catch (ex) {}
+                            SetSearchSpec(&quot;Object Id&quot;, accOliId);
+                            ExecuteQuery(ForwardOnly);
+
+                            var xa = FirstRecord();
+                            while (xa) {
+                                var n = GetFieldValue(&quot;Name&quot;);
+                                var v = GetFieldValue(&quot;Value&quot;);
+                                if (v == null || v == &quot;&quot;) v = GetFieldValue(&quot;Text Value&quot;);
+
+                                if (n == &quot;Accessory Name&quot;)             { pName = v; }
+                                else if (n == &quot;Accessory Code&quot;)        { pCode = v; }
+                                else if (n == &quot;Accessory RRP Inc GST&quot;) { pRRP = v; }
+                                else if (n == &quot;Prepayment Amount&quot;)     { pPre = v; }
+                                else if (n == &quot;Term&quot;)                  { pTerm = v; }
+                                else if (n == &quot;Category&quot;)              { pCat  = v; }
+
+                                xa = NextRecord();
+                            }
+                        }
+
+                        // Fallbacks
+                        if (pName == null || pName == &quot;&quot;) pName = prodLbl;
+                        if (pCode == null || pCode == &quot;&quot;) pCode = pName;
+
+                        // Build item if we have a valid name/code
+                        if (pName != &quot;&quot; &amp;&amp; pCode != &quot;&quot;) {
+                            var item = new Object();
+                            item.RelatedSOId = parentOliId;
+                            item.Name   = pName;
+                            item.Code   = pCode;
+                            item.RRP    = pRRP;
+                            item.Prepay = pPre;
+                            item.Term   = pTerm;
+                            item.Type   = (pCat == &quot;Secondary Device&quot;) ? &quot;Wearable&quot; : &quot;Accessory&quot;;
+
+                            if (item.Type == &quot;Wearable&quot;) {
+                                wearList[wearList.length] = item;
+                            } else {
+                                accList[accList.length] = item;
+                            }
+                        }
+
+                        recA = NextRecord();
+                    }
+                }
+
+                // -------------------------------------------------------------------
+                // 2) Optional: GLOBAL Term from APP OLIs (Billing - APP)
+                // -------------------------------------------------------------------
+                var termGlobal = &quot;&quot;;
+                with (oliBC) {
+                    SetViewMode(AllView);
+                    ClearToQuery();
+                    ActivateField(&quot;Id&quot;);
+                    ActivateField(&quot;Root Order Item Id&quot;);
+                    ActivateField(&quot;Product Type&quot;);
+                    SetSearchSpec(&quot;Root Order Item Id&quot;, parentOliId);
+                    SetSearchSpec(&quot;Product Type&quot;, &quot;Billing - APP&quot;);
+                    ExecuteQuery(ForwardOnly);
+
+                    var rec = FirstRecord();
+                    while (rec) {
+                        var appOliId = GetFieldValue(&quot;Id&quot;);
+
+                        with (xaBC) {
+                            SetViewMode(AllView);
+                            ClearToQuery();
+                            ActivateField(&quot;Name&quot;);
+                            ActivateField(&quot;Value&quot;);
+                            ActivateField(&quot;Text Value&quot;);
+                            ActivateField(&quot;Object Id&quot;);
+                            SetSearchSpec(&quot;Object Id&quot;, appOliId);
+                            ExecuteQuery(ForwardOnly);
+
+                            var xa2 = FirstRecord();
+                            while (xa2) {
+                                var n2 = GetFieldValue(&quot;Name&quot;);
+                                var v2 = GetFieldValue(&quot;Value&quot;);
+                                if (v2 == null || v2 == &quot;&quot;) v2 = GetFieldValue(&quot;Text Value&quot;);
+                                if (n2 == &quot;Term&quot; &amp;&amp; termGlobal == &quot;&quot;) termGlobal = v2;
+                                xa2 = NextRecord();
+                            }
+                        }
+
+                        rec = NextRecord();
+                    }
+                }
+
+                // -------------------------------------------------------------------
+                // 3) INSERT ALL collected Wearables and Accessories (NO DEDUP CHECK)
+                // -------------------------------------------------------------------
+
+                // Wearables
+                for (var i = 0; i &lt; wearList.length; i++) {
+                    var w = wearList[i];
+                    var wTerm = (termGlobal != &quot;&quot;) ? termGlobal : (w.Term || &quot;&quot;);
+
+                    with (accBC) {
+                        SetViewMode(AllView);
+                        // Direct insert, no existence check
+                        NewRecord(NewAfter);
+                        SetFieldValue(&quot;Related Service Order Id&quot;, w.RelatedSOId);
+                        SetFieldValue(&quot;Accessory Name&quot;, w.Name);
+                        SetFieldValue(&quot;Accessory Code&quot;, w.Code);
+                        SetFieldValue(&quot;Order Id&quot;, parentOrderId);
+                        SetFieldValue(&quot;Type&quot;, &quot;Wearable&quot;);
+                        if (w.RRP    != &quot;&quot;) SetFieldValue(&quot;VHA RRP inc GST&quot;, w.RRP);
+                        if (w.Prepay != &quot;&quot;) SetFieldValue(&quot;VHA Accessory Prepayment Amount&quot;, w.Prepay);
+                        if (wTerm    != &quot;&quot;) SetFieldValue(&quot;Contract Term&quot;, wTerm);
+                        if (deviceCareFound) SetFieldValue(&quot;VHA EIN&quot;, &quot;Added&quot;);
+                        WriteRecord();
+                    }
+                }
+
+                // Accessories
+                for (var j = 0; j &lt; accList.length; j++) {
+                    var a = accList[j];
+                    var aTerm = (termGlobal != &quot;&quot;) ? termGlobal : (a.Term || &quot;&quot;);
+
+                    with (accBC) {
+                        SetViewMode(AllView);
+                        // Direct insert, no existence check
+                        NewRecord(NewAfter);
+                        SetFieldValue(&quot;Related Service Order Id&quot;, a.RelatedSOId);
+                        SetFieldValue(&quot;Accessory Name&quot;, a.Name);
+                        SetFieldValue(&quot;Accessory Code&quot;, a.Code);
+                        SetFieldValue(&quot;Order Id&quot;, parentOrderId);
+                        SetFieldValue(&quot;Type&quot;, &quot;Accessory&quot;);
+                        if (a.RRP    != &quot;&quot;) SetFieldValue(&quot;VHA RRP inc GST&quot;, a.RRP);
+                        if (a.Prepay != &quot;&quot;) SetFieldValue(&quot;VHA Accessory Prepayment Amount&quot;, a.Prepay);
+                        if (aTerm    != &quot;&quot;) SetFieldValue(&quot;Contract Term&quot;, aTerm);
+                        // if (deviceCareFound) SetFieldValue(&quot;VHA EIN&quot;, &quot;Added&quot;);
+                        WriteRecord();
+                    }
+                }
+
+                processed++;
+                recRoot = NextRecord();
+            }
+        }
+
+        try { 
+            app.SetStatusText(&quot;Processed &quot; + processed + &quot; root line item(s) for this order.&quot;); 
+        } catch (stx) {}
+
+        retval = CancelOperation;
+    } catch (e) {
+        throw e;
+    }
+    break;
+
+		default :
+			retval = ContinueOperation;
+		break;
+	}
+	return (retval);
+	}
+
+	catch (e)
+	{
+	throw e;
+	}
+	finally
+	{
+	if(defined(bsInvokeWorkflow)) { bsInvokeWorkflow = null; } // This variable is nullified by BALAMURUGAN on 15/10/2019
+	}
+}"
+			   SEQUENCE="4"
+			   UPDATED="04/01/2026 21:14:02"
+			   UPDATED_BY="SWATANTRAS"
+			   CREATED="01/09/2026 16:01:51"
+			   CREATED_BY="SADMIN">
+			</APPLET_SERVER_SCRIPT>
+			<APPLET_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mGetConfirmationCode"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mGetConfirmationCode()
+{
+ try
+ 	{
+     	var boOrder = TheApplication().GetBusObject(&quot;VHA Sharing Thin BO&quot;);
+ 		var bcOrder = boOrder.GetBusComp(&quot;VHA Order Entry - Line Items&quot;);
+		var sOrderItemId = this.BusComp().GetFieldValue(&quot;Id&quot;);
+		var sConfirmationCode = &quot;&quot;;
+		with(bcOrder)
+		{
+			ActivateField(&quot;Confirmation Code&quot;);
+			ClearToQuery();
+			SetViewMode(AllView);
+			SetSearchSpec(&quot;Id&quot;, sOrderItemId);
+			ExecuteQuery(ForwardOnly);
+			if(FirstRecord())
+			{
+				sConfirmationCode = GetFieldValue(&quot;Confirmation Code&quot;);
+			}
+		}
+		return(sConfirmationCode);
+ 	}
+	catch(e)
+	{
+		if (defined(e.errText))
+		{
+			var strError = arguments.callee + e.errText + &quot;\r\n&quot; + ToString(e); 
+		}
+		else
+		{
+			var strError = arguments.callee + ToString(e);
+		}
+		TheApplication().RaiseErrorText(strError);
+	}
+ 	finally
+ 	{
+		bcOrder = null;
+		boOrder = null;
+ 	}
+}"
+			   SEQUENCE="1"
+			   UPDATED="01/13/2026 21:30:34"
+			   UPDATED_BY="RAJUD"
+			   CREATED="01/13/2026 21:30:34"
+			   CREATED_BY="RAJUD">
+			</APPLET_SERVER_SCRIPT>
+			<APPLET_SERVER_SCRIPT
+			   INACTIVE="N"
+			   NAME="mTrimErrorMessage"
+			   PROGRAM_LANGUAGE="JS"
+			   SCRIPT="function mTrimErrorMessage(sErrorMsg)
+{
+var pattern3 = /\s*$/g; //Regular Expression for trailing spaces
+var pattern4 = /^\s*/g; //Regular Expression for leading spaces
+var pattern5 = /\s\s+/g; //Regular Expresion for double spaces
+var pattern6 = /\n\r/g; //replace new lines with a blank.
+var pattern7 = /\n/g; //replace new lines with a blank.
+var pattern8 = /[\n\r]/g; //replace new lines with a blank.
+var pattern9 = /[\n]/g; //replace new lines with a blank.
+var output = sErrorMsg.replace(pattern3 ,&quot;&quot;);
+output = output.replace(pattern4 ,&quot;&quot;);
+output = output.replace(pattern5,&quot;&quot;);
+output = output.replace(pattern6,&quot;&quot;);
+output = output.replace(pattern7,&quot;&quot;);
+output = output.replace(pattern8,&quot;&quot;);
+output = output.replace(pattern9,&quot;&quot;);
+var sSearchText = &quot;(SBL-BPR-00183)--&quot;;
+var sSearchTextLen = sSearchText.length;
+var sFind = output.lastIndexOf(sSearchText);
+var sFullLen = output.length;
+if (sFind != &quot;0&quot;)
+{
+var sFormattedText = output.substring(sFind+sSearchTextLen ,sFullLen);
+return(sFormattedText);
+}
+else
+{
+return(sErrorMsg);
+}
+
+
+}"
+			   SEQUENCE="2"
+			   UPDATED="01/19/2026 18:34:04"
+			   UPDATED_BY="ANGANAD"
+			   CREATED="01/19/2026 18:34:04"
+			   CREATED_BY="ANGANAD">
+			</APPLET_SERVER_SCRIPT>
+			<APPLET_USER_PROP
+			   COMMENTS="Ravikumar Bolla: 24-Dec-25: Added to enable the button only when there are accessories or wearables on the order"
+			   INACTIVE="N"
+			   NAME="CanInvokeMethod: Accessories"
+			   VALUE="[VHA Accessory Line Items For EL Calc] &gt; 0"
+			   UPDATED="01/09/2026 15:49:27"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:49:27"
+			   CREATED_BY="SADMIN">
+			</APPLET_USER_PROP>
+			<APPLET_USER_PROP
+			   INACTIVE="N"
+			   NAME="CanInvokeMethod: DeviceSIM"
+			   VALUE="TRUE"
+			   UPDATED="01/09/2026 15:49:27"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:49:27"
+			   CREATED_BY="SADMIN">
+			</APPLET_USER_PROP>
+			<APPLET_USER_PROP
+			   INACTIVE="N"
+			   NAME="CanInvokeMethod: EditRecordNew"
+			   VALUE="TRUE"
+			   UPDATED="01/09/2026 15:49:27"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:49:27"
+			   CREATED_BY="SADMIN">
+			</APPLET_USER_PROP>
+			<APPLET_USER_PROP
+			   INACTIVE="N"
+			   NAME="CanInvokeMethod: GotoCart"
+			   VALUE="TRUE"
+			   UPDATED="01/15/2026 00:40:47"
+			   UPDATED_BY="GOPALJ"
+			   CREATED="01/15/2026 00:40:47"
+			   CREATED_BY="GOPALJ">
+			</APPLET_USER_PROP>
+			<APPLET_USER_PROP
+			   INACTIVE="Y"
+			   NAME="CanInvokeMethod: eSIMAllocate"
+			   VALUE="TRUE"
+			   UPDATED="01/19/2026 17:30:52"
+			   UPDATED_BY="GOPALJ"
+			   CREATED="01/09/2026 15:49:27"
+			   CREATED_BY="SADMIN">
+			</APPLET_USER_PROP>
+			<APPLET_USER_PROP
+			   INACTIVE="N"
+			   NAME="EnableStandardMethods"
+			   VALUE="Y"
+			   UPDATED="01/09/2026 15:49:27"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:49:27"
+			   CREATED_BY="SADMIN">
+			</APPLET_USER_PROP>
+			<APPLET_WEB_TEMPLATE
+			   INACTIVE="N"
+			   NAME="Base"
+			   SEQUENCE="1"
+			   TYPE="Base"
+			   WEB_TEMPLATE="VHA SSJ Proposition Template"
+			   UPDATED="01/09/2026 15:50:36"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:50:36"
+			   CREATED_BY="SADMIN">
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Accessories &amp; Wearables"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="40252"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Accessories"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:50:45"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:50:45"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Add Ons"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20256"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Add Ons"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:50:46"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:50:46"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Allocate eSIM"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20245"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Allocate eSIM"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:50:47"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:50:47"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="AllocateeSIM"
+				   EXPRESSION="Siebel Power Communications"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="139"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="AllocateeSIM"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:50:49"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:50:49"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Connection type"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="144"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Connection Type"
+				   TYPE="List Item"
+				   UPDATED="01/09/2026 15:50:50"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:50:50"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="DeallocateIMEI/Serial #"
+				   EXPRESSION="Siebel Power Communications"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20346"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="DeallocateIMEI/Serial #"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:50:53"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:50:53"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="DeallocateMSISDN"
+				   EXPRESSION="Siebel Power Communications"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20345"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="DeallocateMSISDN"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:50:54"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:50:54"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="DeallocateSIM/eSIM"
+				   EXPRESSION="Siebel Power Communications"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20347"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="DeallocateSIM/eSIM"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:50:55"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:50:55"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Device"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20260"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Device"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:50:57"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:50:57"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="DeviceSIM"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="40251"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="DeviceSIM"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:50:58"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:50:58"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="EID"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20262"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="EID"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:50:59"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:50:59"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="EID"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9035"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="EIDLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:00"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:00"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="EditRecord"
+				   EXPRESSION="Siebel Power Communications"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="40250"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="EditRecord"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:02"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:02"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="MSISDN"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="404040"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="HeaderMSISDN"
+				   TYPE="Control"
+				   UPDATED="03/21/2026 18:10:45"
+				   UPDATED_BY="SWATANTRAS"
+				   CREATED="03/21/2026 18:10:45"
+				   CREATED_BY="SWATANTRAS">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VFIMEITBUI"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20261"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="IMEI"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:03"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:03"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="IMEI Display Message"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20263"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="IMEI display Message"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:04"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:04"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Installed asset PIN"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="502"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Installed Asset Pin"
+				   TYPE="List Item"
+				   UPDATED="01/09/2026 15:51:06"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:06"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Line Item"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20251"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Line Item"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:07"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:07"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VFMSISDNTBUI"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20259"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="MSISDN"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:08"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:08"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Monthly Device Care"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20264"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Monthly Device Care"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:09"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Notification MSISDN"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="503"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Notification MSISDN"
+				   TYPE="List Item"
+				   UPDATED="01/09/2026 15:51:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:09"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Number Porting"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20258"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Number Porting"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:09"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Order Number"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20252"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Order Number"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:09"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Order Type"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20253"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Order Type"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:09"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="OrderType Calc"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="303030"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Order Type Calc"
+				   TYPE="Control"
+				   UPDATED="03/21/2026 18:10:45"
+				   UPDATED_BY="SWATANTRAS"
+				   CREATED="03/21/2026 18:10:45"
+				   CREATED_BY="SWATANTRAS">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="ParentOrderId"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1018"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="ParentOrderId"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:09"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="ParentOrderId"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1003"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="ParentOrderIdLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:09"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:09"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Payment Term"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20268"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Payment Term"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="Product"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1051"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Product"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Product type"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="501"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Product type"
+				   TYPE="List Item"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="14"
+				   CONTROL="Product"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1035"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="ProductLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Promo Code"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20257"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Promo Code"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Proposition"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20254"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Proposition"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VHARRP"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20269"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="RRP"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Reserve Store Stock"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20389"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Reserve Store Stock"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="SIM"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20267"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="SIM"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="SIM Type"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20265"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="SIM type"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="SKU Code"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20270"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="SKU Code"
+				   TYPE="Control"
+				   UPDATED="01/20/2026 17:42:09"
+				   UPDATED_BY="ANGANAD"
+				   CREATED="01/20/2026 17:42:09"
+				   CREATED_BY="ANGANAD">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Service"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20255"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Service"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="Shipping"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5115"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Shipping"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="Shipping"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5099"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="ShippingLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VF Root Siebel Product Type"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="505050"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="SiebelProdType"
+				   TYPE="Control"
+				   UPDATED="04/20/2026 21:20:00"
+				   UPDATED_BY="SWATANTRAS"
+				   CREATED="04/20/2026 21:20:00"
+				   CREATED_BY="SWATANTRAS">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Stock Indicator"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="147"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Stock Indicator"
+				   TYPE="List Item"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFDeviceTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1083"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFDeviceTBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="14"
+				   CONTROL="VFDeviceTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1067"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFDeviceTBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFIMEITBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1115"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFIMEITBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="14"
+				   CONTROL="VFIMEITBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1099"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFIMEITBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFMSISDNTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5019"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFMSISDNTBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFMSISDNTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5003"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFMSISDNTBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFOrderTypeTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5051"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFOrderTypeTBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFOrderTypeTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5035"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFOrderTypeTBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFPortInTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9083"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFPortInTBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFPortInTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9067"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFPortInTBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFSIMTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5083"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFSIMTBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFSIMTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5067"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFSIMTBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VHAIMEIDisplayMessage"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9115"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHAIMEIDisplayMessage"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VHAIMEIDisplayMessage"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9099"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHAIMEIDisplayMessageLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VHARRP"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="13019"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHARRP"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VHARRP"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="13003"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHARRPLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="eSIM Download"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20266"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="eSIM download"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="eSIMDownload"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9019"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="eSIMDownload"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="eSIMDownload"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9003"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="eSIMDownloadLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:10"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:10"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+			</APPLET_WEB_TEMPLATE>
+			<APPLET_WEB_TEMPLATE
+			   INACTIVE="N"
+			   NAME="Edit List"
+			   SEQUENCE="2"
+			   TYPE="Edit List"
+			   WEB_TEMPLATE="VHA SSJ Proposition Template"
+			   UPDATED="01/09/2026 15:50:36"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:50:36"
+			   CREATED_BY="SADMIN">
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Accessories &amp; Wearables"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="40252"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Accessories"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:11"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:11"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Add Ons"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20256"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Add Ons"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:11"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:11"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Allocate eSIM"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20245"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Allocate eSIM"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:11"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:11"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="AllocateeSIM"
+				   EXPRESSION="Siebel Power Communications"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="139"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="AllocateeSIM"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:11"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:11"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Connection type"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="144"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Connection Type"
+				   TYPE="List Item"
+				   UPDATED="01/09/2026 15:51:11"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:11"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VHADOB"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20272"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="DOB"
+				   TYPE="Control"
+				   UPDATED="03/09/2026 17:30:04"
+				   UPDATED_BY="RAVIKUMARB"
+				   CREATED="02/21/2026 17:46:40"
+				   CREATED_BY="RAVIKUMARB">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="DeallocateIMEI/Serial #"
+				   EXPRESSION="Siebel Power Communications"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20346"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="DeallocateIMEI/Serial #"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:11"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:11"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="DeallocateMSISDN"
+				   EXPRESSION="Siebel Power Communications"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20345"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="DeallocateMSISDN"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:11"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:11"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="DeallocateSIM/eSIM"
+				   EXPRESSION="Siebel Power Communications"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20347"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="DeallocateSIM/eSIM1"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:11"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:11"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Device"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20260"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Device"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:11"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:11"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="DeviceSIM"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="40251"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="DeviceSIM"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:11"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:11"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="EID"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20262"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="EID"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:11"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:11"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="EID"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9035"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="EIDLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="EditRecord"
+				   EXPRESSION="Siebel Power Communications"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="40250"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="EditRecord"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="MSISDN"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="404040"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="HeaderMSISDN"
+				   TYPE="Control"
+				   UPDATED="03/21/2026 18:10:45"
+				   UPDATED_BY="SWATANTRAS"
+				   CREATED="03/21/2026 18:10:45"
+				   CREATED_BY="SWATANTRAS">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="IMEI"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20261"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="IMEI"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="IMEI Display Message"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20263"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="IMEI display Message"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Installed asset PIN"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="502"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Installed Asset PIN"
+				   TYPE="List Item"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Line Item"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20251"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Line Item"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VFMSISDNTBUI"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20259"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="MSISDN"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Monthly Device Care"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20264"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Monthly Device Care"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Notification MSISDN"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="503"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Notification MSISDN"
+				   TYPE="List Item"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Number Porting"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20258"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Number Porting"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Order Number"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20252"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Order Number"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Order Type"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20253"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Order Type"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="OrderType Calc"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="303030"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Order Type Calc"
+				   TYPE="Control"
+				   UPDATED="03/21/2026 18:10:45"
+				   UPDATED_BY="SWATANTRAS"
+				   CREATED="03/21/2026 18:10:45"
+				   CREATED_BY="SWATANTRAS">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="ParentOrderId"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1018"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="ParentOrderId"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="ParentOrderId"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1003"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="ParentOrderIdLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Payment Term"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20268"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Payment Term"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VHA Port In Service Account"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20273"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Port In service account"
+				   TYPE="Control"
+				   UPDATED="03/09/2026 17:30:04"
+				   UPDATED_BY="RAVIKUMARB"
+				   CREATED="02/21/2026 17:46:40"
+				   CREATED_BY="RAVIKUMARB">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="Product"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1051"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Product"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Product type"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="501"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Product Type"
+				   TYPE="List Item"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="14"
+				   CONTROL="Product"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1035"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="ProductLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Promo Code"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20257"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Promo Code"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Proposition"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20254"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Proposition"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VHARRP"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20269"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="RRP"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Reserve Store Stock"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20389"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Reserve Store Stock"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="SIM"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20267"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="SIM"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="SIM Type"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20265"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="SIM type"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="SKU Code"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20270"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="SKU Code"
+				   TYPE="Control"
+				   UPDATED="01/20/2026 17:42:09"
+				   UPDATED_BY="ANGANAD"
+				   CREATED="01/20/2026 17:42:09"
+				   CREATED_BY="ANGANAD">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Service"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20255"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Service"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="Shipping"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5115"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Shipping"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="Shipping"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5099"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="ShippingLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VF Root Siebel Product Type"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="505050"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="SiebelProdType"
+				   TYPE="Control"
+				   UPDATED="04/20/2026 21:20:00"
+				   UPDATED_BY="SWATANTRAS"
+				   CREATED="04/20/2026 21:20:00"
+				   CREATED_BY="SWATANTRAS">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="Stock Indicator"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="147"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="Stock Indicator"
+				   TYPE="List Item"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VF ConnectionType"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="40255"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF ConnectionType"
+				   TYPE="Control"
+				   UPDATED="03/16/2026 17:17:18"
+				   UPDATED_BY="RAJUD"
+				   CREATED="03/12/2026 20:43:35"
+				   CREATED_BY="RAJUD">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VF DFA MSISDN"
+				   EXPRESSION="Siebel Power Communications"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="23272"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF DFA MSISDN"
+				   TYPE="Control"
+				   UPDATED="04/06/2026 16:57:21"
+				   UPDATED_BY="MOTHILALK"
+				   CREATED="04/06/2026 16:57:21"
+				   CREATED_BY="MOTHILALK">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="VF SSJ Port In TBUI"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20271"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF SSJ Port In TBUI"
+				   TYPE="Control"
+				   UPDATED="03/09/2026 17:30:04"
+				   UPDATED_BY="RAVIKUMARB"
+				   CREATED="03/09/2026 17:30:04"
+				   CREATED_BY="RAVIKUMARB">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFDeviceTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1083"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFDeviceTBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="14"
+				   CONTROL="VFDeviceTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1067"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFDeviceTBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFIMEITBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1115"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFIMEITBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="14"
+				   CONTROL="VFIMEITBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1099"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFIMEITBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFMSISDNTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5019"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFMSISDNTBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFMSISDNTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5003"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFMSISDNTBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:12"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:12"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFOrderTypeTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5051"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFOrderTypeTBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFOrderTypeTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5035"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFOrderTypeTBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFPortInTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9083"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFPortInTBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFPortInTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9067"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFPortInTBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFSIMTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5083"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFSIMTBUI"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VFSIMTBUI"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5067"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VFSIMTBUILabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VHAIMEIDisplayMessage"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9115"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHAIMEIDisplayMessage"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VHAIMEIDisplayMessage"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9099"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHAIMEIDisplayMessageLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VHARRP"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="13019"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHARRP"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="VHARRP"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="13003"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHARRPLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   CONTROL="eSIM Download"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="20266"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="eSIM download"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="eSIMDownload"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedHtml"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9019"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="eSIMDownload"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+				<APPLET_WEB_TEMPLATE_ITEM
+				   COLUMN_SPAN="15"
+				   CONTROL="eSIMDownload"
+				   EXTENSION_FLAG="N"
+				   GRID_PROPERTY="FormattedLabel"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="9003"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="eSIMDownloadLabel"
+				   ROW_SPAN="3"
+				   TYPE="Control"
+				   UPDATED="01/09/2026 15:51:13"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:51:13"
+				   CREATED_BY="SADMIN">
+				</APPLET_WEB_TEMPLATE_ITEM>
+			</APPLET_WEB_TEMPLATE>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   COMMENTS="Updated"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonEdit"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   METHOD_INVOKED="Accessories"
+			   MULTI_LINE="N"
+			   NAME="Accessories &amp; Wearables"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="03/11/2026 19:25:42"
+			   UPDATED_BY="RAVIKUMARB"
+			   CREATED="01/09/2026 15:56:14"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Accessories &amp; wearables"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="04/08/2026 00:37:37"
+				   UPDATED_BY="PAVANIP"
+				   CREATED="01/09/2026 15:59:10"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF SSJ Add On Display"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="Add Ons"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="Y"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="04/29/2026 01:54:18"
+			   UPDATED_BY="RAVIKUMARB"
+			   CREATED="01/09/2026 15:56:16"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Add ons"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/11/2026 20:32:20"
+				   UPDATED_BY="SAISINDHUV"
+				   CREATED="01/09/2026 15:59:12"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   CAPTION_-_STRING_REFERENCE="SBL_ALLOCATE-1004224601-022"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonEdit"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   METHOD_INVOKED="eSIMAllocate"
+			   MULTI_LINE="N"
+			   NAME="Allocate eSIM"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/19/2026 18:34:03"
+			   UPDATED_BY="ANGANAD"
+			   CREATED="01/09/2026 15:56:17"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Allocate"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   VISIBLE="Y"
+				   UPDATED="01/19/2026 18:34:03"
+				   UPDATED_BY="ANGANAD"
+				   CREATED="01/09/2026 15:59:13"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+				<CONTROL_USER_PROP
+				   INACTIVE="N"
+				   NAME="CanInvokeMethod: eSIMAllocate"
+				   VALUE="True"
+				   UPDATED="01/09/2026 16:01:42"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 16:01:42"
+				   CREATED_BY="SADMIN">
+				</CONTROL_USER_PROP>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonEdit"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   METHOD_INVOKED="DeallocateIMEI"
+			   MULTI_LINE="N"
+			   NAME="DeallocateIMEI/Serial #"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:21"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:21"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Deallocate"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:15"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:15"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonEdit"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   METHOD_INVOKED="DeallocateNewMSISDN"
+			   MULTI_LINE="N"
+			   NAME="DeallocateMSISDN"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:22"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:22"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Deallocate"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:16"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:16"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonEdit"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   METHOD_INVOKED="DeallocateSIM"
+			   MULTI_LINE="N"
+			   NAME="DeallocateSIM/eSIM"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:24"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:24"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Deallocate"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:17"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:17"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButton"
+			   HEIGHT="10"
+			   INACTIVE="N"
+			   LEFT="0"
+			   METHOD_INVOKED="DeleteRecord"
+			   MULTI_LINE="N"
+			   NAME="DeleteRecord"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SEQUENCE="14"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="40"
+			   UPDATED="01/09/2026 15:56:28"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:28"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Delete"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:20"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   COMMENTS="MM:200326:CM-8414:Enable Read Only"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF Device TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Field"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="Device"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="Y"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="03/20/2026 22:43:21"
+			   UPDATED_BY="MURUGANM"
+			   CREATED="01/09/2026 15:56:29"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Device"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:20"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonEdit"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   METHOD_INVOKED="DeviceSIM"
+			   MULTI_LINE="N"
+			   NAME="DeviceSIM"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:31"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:31"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Device &amp; SIM"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:20"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="EID"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="381"
+			   MULTI_LINE="N"
+			   NAME="EID"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="10"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="54"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:31"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:31"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="EID"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:20"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButton"
+			   HEIGHT="10"
+			   INACTIVE="N"
+			   LEFT="0"
+			   METHOD_INVOKED="GotoCart"
+			   MULTI_LINE="N"
+			   NAME="EditRecord"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SEQUENCE="15"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="40"
+			   UPDATED="01/15/2026 00:40:49"
+			   UPDATED_BY="GOPALJ"
+			   CREATED="01/09/2026 15:56:31"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Edit in cart"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/30/2026 19:19:10"
+				   UPDATED_BY="MANOHARG"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   CAPTION_-_STRING_REFERENCE="SBL_GO-1004224654-095"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonQuery"
+			   HEIGHT="10"
+			   INACTIVE="N"
+			   LEFT="0"
+			   METHOD_INVOKED="ExecuteQuery"
+			   MULTI_LINE="N"
+			   NAME="ExecuteQuery"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SEQUENCE="16"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="40"
+			   UPDATED="01/09/2026 15:56:31"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:31"
+			   CREATED_BY="SADMIN">
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="RecNavNxt"
+			   HEIGHT="10"
+			   INACTIVE="N"
+			   LEFT="0"
+			   METHOD_INVOKED="GotoNextSet"
+			   MULTI_LINE="N"
+			   NAME="GotoNextSet"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SEQUENCE="17"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="40"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="RecNavPrv"
+			   HEIGHT="10"
+			   INACTIVE="N"
+			   LEFT="0"
+			   METHOD_INVOKED="GotoPreviousSet"
+			   MULTI_LINE="N"
+			   NAME="GotoPreviousSet"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SEQUENCE="18"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="40"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF IMEI TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="631"
+			   MULTI_LINE="N"
+			   NAME="IMEI"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="3"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="2"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="IMEI / Serial #"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="02/25/2026 20:23:25"
+				   UPDATED_BY="RAJUD"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VHA IMEI Display Message Calc"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="TextArea"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="IMEI Display Message"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="02/24/2026 21:14:17"
+			   UPDATED_BY="PAVANIP"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="IMEI display message"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/13/2026 21:46:19"
+				   UPDATED_BY="SAISINDHUV"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   COMMENTS="Changed VF Line Number field to Outline Number for CM:8975"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="Outline Number"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Field"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="Line Item"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="Y"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="03/30/2026 22:29:59"
+			   UPDATED_BY="MONISHAJ"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Line item"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/11/2026 20:32:20"
+				   UPDATED_BY="SAISINDHUV"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VHA MSISDN Calc"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="PlainText"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="MSISDN"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="03/21/2026 18:10:47"
+			   UPDATED_BY="SWATANTRAS"
+			   CREATED="03/21/2026 18:10:47"
+			   CREATED_BY="SWATANTRAS">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="MSISDN"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/21/2026 18:10:48"
+				   UPDATED_BY="SWATANTRAS"
+				   CREATED="03/21/2026 18:10:48"
+				   CREATED_BY="SWATANTRAS">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VFMonthlyDeviceCare"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="Monthly Device Care"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="02/12/2026 18:54:28"
+			   UPDATED_BY="GOPALJ"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Monthly device care"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/13/2026 21:46:19"
+				   UPDATED_BY="SAISINDHUV"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   CAPTION_-_STRING_REFERENCE="SBL_QUERY-1005111820-1VI"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButton"
+			   HEIGHT="10"
+			   INACTIVE="N"
+			   LEFT="0"
+			   METHOD_INVOKED="NewQuery"
+			   MULTI_LINE="N"
+			   NAME="NewQuery"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SEQUENCE="19"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="40"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   CAPTION_-_STRING_REFERENCE="SBL_NEW-1004235437-602"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonEdit"
+			   HEIGHT="10"
+			   INACTIVE="N"
+			   LEFT="0"
+			   METHOD_INVOKED="NewRecord"
+			   MULTI_LINE="N"
+			   NAME="NewRecord"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SEQUENCE="20"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="40"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF Port In TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="RadioButton"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="Number Porting"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Number Porting"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:20"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="Order Number"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Field"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="Order Number"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="Y"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="02/24/2026 00:22:38"
+			   UPDATED_BY="SHUSHILK"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Order number"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/09/2026 15:42:37"
+				   UPDATED_BY="RAJUD"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VHA SSJ Disp Order Type Calc"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Field"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="Order Type"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="Y"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="04/13/2026 18:11:12"
+			   UPDATED_BY="SUMA"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Order type"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/09/2026 15:42:37"
+				   UPDATED_BY="RAJUD"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VHA SSJ Disp Order Type Calc"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="PlainText"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="OrderType Calc"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="03/21/2026 18:10:47"
+			   UPDATED_BY="SWATANTRAS"
+			   CREATED="03/21/2026 18:10:47"
+			   CREATED_BY="SWATANTRAS">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Order Type"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/21/2026 18:10:47"
+				   UPDATED_BY="SWATANTRAS"
+				   CREATED="03/21/2026 18:10:47"
+				   CREATED_BY="SWATANTRAS">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="Parent Order Id"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="131"
+			   MULTI_LINE="N"
+			   NAME="ParentOrderId"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="1"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="2"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Parent Order Id"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:20"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VHA SSJ Term Calc"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="Payment Term"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/23/2026 15:58:34"
+			   UPDATED_BY="MONISHAJ"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Payment term"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/13/2026 21:46:19"
+				   UPDATED_BY="SAISINDHUV"
+				   CREATED="01/09/2026 15:59:20"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="PositionOnRow"
+			   HEIGHT="10"
+			   INACTIVE="N"
+			   LEFT="0"
+			   METHOD_INVOKED="PositionOnRow"
+			   MULTI_LINE="N"
+			   NAME="PositionOnRow"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SEQUENCE="21"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="40"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="Promo Code"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Field"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="Promo Code"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="Y"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="02/24/2026 00:22:38"
+			   UPDATED_BY="SHUSHILK"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Promo code"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/30/2026 19:19:10"
+				   UPDATED_BY="MANOHARG"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="Product"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="381"
+			   MULTI_LINE="N"
+			   NAME="Proposition"
+			   OWNER_DRAW="N"
+			   PICK_APPLET="Product Pick Applet (Eligibility)"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="2"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="2"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Proposition"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonEdit"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   METHOD_INVOKED="ReserveStoreStock"
+			   MULTI_LINE="N"
+			   NAME="Reserve Store Stock"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Reserve store stock"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/13/2026 21:46:19"
+				   UPDATED_BY="SAISINDHUV"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF SIM TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="631"
+			   MULTI_LINE="N"
+			   NAME="SIM"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="3"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="2"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="SIM"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="Shipping"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="RadioButton"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="881"
+			   MULTI_LINE="N"
+			   NAME="SIM Type"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="8"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="28"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="SIM type"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/13/2026 21:46:19"
+				   UPDATED_BY="SAISINDHUV"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF Handset Code TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Field"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="SKU Code"
+			   OWNER_DRAW="N"
+			   PICK_APPLET="VF Connect Wizard - Out of Stock Handset Pick Applet"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/20/2026 17:42:11"
+			   UPDATED_BY="ANGANAD"
+			   CREATED="01/20/2026 17:42:11"
+			   CREATED_BY="ANGANAD">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="SKU Code"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/20/2026 17:42:11"
+				   UPDATED_BY="ANGANAD"
+				   CREATED="01/20/2026 17:42:11"
+				   CREATED_BY="ANGANAD">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="Rate Plan Name"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="631"
+			   MULTI_LINE="N"
+			   NAME="Service"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="3"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="2"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Service"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="Status Indicator"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="631"
+			   MULTI_LINE="N"
+			   NAME="Status Indicator"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="3"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="2"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Status Indicator"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonQuery"
+			   HEIGHT="10"
+			   INACTIVE="N"
+			   LEFT="0"
+			   METHOD_INVOKED="UndoQuery"
+			   MULTI_LINE="N"
+			   NAME="UndoQuery"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SEQUENCE="22"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="40"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Cancel"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonNew"
+			   HEIGHT="10"
+			   INACTIVE="N"
+			   LEFT="0"
+			   METHOD_INVOKED="UndoRecord"
+			   MULTI_LINE="N"
+			   NAME="UndoRecord"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SEQUENCE="23"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="40"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Cancel"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF ConnectionType"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Field"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="VF ConnectionType"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="Y"
+			   RUNTIME="Y"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="03/12/2026 20:43:39"
+			   UPDATED_BY="RAJUD"
+			   CREATED="03/12/2026 20:43:39"
+			   CREATED_BY="RAJUD">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Connection type"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/13/2026 21:46:19"
+				   UPDATED_BY="SAISINDHUV"
+				   CREATED="03/12/2026 20:43:40"
+				   CREATED_BY="RAJUD">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF Port In - Service Number TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="VF DFA MSISDN"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="04/06/2026 15:59:31"
+			   UPDATED_BY="SOUMALYAM"
+			   CREATED="04/06/2026 15:59:31"
+			   CREATED_BY="SOUMALYAM">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="MSISDN"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="04/06/2026 23:33:48"
+				   UPDATED_BY="MOTHILALK"
+				   CREATED="04/06/2026 15:59:31"
+				   CREATED_BY="SOUMALYAM">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF Root Siebel Product Type"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="PlainText"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   MULTI_LINE="N"
+			   NAME="VF Root Siebel Product Type"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="04/20/2026 21:20:02"
+			   UPDATED_BY="SWATANTRAS"
+			   CREATED="04/20/2026 21:20:02"
+			   CREATED_BY="SWATANTRAS">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Siebel Product Type"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="04/20/2026 21:20:02"
+				   UPDATED_BY="SWATANTRAS"
+				   CREATED="04/20/2026 21:20:02"
+				   CREATED_BY="SWATANTRAS">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VHA SSJ Portin Options"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Field"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="381"
+			   MULTI_LINE="N"
+			   NAME="VF SSJ Port In TBUI"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="10"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="54"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="03/09/2026 23:05:19"
+			   UPDATED_BY="RAVIKUMARB"
+			   CREATED="03/09/2026 17:30:05"
+			   CREATED_BY="RAVIKUMARB">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Port In"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/09/2026 17:30:05"
+				   UPDATED_BY="RAVIKUMARB"
+				   CREATED="03/09/2026 17:30:05"
+				   CREATED_BY="RAVIKUMARB">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF Device TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="631"
+			   MULTI_LINE="N"
+			   NAME="VFDeviceTBUI"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="3"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="2"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="VF Device TBUI"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF IMEI TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="881"
+			   MULTI_LINE="N"
+			   NAME="VFIMEITBUI"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="4"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="2"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="VF IMEI TBUI"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF MSISDN TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="131"
+			   MULTI_LINE="N"
+			   NAME="VFMSISDNTBUI"
+			   OWNER_DRAW="N"
+			   PICK_APPLET="VF Change MSISDN VBC for Smartscript"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="5"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="28"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="03/04/2026 18:31:12"
+			   UPDATED_BY="VENKAREDDYJ"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="MSISDN"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF Order Type TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="381"
+			   MULTI_LINE="N"
+			   NAME="VFOrderTypeTBUI"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="6"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="28"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="VF Order Type TBUI"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF Port In TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="631"
+			   MULTI_LINE="N"
+			   NAME="VFPortInTBUI"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="11"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="54"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="VF Port In TBUI"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF SIM TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="631"
+			   MULTI_LINE="N"
+			   NAME="VFSIMTBUI"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="7"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="28"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="VF SIM TBUI"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF Port In - Service Account TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="131"
+			   MULTI_LINE="N"
+			   NAME="VHA Port In Service Account"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="13"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="80"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="02/21/2026 17:46:43"
+			   UPDATED_BY="RAVIKUMARB"
+			   CREATED="02/21/2026 17:46:43"
+			   CREATED_BY="RAVIKUMARB">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Port in service account"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="02/21/2026 17:46:44"
+				   UPDATED_BY="RAVIKUMARB"
+				   CREATED="02/21/2026 17:46:44"
+				   CREATED_BY="RAVIKUMARB">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VF Port In - DOB TBUI"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Field"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="131"
+			   MULTI_LINE="N"
+			   NAME="VHADOB"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="Y"
+			   RUNTIME="Y"
+			   SEQUENCE="13"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="80"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="04/04/2026 01:45:52"
+			   UPDATED_BY="MONISHAJ"
+			   CREATED="02/21/2026 17:46:43"
+			   CREATED_BY="RAVIKUMARB">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="Date of Birth"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="02/21/2026 17:46:44"
+				   UPDATED_BY="RAVIKUMARB"
+				   CREATED="02/21/2026 17:46:44"
+				   CREATED_BY="RAVIKUMARB">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VHA IMEI Display Message"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="881"
+			   MULTI_LINE="N"
+			   NAME="VHAIMEIDisplayMessage"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="12"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="54"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="VHA IMEI Display Message"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="VHA RRP"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="131"
+			   MULTI_LINE="N"
+			   NAME="VHARRP"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="13"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="80"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="03/30/2026 18:59:24"
+			   UPDATED_BY="ADITIK"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="RRP"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="01/09/2026 15:59:21"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   CAPTION_-_STRING_REFERENCE="SBL_SAVE-1004225832-051"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_ONLY="Y"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="MiniButtonEditNew"
+			   HEIGHT="10"
+			   INACTIVE="N"
+			   LEFT="0"
+			   METHOD_INVOKED="WriteRecord"
+			   MULTI_LINE="N"
+			   NAME="WriteRecord"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="N"
+			   SEQUENCE="24"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="0"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="40"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="eSIM Download"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="631"
+			   MULTI_LINE="N"
+			   NAME="eSIM Download"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="3"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="2"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="eSIM download"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/27/2026 21:18:31"
+				   UPDATED_BY="ADITIK"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<CONTROL
+			   AUTOMATIC_HORIZONTAL_SCROLL="Y"
+			   AUTOMATIC_VERTICAL_SCROLL="N"
+			   DEFAULT_BUTTON="N"
+			   EXTENSION_FLAG="N"
+			   FIELD="eSIM Download"
+			   FIELD_TYPE="BC Field"
+			   GROUP="N"
+			   HTML_DEFAULT_CONTROL="N"
+			   HTML_DISPLAY_MODE="EncodeData"
+			   HTML_HEIGHT="24"
+			   HTML_ONLY="N"
+			   HTML_ROW_SENSITIVE="Y"
+			   HTML_TYPE="Text"
+			   HTML_WIDTH="120"
+			   HEIGHT="24"
+			   INACTIVE="N"
+			   LEFT="131"
+			   MULTI_LINE="N"
+			   NAME="eSIMDownload"
+			   OWNER_DRAW="N"
+			   POPUP_EDIT="N"
+			   PROMPT="N"
+			   READ_ONLY="N"
+			   RUNTIME="Y"
+			   SEQUENCE="9"
+			   SHOW_POPUP="N"
+			   SORT="Y"
+			   TAB_STOP="Y"
+			   TEXT_ALIGNMENT="Left"
+			   TEXT_ALIGNMENT-LABEL="Right"
+			   TOP="54"
+			   TYPE="TextBox"
+			   VERTICAL_SCROLL="N"
+			   VISIBLE="Y"
+			   WANT_RETURN="N"
+			   WIDTH="120"
+			   UPDATED="01/09/2026 15:56:32"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:56:32"
+			   CREATED_BY="SADMIN">
+				<CONTROL_LOCALE
+				   APPLICATION_CODE="STD"
+				   CAPTION="eSIM download"
+				   INACTIVE="N"
+				   LANGUAGE_CODE="ENU"
+				   NAME="ENU-STD"
+				   TRANSLATE="Y"
+				   UPDATED="03/27/2026 21:18:31"
+				   UPDATED_BY="ADITIK"
+				   CREATED="01/09/2026 15:59:21"
+				   CREATED_BY="SADMIN">
+				</CONTROL_LOCALE>
+			</CONTROL>
+			<LIST
+			   HTML_MULTI_ROW_EDIT="N"
+			   HTML_MULTI_ROW_SELECT="N"
+			   INACTIVE="N"
+			   NAME="List"
+			   TOTAL_DISPLAYED="Y"
+			   TOTAL_REQUIRED="Y"
+			   UPDATED="01/09/2026 15:49:44"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:49:44"
+			   CREATED_BY="SADMIN">
+				<LIST_COLUMN
+				   AVAILABLE="Y"
+				   BITMAP_COLUMN_HEADING="N"
+				   FIELD="VF ConnectionType"
+				   HTML_DISPLAY_MODE="EncodeData"
+				   HTML_LIST_EDIT="Y"
+				   HTML_ONLY="N"
+				   HTML_ROW_SENSITIVE="Y"
+				   HTML_TYPE="Field"
+				   INACTIVE="N"
+				   NAME="Connection type"
+				   POPUP_EDIT="N"
+				   READ_ONLY="Y"
+				   RUNTIME="Y"
+				   SHOW_IN_LIST="Y"
+				   SHOW_POPUP="N"
+				   TEXT_ALIGNMENT="Left"
+				   TEXT_ALIGNMENT-LABEL="Left"
+				   TOTAL_REQUIRED="N"
+				   TYPE="TextBox"
+				   WIDTH="20"
+				   UPDATED="02/11/2026 18:59:13"
+				   UPDATED_BY="RAJUD"
+				   CREATED="01/09/2026 15:49:49"
+				   CREATED_BY="SADMIN">
+					<LIST_COLUMN_LOCALE
+					   APPLICATION_CODE="STD"
+					   DISPLAY_NAME="Connection type"
+					   INACTIVE="N"
+					   LANGUAGE_CODE="ENU"
+					   NAME="ENU-STD"
+					   TRANSLATE="Y"
+					   UPDATED="03/13/2026 21:46:15"
+					   UPDATED_BY="SAISINDHUV"
+					   CREATED="01/09/2026 15:50:20"
+					   CREATED_BY="SADMIN">
+					</LIST_COLUMN_LOCALE>
+					<LIST_COLUMN_USER_PROP
+					   INACTIVE="N"
+					   NAME="DisableSort"
+					   VALUE="TRUE"
+					   UPDATED="02/14/2026 01:13:49"
+					   UPDATED_BY="KOVIDT"
+					   CREATED="02/14/2026 01:13:49"
+					   CREATED_BY="KOVIDT">
+					</LIST_COLUMN_USER_PROP>
+				</LIST_COLUMN>
+				<LIST_COLUMN
+				   AVAILABLE="Y"
+				   BITMAP_COLUMN_HEADING="N"
+				   FIELD="Service PIN"
+				   HTML_DISPLAY_MODE="EncodeData"
+				   HTML_LIST_EDIT="Y"
+				   HTML_ONLY="N"
+				   HTML_ROW_SENSITIVE="Y"
+				   HTML_TYPE="Field"
+				   INACTIVE="N"
+				   NAME="Installed asset PIN"
+				   POPUP_EDIT="N"
+				   READ_ONLY="N"
+				   RUNTIME="Y"
+				   SHOW_IN_LIST="Y"
+				   SHOW_POPUP="N"
+				   TEXT_ALIGNMENT="Left"
+				   TEXT_ALIGNMENT-LABEL="Left"
+				   TOTAL_REQUIRED="N"
+				   TYPE="TextBox"
+				   WIDTH="20"
+				   UPDATED="01/10/2026 21:22:30"
+				   UPDATED_BY="GOPALJ"
+				   CREATED="01/09/2026 15:49:50"
+				   CREATED_BY="SADMIN">
+					<LIST_COLUMN_LOCALE
+					   APPLICATION_CODE="STD"
+					   DISPLAY_NAME="Installed asset PIN"
+					   INACTIVE="N"
+					   LANGUAGE_CODE="ENU"
+					   NAME="ENU-STD"
+					   TRANSLATE="Y"
+					   UPDATED="01/09/2026 15:50:21"
+					   UPDATED_BY="SADMIN"
+					   CREATED="01/09/2026 15:50:21"
+					   CREATED_BY="SADMIN">
+					</LIST_COLUMN_LOCALE>
+					<LIST_COLUMN_USER_PROP
+					   INACTIVE="N"
+					   NAME="DisableSort"
+					   VALUE="TRUE"
+					   UPDATED="02/14/2026 01:13:49"
+					   UPDATED_BY="KOVIDT"
+					   CREATED="02/14/2026 01:13:49"
+					   CREATED_BY="KOVIDT">
+					</LIST_COLUMN_USER_PROP>
+				</LIST_COLUMN>
+				<LIST_COLUMN
+				   AVAILABLE="Y"
+				   BITMAP_COLUMN_HEADING="N"
+				   FIELD="VF AA Set Notification MSISDN"
+				   HTML_DISPLAY_MODE="EncodeData"
+				   HTML_LIST_EDIT="Y"
+				   HTML_ONLY="N"
+				   HTML_ROW_SENSITIVE="Y"
+				   HTML_TYPE="CheckBox"
+				   INACTIVE="N"
+				   NAME="Notification MSISDN"
+				   POPUP_EDIT="N"
+				   READ_ONLY="N"
+				   RUNTIME="Y"
+				   SHOW_IN_LIST="Y"
+				   SHOW_POPUP="N"
+				   TEXT_ALIGNMENT="Left"
+				   TEXT_ALIGNMENT-LABEL="Left"
+				   TOTAL_REQUIRED="N"
+				   TYPE="TextBox"
+				   WIDTH="20"
+				   UPDATED="01/13/2026 22:55:49"
+				   UPDATED_BY="ANGANAD"
+				   CREATED="01/09/2026 15:49:50"
+				   CREATED_BY="SADMIN">
+					<LIST_COLUMN_LOCALE
+					   APPLICATION_CODE="STD"
+					   DISPLAY_NAME="Notification MSISDN"
+					   INACTIVE="N"
+					   LANGUAGE_CODE="ENU"
+					   NAME="ENU-STD"
+					   TRANSLATE="Y"
+					   UPDATED="01/09/2026 15:50:21"
+					   UPDATED_BY="SADMIN"
+					   CREATED="01/09/2026 15:50:21"
+					   CREATED_BY="SADMIN">
+					</LIST_COLUMN_LOCALE>
+					<LIST_COLUMN_USER_PROP
+					   INACTIVE="N"
+					   NAME="DisableSort"
+					   VALUE="TRUE"
+					   UPDATED="02/14/2026 01:13:49"
+					   UPDATED_BY="KOVIDT"
+					   CREATED="02/14/2026 01:13:49"
+					   CREATED_BY="KOVIDT">
+					</LIST_COLUMN_USER_PROP>
+				</LIST_COLUMN>
+				<LIST_COLUMN
+				   AVAILABLE="Y"
+				   BITMAP_COLUMN_HEADING="N"
+				   FIELD="Product Type"
+				   HTML_DISPLAY_MODE="EncodeData"
+				   HTML_LIST_EDIT="Y"
+				   HTML_ONLY="N"
+				   HTML_ROW_SENSITIVE="Y"
+				   HTML_TYPE="Field"
+				   INACTIVE="N"
+				   NAME="Product type"
+				   POPUP_EDIT="N"
+				   READ_ONLY="Y"
+				   RUNTIME="Y"
+				   SHOW_IN_LIST="Y"
+				   SHOW_POPUP="N"
+				   TEXT_ALIGNMENT="Left"
+				   TEXT_ALIGNMENT-LABEL="Left"
+				   TOTAL_REQUIRED="N"
+				   TYPE="TextBox"
+				   WIDTH="20"
+				   UPDATED="02/11/2026 18:59:13"
+				   UPDATED_BY="RAJUD"
+				   CREATED="01/09/2026 15:49:50"
+				   CREATED_BY="SADMIN">
+					<LIST_COLUMN_LOCALE
+					   APPLICATION_CODE="STD"
+					   DISPLAY_NAME="Product type"
+					   INACTIVE="N"
+					   LANGUAGE_CODE="ENU"
+					   NAME="ENU-STD"
+					   TRANSLATE="Y"
+					   UPDATED="01/09/2026 15:50:21"
+					   UPDATED_BY="SADMIN"
+					   CREATED="01/09/2026 15:50:21"
+					   CREATED_BY="SADMIN">
+					</LIST_COLUMN_LOCALE>
+					<LIST_COLUMN_USER_PROP
+					   INACTIVE="N"
+					   NAME="DisableSort"
+					   VALUE="TRUE"
+					   UPDATED="02/14/2026 01:13:49"
+					   UPDATED_BY="KOVIDT"
+					   CREATED="02/14/2026 01:13:49"
+					   CREATED_BY="KOVIDT">
+					</LIST_COLUMN_USER_PROP>
+				</LIST_COLUMN>
+				<LIST_COLUMN
+				   AVAILABLE="Y"
+				   BITMAP_COLUMN_HEADING="N"
+				   FIELD="VF Stock Indicator TBUI"
+				   HTML_DISPLAY_MODE="EncodeData"
+				   HTML_LIST_EDIT="Y"
+				   HTML_ONLY="N"
+				   HTML_ROW_SENSITIVE="Y"
+				   HTML_TYPE="Field"
+				   INACTIVE="N"
+				   NAME="Stock Indicator"
+				   POPUP_EDIT="N"
+				   READ_ONLY="N"
+				   RUNTIME="Y"
+				   SHOW_IN_LIST="Y"
+				   SHOW_POPUP="N"
+				   TEXT_ALIGNMENT="Left"
+				   TEXT_ALIGNMENT-LABEL="Left"
+				   TOTAL_REQUIRED="N"
+				   TYPE="TextBox"
+				   WIDTH="20"
+				   UPDATED="01/10/2026 21:22:30"
+				   UPDATED_BY="GOPALJ"
+				   CREATED="01/09/2026 15:49:50"
+				   CREATED_BY="SADMIN">
+					<LIST_COLUMN_LOCALE
+					   APPLICATION_CODE="STD"
+					   DISPLAY_NAME="Stock indicator"
+					   INACTIVE="N"
+					   LANGUAGE_CODE="ENU"
+					   NAME="ENU-STD"
+					   TRANSLATE="Y"
+					   UPDATED="01/09/2026 15:50:21"
+					   UPDATED_BY="SADMIN"
+					   CREATED="01/09/2026 15:50:21"
+					   CREATED_BY="SADMIN">
+					</LIST_COLUMN_LOCALE>
+					<LIST_COLUMN_USER_PROP
+					   INACTIVE="N"
+					   NAME="DisableSort"
+					   VALUE="TRUE"
+					   UPDATED="02/14/2026 01:13:49"
+					   UPDATED_BY="KOVIDT"
+					   CREATED="02/14/2026 01:13:49"
+					   CREATED_BY="KOVIDT">
+					</LIST_COLUMN_USER_PROP>
+				</LIST_COLUMN>
+				<LIST_COLUMN
+				   AVAILABLE="Y"
+				   BITMAP_COLUMN_HEADING="N"
+				   FIELD="VF Order Function SSJ"
+				   HTML_DISPLAY_MODE="EncodeData"
+				   HTML_LIST_EDIT="Y"
+				   HTML_ONLY="N"
+				   HTML_ROW_SENSITIVE="Y"
+				   HTML_TYPE="Field"
+				   INACTIVE="N"
+				   NAME="VF Order Function SSJ"
+				   POPUP_EDIT="N"
+				   READ_ONLY="Y"
+				   RUNTIME="Y"
+				   SHOW_IN_LIST="Y"
+				   SHOW_POPUP="N"
+				   TEXT_ALIGNMENT="Left"
+				   TEXT_ALIGNMENT-LABEL="Left"
+				   TOTAL_REQUIRED="N"
+				   TYPE="TextBox"
+				   WIDTH="20"
+				   UPDATED="03/21/2026 01:34:09"
+				   UPDATED_BY="RAJUD"
+				   CREATED="03/21/2026 01:34:09"
+				   CREATED_BY="RAJUD">
+					<LIST_COLUMN_LOCALE
+					   APPLICATION_CODE="STD"
+					   DISPLAY_NAME="Order Function"
+					   INACTIVE="N"
+					   LANGUAGE_CODE="ENU"
+					   NAME="ENU-STD"
+					   TRANSLATE="Y"
+					   UPDATED="03/21/2026 01:34:10"
+					   UPDATED_BY="RAJUD"
+					   CREATED="03/21/2026 01:34:10"
+					   CREATED_BY="RAJUD">
+					</LIST_COLUMN_LOCALE>
+				</LIST_COLUMN>
+				<LIST_COLUMN
+				   AVAILABLE="Y"
+				   BITMAP_COLUMN_HEADING="N"
+				   FIELD="VHA SSJ Disp Order Type Calc"
+				   HTML_DISPLAY_MODE="EncodeData"
+				   HTML_LIST_EDIT="Y"
+				   HTML_ONLY="N"
+				   HTML_ROW_SENSITIVE="Y"
+				   HTML_TYPE="Field"
+				   INACTIVE="N"
+				   NAME="VHA SSJ Disp Order Type Calc"
+				   POPUP_EDIT="N"
+				   READ_ONLY="Y"
+				   RUNTIME="Y"
+				   SHOW_IN_LIST="Y"
+				   SHOW_POPUP="N"
+				   TEXT_ALIGNMENT="Left"
+				   TEXT_ALIGNMENT-LABEL="Left"
+				   TOTAL_REQUIRED="N"
+				   TYPE="TextBox"
+				   WIDTH="20"
+				   UPDATED="03/21/2026 01:34:09"
+				   UPDATED_BY="RAJUD"
+				   CREATED="03/21/2026 01:34:09"
+				   CREATED_BY="RAJUD">
+					<LIST_COLUMN_LOCALE
+					   APPLICATION_CODE="STD"
+					   DISPLAY_NAME="Order Type"
+					   INACTIVE="N"
+					   LANGUAGE_CODE="ENU"
+					   NAME="ENU-STD"
+					   TRANSLATE="Y"
+					   UPDATED="03/21/2026 01:34:10"
+					   UPDATED_BY="RAJUD"
+					   CREATED="03/21/2026 01:34:10"
+					   CREATED_BY="RAJUD">
+					</LIST_COLUMN_LOCALE>
+				</LIST_COLUMN>
+			</LIST>
+		</APPLET>
+	</PROJECT>
+	<SBL_EXT_TYPE_DEF>
+		<TYPE
+		   NAME="Applet">
+			<ATTRIBUTE
+			   NAME="Responsive Flag">
+			</ATTRIBUTE>
+		</TYPE>
+		<TYPE
+		   NAME="Applet Web Template">
+			<ATTRIBUTE
+			   NAME="Ext Web Template">
+			</ATTRIBUTE>
+		</TYPE>
+		<TYPE
+		   NAME="Applet Web Template Item">
+			<ATTRIBUTE
+			   NAME="Ext Expression">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Group Name">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Html Attr">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Sequence">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Tmpl Item Holder Name">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Web Tmpl Name">
+			</ATTRIBUTE>
+		</TYPE>
+	</SBL_EXT_TYPE_DEF>
+</REPOSITORY>
+
+
+
