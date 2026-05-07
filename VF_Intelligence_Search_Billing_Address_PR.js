@@ -6,6 +6,7 @@ if (typeof(SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR) === "undef
                 SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR.superclass.constructor.apply(this, arguments)
             }
             SiebelJS.Extend(VF_Intelligence_Search_Billing_Address_PR, SiebelAppFacade.JQGridRenderer);
+			let sCnt= 0;
             
             VF_Intelligence_Search_Billing_Address_PR.prototype.Init = function() {
                 try {
@@ -59,6 +60,21 @@ if (typeof(SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR) === "undef
                 try {
                     SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR.superclass.BindData.apply(this, arguments);
                 } catch(e) { }
+				$('body').on("click", 'button[title="Billing Address Form Applet:Edit"]', function () {
+					var sBALAr = SiebelApp.S_App.GetActiveView().GetAppletMap()['VHA SSJ Billing Account Address List Applet TBUI'].GetFullId();
+					if(sBALAr)
+					{
+						$("#" + sBALAr).removeClass("VFDisplayNone");
+						sCnt=1;
+					}
+				});
+				$('body').on("click", 'button[title="Billing Address Form Applet:Discard"]', function () {
+					sCnt=0;
+				});
+				
+				$('body').on("click", 'button[title="Billing Address Form Applet:Save"]', function () {
+					sCnt=0;
+				});
             };
 
             VF_Intelligence_Search_Billing_Address_PR.prototype.ShowUI = function() {
@@ -207,6 +223,15 @@ if (typeof(SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR) === "undef
                         }
                     }
                 }
+				if(SiebelApp.S_App.GetActiveView().GetAppletMap()['VHA SSJ Billing Account Address List Applet TBUI'] != null)
+				{
+					var sBiALA = SiebelApp.S_App.GetActiveView().GetAppletMap()['VHA SSJ Billing Account Address List Applet TBUI'].GetFullId();
+					if(sBiALA && sCnt == 0)
+					{
+						$("#" + sBiALA).addClass("VFDisplayNone");
+						
+					}
+				}
             };
 
             VF_Intelligence_Search_Billing_Address_PR.prototype.EndLife = function() { SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR.superclass.EndLife.apply(this, arguments); };
