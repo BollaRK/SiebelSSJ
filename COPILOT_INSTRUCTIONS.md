@@ -43,11 +43,13 @@ Ask for:
 After answers are collected, produce a short structured summary **before** proposing fixes:
 - Journey: ...
 - Flow: ... (if TBUI SSJ)
-- Page: ... (1–9) + PageName (if mapping exists)
-- View: ... (if known)
-- Applet(s): ... (if known)
-- BC/BO: ... (if known)
-- BS/WF/LOV involved: ... (if known)
+- Page: ... (1–9) + PageName
+- Main Task: ... (if TBUI SSJ)
+- Sub Task: ... (if TBUI SSJ)
+- View: ...
+- Applet(s): ... (derived from View SIF)
+- BC/BO: ... (derived from Applet/BC SIF)
+- BS/WF/LOV involved: ... (derived from referenced logic)
 - Expected:
 - Actual:
 - Steps:
@@ -61,40 +63,97 @@ These rules apply **only when Journey = TBUI SSJ**.
 
 ### Scope rule (critical)
 When Journey = TBUI SSJ and the Page (1–9) is identified:
-1. **Focus analysis ONLY on artifacts related to that page**.
-2. Do not scan unrelated SIFs/JS unless the page’s artifacts reference them.
+1. **Set the Main Task to: `VHA DFA Post Pay Connection`**.
+2. **Use only the page’s Sub Task + View** (from the mapping below) to drive investigation.
+3. **Focus analysis ONLY on artifacts related to that page’s View/Applets/BCs/Services**.
+4. Do not scan unrelated SIFs/JS unless the page’s artifacts reference them.
+
+### TBUI SSJ Page → Sub Task → View mapping (authoritative)
+Use this mapping whenever user provides page number or page name.
+
+1. **Capture customer details**
+   - Main Task: `VHA DFA Post Pay Connection`
+   - Sub Task (New): `VF SSJ Connection Wizard View – Shopping Cart – TBUI`
+   - Sub Task (Existing): `VF SSJ Connection Wizard View – Shopping Cart – TBUI`
+   - View (New): `VF Capture Customer Details – Postpay - SSJ`
+   - View (Existing): `VF Capture Customer Details – Postpay - SSJ`
+
+2. **Capture ID details**
+   - Main Task: `VHA DFA Post Pay Connection`
+   - Sub Task (New): `VHA Kogan Capture Id Details Sub Task`
+   - Sub Task (Existing): `VHA Kogan Capture Id Details Sub Task`
+   - View (New): `VF SSJ Customer ID Details – Postpay TBUI`
+   - View (Existing): `VF SSJ Customer ID Details – Postpay TBUI`
+
+3. **Capture Credit check**
+   - Main Task: `VHA DFA Post Pay Connection`
+   - Sub Task (New): `VF Perform Credit Check Task`
+   - View (New): `VF Connection Wizard View - Credit Check – TBUI - SSJ`
+   - Sub Task (Existing): `VF Perform Credit Check Existing Customer`
+   - View (Existing): `VF Connection Wizard View - Credit Check – TBUI - SSJ Exist Customer`
+
+4. **Billing Details**
+   - Main Task: `VHA DFA Post Pay Connection`
+   - Sub Task (New): `VF Capture Billing Details Task`
+   - View (New): `VHA Connection Wizard View - Billing Detail - TBUI - SSJ`
+   - Sub Task (Existing): `VF Capture SSJ Exist Billing Details Task`
+   - View (Existing): `VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ`
+
+5. **Coverage Check Details**
+   - Main Task: `VHA DFA Post Pay Connection`
+   - Sub Task (New/Existing): `VHA SSJ Coverage Check Details Task`
+   - View (New/Existing): `VF Coverage Check Details - Postpay - SSJ`
+
+6. **Proposition**
+   - Main Task: `VHA DFA Post Pay Connection`
+   - Sub Task (New/Existing): `VF SSJ Add Proposition Task MSO`
+   - View (New/Existing): `VF SSJ Connection Wizard View – Shopping Cart – TBUI`
+
+7. **Prepayment and sharing**
+   - Main Task: `VHA DFA Post Pay Connection`
+   - Sub Task (New/Existing): `VF SSJ MSO Configure Mobile Payment Plan Task`
+   - View (New/Existing): `VF SSJ Prepayments View-TBUI`
+
+8. **Order Review**
+   - Main Task: `VHA DFA Post Pay Connection`
+   - View (New Connect / Upgrade / RPC): `VF New Connect MSO Order Summary View TBUI SSJ - eSIM Details`
+   - Sub Task (New Connect): `VF Order SSJ Submit Task MSO`
+   - Sub Task (Upgrade/RPC): `VF SSJ Upg Order Summary Task`
+
+9. **Make a Prepayment**
+   - Main Task: `VHA DFA Post Pay Connection`
+   - Sub Task (New/Existing): `VHA Prepayments Task`
+   - View (New/Existing): `VHA SSJ Prepayment Processing View`
 
 ### What to consult (in order)
 Once the page is known, use this order to minimize time:
 
-1) **View SIF**
-- Identify the **View** for the page.
-- From the view definition, list the **applets** on that view (and whether they are list/form/toggle/task playbar etc.).
+1) **Main Task + Sub Task (navigation context)**
+- Confirm the issue is in Main Task: `VHA DFA Post Pay Connection`.
+- Confirm the Sub Task and View from the mapping for the selected page and flow.
 
-2) **Applet SIF(s)**
-- For each relevant applet: identify underlying **BC** and key controls/fields.
+2) **View SIF**
+- Locate the SIF entry for the mapped **View name**.
+- From the view definition, list the **applets** on that view.
 
-3) **BC/BO SIF(s)**
+3) **Applet SIF(s)**
+- For each relevant applet on that view: identify underlying **BC** and key controls/fields.
+
+4) **BC/BO SIF(s)**
 - For each relevant BC: review calculated fields, user properties, validation/search specs, picklists.
 
-4) **Business Service / Workflow / Runtime events (if implicated)**
-- If the issue mentions validations, errors, popups, automation, integrations, or background logic:
-  consult corresponding **BS**, **WF**, runtime events, LOVs referenced by the page/view/applet/BC.
+5) **Business Service / Workflow / Runtime events / LOVs (only if implicated)**
+- Only consult BS/WF/LOVs that are referenced by the View/Applet/BC OR clearly mentioned by the user’s symptoms.
 
-5) **Open UI PR/JS/CSS overrides for that view/applet**
+6) **Open UI PR/JS/CSS overrides for that view/applet**
 - Search this repo for Presentation Renderer / custom JS matching:
   - the **View name**, **Applet name**, module define name (e.g., `siebel/custom/<name>`), or file naming pattern like `*PR.js`.
 - Prioritize files that explicitly check `SiebelApp.S_App.GetActiveView().GetName()` or reference the applet name.
 
 ### Output rule
 When responding, always include:
+- The page number + page name
+- Main Task + Sub Task + View used
 - The exact View/Applet/BC names you used for analysis
 - The specific repo files you consulted (by filename)
 - What you ruled out due to scoping
-
-### Missing mapping rule
-If the page-number → view/applet mapping is not yet available, ask the user to provide:
-- Page number → View name mapping (1–9)
-OR
-- The SIF/task file where the SSJ journey pages are defined
-Then proceed with the scope reduction rules.
