@@ -19,15 +19,12 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
           var selection = bc.GetSelection();
           var controls = pm.Get("GetControls");
 
-          // Force-map data from BC RecordSet directly to the UI controls
           if (selection !== -1 && recordSet[selection]) {
             var activeRecord = recordSet[selection];
             for (var ctrlName in controls) {
               var fieldName = controls[ctrlName].GetFieldName();
               if (fieldName && activeRecord[fieldName] !== undefined) {
-                // Update PM Property for internal state
                 pm.SetProperty(ctrlName, activeRecord[fieldName]);
-                // Push directly to DOM if the field currently appears empty
                 var uiEl = $("[name='" + controls[ctrlName].GetInputName() + "']");
                 if (uiEl.length > 0 && !uiEl.val()) {
                   uiEl.val(activeRecord[fieldName]);
@@ -40,36 +37,61 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
         // ==========================================================
         // 2. LAYOUT HELPER: Uses "Soft Hide" to keep the Selection Link alive
         // ==========================================================
+        function isEditOrNewMode($formEl) {
+          if (!$formEl || $formEl.length === 0) return false;
+
+          // Primary: if Save/Discard exist
+          if ($formEl.find("button[data-display='Save'], button[data-display='Discard'], button:contains('Save'), button:contains('Discard')").length > 0) {
+            return true;
+          }
+
+          // Secondary: session state (used elsewhere in this file)
+          if (sessionStorage.getItem("isAddressEditing") === "Y") {
+            return true;
+          }
+
+          // Fallback: any editable field indicates edit/new
+          var $editable = $formEl.find("input,textarea,select").filter(function () {
+            var $el = $(this);
+            if ($el.is(":disabled")) return false;
+            if ($el.prop("readonly")) return false;
+            var type = ($el.attr("type") || "").toLowerCase();
+            if (type === "hidden") return false;
+            return true;
+          });
+
+          return $editable.length > 0;
+        }
+
         function refreshBillingLayout() {
           var view = SiebelApp.S_App.GetActiveView();
           if (!view) return;
 
           var listApplet = view.GetApplet("VHA SSJ Billing Account Address List Applet TBUI");
-          
-          // --- NEW: Support both the default form and the manual address toggle form
+          // Support both default form and manual toggle form
           var formApplet = view.GetApplet("VF SSJ Billing Account Address Details TBUI") || view.GetApplet("VHA SSJ Billing Account Manual Address List Applet TBUI");
-          
           if (!listApplet || !formApplet) return;
 
           var $listEl = $("#" + listApplet.GetFullId());
           var $formEl = $("#" + formApplet.GetFullId());
 
-          // --- NEW: Check sessionStorage state first, fallback to DOM check for safety
-          var isEditModeSession = sessionStorage.getItem("isAddressEditing") === "Y";
-          var isEditModeDOM = $formEl.find("button[data-display='Save'], button:contains('Save')").length > 0;
-          var isEditMode = isEditModeSession || isEditModeDOM;
+          var isEditMode = isEditOrNewMode($formEl);
 
           if (isEditMode) {
-             // Reset to standard layout for editing
-             $listEl.show().css({ "height": "auto", "opacity": "1", "visibility": "visible", "overflow": "visible", "display": "block" });
-             if ($listEl.next().attr('id') !== $formEl.attr('id')) { $listEl.insertBefore($formEl); }
-             
-             setTimeout(function () { 
+            $listEl.show().css({ "height": "auto", "opacity": "1", "visibility": "visible", "overflow": "visible", "display": "block" });
+            if ($listEl.next().attr('id') !== $formEl.attr('id')) {
+              $listEl.insertBefore($formEl);
+            }
+            setTimeout(function () {
+              try {
                 var grid = $("#gbox_" + listApplet.GetFullId() + " .ui-jqgrid-btable");
-                if(grid.length) { grid.setGridWidth($listEl.width()); $(window).trigger("resize"); }
-             }, 200);
+                if (grid.length) { grid.setGridWidth($listEl.width()); $(window).trigger("resize"); }
+              } catch (e) {
+                // ignore
+              }
+            }, 200);
           } else {
-            // BASE MODE: Hide List without 'deactivating' the data sync
+            // Base mode: hide list but keep in DOM
             $listEl.css({
               "display": "block",
               "height": "0px",
@@ -78,7 +100,6 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
               "margin": "0",
               "padding": "0"
             });
-            // Perform fallback data sync for read-only mode
             manualDataSync(formApplet);
           }
         }
@@ -104,33 +125,33 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
             });
             const closeIcon = document.querySelector(".update-bank-close");
             if (closeIcon) closeIcon.addEventListener("click", () => {
-                let cancelBtn = document.querySelector(".update-btn-cancel button");
-                if (cancelBtn) cancelBtn.click();
+              let cancelBtn = document.querySelector(".update-btn-cancel button");
+              if (cancelBtn) cancelBtn.click();
             });
           }
         }
 
         function watchBankPopupAfterPickClick() {
           $(document).off("click.bankPopup", ".VHASearch .applet-form-pick.applet-list-pick").on("click.bankPopup", ".VHASearch .applet-form-pick.applet-list-pick", function () {
-              const popupWatcher = setInterval(function () {
-                const bankPopup = document.querySelector(".bank-applet-container");
-                if (bankPopup) { handleBankDetailsPopup(); clearInterval(popupWatcher); }
-              }, 300);
-            });
+            const popupWatcher = setInterval(function () {
+              const bankPopup = document.querySelector(".bank-applet-container");
+              if (bankPopup) { handleBankDetailsPopup(); clearInterval(popupWatcher); }
+            }, 300);
+          });
         }
 
         function handleBankDetailsPopup() {
           const bankDetailsPopup = document.querySelector('.bank-applet-container');
           if (bankDetailsPopup) {
             bankDetailsPopup.querySelectorAll("label, span, div").forEach(el => {
-                if (el.textContent.trim() === "BSB Number") el.textContent = "BSB number";
+              if (el.textContent.trim() === "BSB Number") el.textContent = "BSB number";
             });
             const inputField = bankDetailsPopup.querySelector(".bank-input-container input");
             if (inputField) inputField.placeholder = "";
             const closeIcon = document.querySelector(".bank-close-btn");
             if (closeIcon) closeIcon.addEventListener("click", () => {
-                let cancelBtn = document.querySelector(".bank-btn-cancel button");
-                if (cancelBtn) cancelBtn.click();
+              let cancelBtn = document.querySelector(".bank-btn-cancel button");
+              if (cancelBtn) cancelBtn.click();
             });
           }
         }
@@ -148,18 +169,16 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
           var isDFAFlow = SiebelApp.S_App.GetProfileAttr("VHANewOrg");
           var ext = SiebelApp.S_App.GetProfileAttr("ExistingCustomerFlag");
 
-          // CM-7660 Heading logic
+          // Heading logic
           $(".CustomProfileContainer .SFJHeading").each(function () {
             if ($(this).text().trim().toLowerCase() === "billing delivery options") {
               $(this).closest(".CustomProfileContainer").addClass("customBillingDeliveryOptions");
             }
           });
-          
-          // CM-9059: Conditional Field Visibility
+
+          // Existing DFA logic retained (unchanged)
           if (view.GetName() === "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ" &&
             (isDFAFlow === "TPG" || isDFAFlow === "iiNet") && ext == "Y") {
-            
-            // REMOVED: Server-side Refresh Business Component (Prevented data binding)
 
             setTimeout(() => {
               var setupApplet = view.GetAppletMap()['VHA DFA Billing Setup Applet TBUI'];
@@ -171,7 +190,6 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                 } else if (payType === "Debit or credit card" || payType === "Credit Card") {
                   $(".CardField").removeClass("VFLFDisplayNone");
                 }
-                // SCOPED HIDE: Only hide within the setup applet to protect address data
                 $("#" + setupApplet.GetFullId()).find('.siebui-ctrl-link, .Capturenewdirect').hide();
               }
               refreshBillingLayout();
@@ -183,68 +201,74 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
             }
           }
 
-        //CM-7656 - Start code added by Renuka on 13/3/2026
-
-        var $paymentTypeField = $(".BillingSetupContainer .vha-ssj-bill-setup-pay-dtls .FormItemVertical span").filter(function(){
+          // CM-7656 fields tagging retained
+          var $paymentTypeField = $(".BillingSetupContainer .vha-ssj-bill-setup-pay-dtls .FormItemVertical span").filter(function(){
             return $(this).text().trim() === "Payment type";
-        }).closest(".FormItemVertical");
-        if(!$paymentTypeField.hasClass("paymentTypeField")){
-            $paymentTypeField.addClass("paymentTypeField");
-        }
+          }).closest(".FormItemVertical");
+          if(!$paymentTypeField.hasClass("paymentTypeField")) $paymentTypeField.addClass("paymentTypeField");
 
-        var $accountNumberField = $(".BillingSetupContainer .vha-ssj-bill-setup-dd-dtls .FormItemVertical span").filter(function(){
+          var $accountNumberField = $(".BillingSetupContainer .vha-ssj-bill-setup-dd-dtls .FormItemVertical span").filter(function(){
             return $(this).text().trim() === "Account number";
-        }).closest(".FormItemVertical");
-        if(!$accountNumberField.hasClass("accountNumberField")){
-            $accountNumberField.addClass("accountNumberField");
-        }
-         //CM-7656 - End code added by Renuka
+          }).closest(".FormItemVertical");
+          if(!$accountNumberField.hasClass("accountNumberField")) $accountNumberField.addClass("accountNumberField");
 
           watchBankPopupAfterPickClick();
           watchUpdateBankAcctPopupAfterPickClick();
+
+          // IMPORTANT: call refresh (was already correct here)
           setTimeout(refreshBillingLayout, 50);
 
-          // --- NEW: Force Manual Applet into Edit Mode if it toggled into Base ---
+          // Manual toggle: force edit if needed
           var manualAppletMap = view.GetAppletMap()['VHA SSJ Billing Account Manual Address List Applet TBUI'];
           if (manualAppletMap && sessionStorage.getItem("isAddressEditing") === "Y") {
-              var manualAppletDivId = '#s_' + manualAppletMap.GetFullId() + '_div';
-              // Check if it loaded as read-only (no inputs)
-              var hasInputs = $(manualAppletDivId).find('input[type="text"]').length > 0;
-              
-              if (!hasInputs) {
-                  setTimeout(function() {
-                      manualAppletMap.InvokeMethod("EditRecord");
-                  }, 150);
-              }
+            var manualAppletDivId = '#s_' + manualAppletMap.GetFullId() + '_div';
+            var hasInputs = $(manualAppletDivId).find('input[type="text"]').length > 0;
+            if (!hasInputs) {
+              setTimeout(function() {
+                manualAppletMap.InvokeMethod("EditRecord");
+              }, 150);
+            }
           }
-          // ------------------------------------------------------------------------
         }
 
         VHASSJBillingDetailViewPR.prototype.BindData = function (bRefresh) {
           SiebelAppFacade.VHASSJBillingDetailViewPR.superclass.BindData.apply(this, arguments);
-          // Manually sync the address details applet to ensure data is visible
-          manualDataSync(this.GetPM().Get("AppletMap")["VF SSJ Billing Account Address Details TBUI"]);
-          setTimeout(refreshBillingLayout, 150);
+
+          // FIX: original code had Get("AppletMap") vs Get("GetAppletMap") inconsistencies in older versions.
+          try {
+            manualDataSync(this.GetPM().Get("GetAppletMap")["VF SSJ Billing Account Address Details TBUI"]);
+          } catch(e) {
+            // ignore
+          }
+
+          setTimeout(function(){ refreshBillingLayout(); }, 150);
         }
 
         VHASSJBillingDetailViewPR.prototype.BindEvents = function () {
           SiebelAppFacade.VHASSJBillingDetailViewPR.superclass.BindEvents.apply(this, arguments);
 
           $(document).off("click.vhaSSJLayout").on("click.vhaSSJLayout", "button, a", function () {
-            var txt = ($(this).text() || "").trim().toLowerCase();
-            
-            // --- NEW: Set Session State based on Button Click ---
+            var $t = $(this);
+            var txt = (($t.text() || "").trim().toLowerCase());
+            var display = ($t.attr("data-display") || "");
+            var title = ($t.attr("title") || "");
+
+            // NewRecord: this is your exact SSJ button
+            var isNew = (display === "New") || (title === "Captured billing addresses List Applet:New");
+
             if (txt === "edit") {
               sessionStorage.setItem("isAddressEditing", "Y");
-              setTimeout(refreshBillingLayout, 500);
+              setTimeout(function(){ refreshBillingLayout(); }, 500);
             } else if (txt === "save" || txt === "discard") {
               sessionStorage.setItem("isAddressEditing", "N");
-              setTimeout(refreshBillingLayout, 500);
+              setTimeout(function(){ refreshBillingLayout(); }, 500);
+            } else if (isNew) {
+              // Treat NewRecord as editing/new mode
+              sessionStorage.setItem("isAddressEditing", "Y");
+              setTimeout(function(){ refreshBillingLayout(); }, 800);
             } else if (txt === "manual address") {
-              // Safety catch for the toggle
-              setTimeout(refreshBillingLayout, 500);
+              setTimeout(function(){ refreshBillingLayout(); }, 500);
             }
-            // ----------------------------------------------------
           });
 
           $(".Refreshbutton img").off("click").on("click", function() {
@@ -254,20 +278,18 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
             inPS.SetProperty("Business Object Name","Order Entry (Sales)");
             inPS.SetProperty("Business Component Name","VF Com Invoice Profile TBUI");
             service.InvokeMethod("Refresh Business Component",inPS,outPS);
-            setTimeout(refreshBillingLayout, 500);
+            setTimeout(function(){ refreshBillingLayout(); }, 500);
           });
         }
 
         VHASSJBillingDetailViewPR.prototype.EndLife = function () {
-          // --- NEW: Clean up state when navigating away ---
           sessionStorage.removeItem("isAddressEditing");
-          
           $(document).off(".vhaSSJLayout");
           SiebelAppFacade.VHASSJBillingDetailViewPR.superclass.EndLife.apply(this, arguments);
         }
 
         return VHASSJBillingDetailViewPR;
       }())
-      return "SiebelAppFacade.VHASSJBillingDetailViewPR"
+      return "SiebelAppFacade.VHASSJBillingDetailViewPR";
     })
 }
