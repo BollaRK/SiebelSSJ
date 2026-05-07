@@ -1,72 +1,71 @@
-if (typeof(SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR) === "undefined") {
+if (typeof (SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR) === "undefined") {
+  SiebelJS.Namespace("SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR");
+  define("siebel/custom/VHASSJBillAccntAddrListAppletTBUIPR", ["siebel/jqgridrenderer"], function () {
+    SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR = (function () {
+      function VHASSJBillAccntAddrListAppletTBUIPR(pm) {
+        SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR.superclass.constructor.apply(this, arguments);
+      }
 
- SiebelJS.Namespace("SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR");
- define("siebel/custom/VHASSJBillAccntAddrListAppletTBUIPR", ["siebel/jqgridrenderer"],
-  function () {
-   SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR = (function () {
+      SiebelJS.Extend(VHASSJBillAccntAddrListAppletTBUIPR, SiebelAppFacade.JQGridRenderer);
 
-    function VHASSJBillAccntAddrListAppletTBUIPR(pm) {
-     SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR.superclass.constructor.apply(this, arguments);
-    }
+      function applyGridSettings(renderer) {
+        try {
+          var jqGrid = renderer.GetGrid && renderer.GetGrid();
+          if (!jqGrid || !jqGrid.jqGrid) return;
 
-    SiebelJS.Extend(VHASSJBillAccntAddrListAppletTBUIPR, SiebelAppFacade.JQGridRenderer);
+          jqGrid.jqGrid("setGridParam", { shrinkToFit: true });
 
-    VHASSJBillAccntAddrListAppletTBUIPR.prototype.Init = function () {
-     SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR.superclass.Init.apply(this, arguments);
-    }
+          [
+            ["Attention_to", 150],
+            ["Street_Address", 150],
+            ["Street_Address_2", 150],
+            ["City_no_star_AU", 150],
+            ["Postal_Code_no_star_AU", 150],
+            ["Country", 150],
+            ["Start_Date_no_star1", 100],
+            ["End_Date", 100],
+            ["SSA_Primary_Field", 100]
+          ].forEach(function (c) {
+            try {
+              jqGrid.jqGrid("setColProp", c[0], { widthOrg: c[1] });
+            } catch (e) {
+              // ignore
+            }
+          });
 
-    VHASSJBillAccntAddrListAppletTBUIPR.prototype.ShowUI = function () {
-     SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR.superclass.ShowUI.apply(this, arguments);
-		var jqGrid = this.GetGrid();
-		jqGrid.jqGrid("setGridParam", {
-			shrinkToFit: true
-		});
-		jqGrid.jqGrid('setColProp', 'Attention_to', {
-			widthOrg: 150
-		});
-		jqGrid.jqGrid('setColProp', 'Street_Address', {
-			widthOrg: 150
-		});
-		jqGrid.jqGrid('setColProp', 'Street_Address_2', {
-			widthOrg: 150
-		});
-		jqGrid.jqGrid('setColProp', 'City_no_star_AU', {
-			widthOrg: 150
-		});
-		jqGrid.jqGrid('setColProp', 'Postal_Code_no_star_AU', {
-			widthOrg: 150
-		});
-		jqGrid.jqGrid('setColProp', 'Country', {
-			widthOrg: 150
-		});
-		jqGrid.jqGrid('setColProp', 'Start_Date_no_star1', {
-			widthOrg: 100
-		});
-		jqGrid.jqGrid('setColProp', 'End_Date', {
-			widthOrg: 100
-		});
-		jqGrid.jqGrid('setColProp', 'SSA_Primary_Field', {
-			widthOrg: 100
-		});
-		//jqGrid.jqGrid('hideCol', "Order_Sequence");
-		jqGrid.jqGrid('setGridWidth', 1278);
-    }
+          // Use container width instead of fixed width (prevents distortion on reflow)
+          var $wrap = jqGrid.closest(".ui-jqgrid");
+          var w = ($wrap.parent().width() || $wrap.width());
+          if (w) jqGrid.jqGrid("setGridWidth", w);
 
-    VHASSJBillAccntAddrListAppletTBUIPR.prototype.BindData = function (bRefresh) {
-     SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR.superclass.BindData.apply(this, arguments);
-    }
+          setTimeout(function () {
+            try {
+              $(window).trigger("resize");
+            } catch (e) {
+              // ignore
+            }
+          }, 0);
+        } catch (e) {
+          if (window.console && console.warn) console.warn("SSJ list grid init skipped:", e);
+        }
+      }
 
-    VHASSJBillAccntAddrListAppletTBUIPR.prototype.BindEvents = function () {
-     SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR.superclass.BindEvents.apply(this, arguments);
-    }
+      VHASSJBillAccntAddrListAppletTBUIPR.prototype.ShowUI = function () {
+        SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR.superclass.ShowUI.apply(this, arguments);
+        var self = this;
+        setTimeout(function () { applyGridSettings(self); }, 0);
+        setTimeout(function () { applyGridSettings(self); }, 250);
+      };
 
-    VHASSJBillAccntAddrListAppletTBUIPR.prototype.EndLife = function () {
-     SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR.superclass.EndLife.apply(this, arguments);
-    }
+      VHASSJBillAccntAddrListAppletTBUIPR.prototype.BindData = function (bRefresh) {
+        SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR.superclass.BindData.apply(this, arguments);
+        var self = this;
+        setTimeout(function () { applyGridSettings(self); }, 0);
+      };
 
-    return VHASSJBillAccntAddrListAppletTBUIPR;
-   }()
-  );
-  return "SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR";
- })
+      return VHASSJBillAccntAddrListAppletTBUIPR;
+    }());
+
+    return "SiebelAppFacade.VHASSJBillAccntAddrListAppletTBUIPR";
+  });
 }
