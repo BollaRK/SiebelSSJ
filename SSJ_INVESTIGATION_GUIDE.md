@@ -80,3 +80,38 @@ Open both the New and Existing row SIF files for that page and compare.
 | "Prepayment sharing", "payment plan", "sharing" | Page 7 |
 | "Order review", "order summary" | Page 8 |
 | "Make a prepayment", "prepayment processing" | Page 9 |
+
+---
+
+## PR / JS Files Grouped by SSJ Page
+
+> **Why this section exists:** Each AI/agent chat session is stateless — answers given only in chat are lost when the session ends. This table persists the PR-file → page mapping in the repo so it survives across sessions and reviewers.
+>
+> Mapping was derived from each file's namespace declaration and the applet/view names referenced inside its header (e.g. `VHACaptureIdDetailsPR.js` references applet `VF SSJ Capture Identification Details List Applet – Postpay TBUI` → Page 2).
+
+### Page-specific Physical Renderers (PRs)
+
+| Page | PR / JS file(s) | Notes |
+|---|---|---|
+| **1** Capture Customer Details | `VHASSJCustomerDetailsFormAppletPR.js` | Form applet PR (extends `PhysicalRenderer`) |
+| **2** Capture ID Details | `VHACaptureIdDetailsPR.js` | References `VF SSJ Capture Identification Details List Applet – Postpay TBUI` |
+| **3** Credit Check | *(none repo-local)* | Uses OOTB renderers + cross-cutting files |
+| **4** Billing Details | `VHASSJBillingDetailViewPR.js` (View PR) <br> `VHASSJBillingAccountPR.js` (billing account list) <br> `VHABillingSetupAppletTBUIPR.js` (billing setup applet) <br> `VF_Intelligence_Search_Billing_Address_PR.js` (address lookup grid) <br> `VHASSJAddressSearch.js` (address-search helper) | View PR extends `ViewPR`; address files are billing-address pickers used on this page |
+| **5** Coverage Check | *(none repo-local)* | OOTB + cross-cutting |
+| **6** Proposition | `VHASSJPropositionViewPR.js` (View PR) <br> `VHASSJPropositionLineItemListAppletPR.js` <br> `VHASSJAccessoriesListAppletTBUIPR.js` <br> `VHASSJStoreReservationsListAppletTBUI.js` <br> `VHASalesCalculatorSSJViewPR.js` <br> `VHANSASalesCalcUpgradePDFPR.js` | View PR + applets that render inside the shopping-cart / proposition view |
+| **7** Prepayment & Sharing | *(none repo-local)* | OOTB + cross-cutting |
+| **8** Order Review | `VHALFOrderReviewSSJPR.js` (View PR) <br> `VHASSJOrderReviewShippingAddPR.js` (shipping address) <br> `VHAOrderEntryAttachmentListAppletSSJPR.js` (attachments) <br> `VHAOrderFormAppletPR.js` (order form applet) | LF Order Review is the order-summary view PR |
+| **9** Make a Prepayment | *(none repo-local)* | OOTB + cross-cutting |
+
+### Cross-cutting files (apply to all pages)
+
+| File | Purpose |
+|---|---|
+| `VHASSJNavigationPR.js` | SSJ wizard navigation (next/prev) and framework crash-prevention patches |
+| `VHACustomUIFrameWork.js` | Generic SSJ UI framework helpers; uses `VHA Customer Navigation Applet - SSJ` |
+| `VHASSJValidations.js` | Shared validation utility (business-service property-set calls) |
+| `VHALFTheme.css` | SSJ look-and-feel styling for all pages |
+
+### Notes
+- Pages **3, 5, 7, 9** have no page-specific custom PR file in this repo — they rely on OOTB Siebel renderers plus the cross-cutting files. If additional PR files for those pages exist elsewhere, slot them into the table.
+- `VHASSJAddressSearch.js` and `VHASSJValidations.js` are utility modules; listed under their primary consumer page but may be loaded by other pages too.
