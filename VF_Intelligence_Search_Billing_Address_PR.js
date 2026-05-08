@@ -6,7 +6,10 @@ if (typeof(SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR) === "undef
                 SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR.superclass.constructor.apply(this, arguments)
             }
             SiebelJS.Extend(VF_Intelligence_Search_Billing_Address_PR, SiebelAppFacade.JQGridRenderer);
-            
+            // sCnt tracks whether the billing address form applet is actively in use (Edit/New mode).
+            // When 0, ShowUI hides the SSJ list applet; when 1, it remains visible.
+            let sCnt = 0;
+
             VF_Intelligence_Search_Billing_Address_PR.prototype.Init = function() {
                 try {
                     SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR.superclass.Init.apply(this, arguments);
@@ -59,6 +62,45 @@ if (typeof(SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR) === "undef
                 try {
                     SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR.superclass.BindData.apply(this, arguments);
                 } catch(e) { }
+                // Use delegated event handlers with .off().on() to prevent handler accumulation across BindData calls.
+                // Watch for Edit on BOTH the BAU form applet ("Billing Address Form Applet") and the SSJ form applet
+                // ("VF SSJ Billing Account Address Details TBUI") so sCnt is correctly managed on both views.
+                $('body').off("click.baBillingEdit").on("click.baBillingEdit",
+                    'button[title="Billing Address Form Applet:Edit"], button[title="VF SSJ Billing Account Address Details TBUI:Edit"]',
+                    function () {
+                        var oView = SiebelApp.S_App.GetActiveView();
+                        if (!oView) return;
+                        var appletMap = oView.GetAppletMap();
+                        var listApplet = appletMap && appletMap['VHA SSJ Billing Account Address List Applet TBUI'];
+                        if (listApplet) {
+                            var sBALAr = listApplet.GetFullId();
+                            if (sBALAr) {
+                                $("#" + sBALAr).removeClass("VFDisplayNone");
+                                sCnt = 1;
+                            }
+                        }
+                    }
+                );
+                // Also treat clicking "New" on the list applet as entering an active editing state,
+                // so sCnt is set to 1 and the list applet is not re-hidden on subsequent ShowUI calls.
+                $('body').off("click.baBillingNew").on("click.baBillingNew",
+                    'button[title="VHA SSJ Billing Account Address List Applet TBUI:New"]',
+                    function () {
+                        sCnt = 1;
+                    }
+                );
+                $('body').off("click.baBillingDiscard").on("click.baBillingDiscard",
+                    'button[title="Billing Address Form Applet:Discard"], button[title="VF SSJ Billing Account Address Details TBUI:Discard"]',
+                    function () {
+                        sCnt = 0;
+                    }
+                );
+                $('body').off("click.baBillingSave").on("click.baBillingSave",
+                    'button[title="Billing Address Form Applet:Save"], button[title="VF SSJ Billing Account Address Details TBUI:Save"]',
+                    function () {
+                        sCnt = 0;
+                    }
+                );
             };
 
             VF_Intelligence_Search_Billing_Address_PR.prototype.ShowUI = function() {
@@ -209,7 +251,11 @@ if (typeof(SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR) === "undef
                 }
             };
 
-            VF_Intelligence_Search_Billing_Address_PR.prototype.EndLife = function() { SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR.superclass.EndLife.apply(this, arguments); };
+            VF_Intelligence_Search_Billing_Address_PR.prototype.EndLife = function() {
+                // Clean up delegated body event handlers registered in BindData
+                $('body').off("click.baBillingEdit click.baBillingNew click.baBillingDiscard click.baBillingSave");
+                SiebelAppFacade.VF_Intelligence_Search_Billing_Address_PR.superclass.EndLife.apply(this, arguments);
+            };
 
             function mSetPrflAttr(name,val) {
                 var ser = SiebelApp.S_App.GetService("VF BS Process Manager");

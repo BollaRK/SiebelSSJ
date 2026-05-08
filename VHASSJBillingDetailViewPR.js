@@ -62,6 +62,15 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                         if ($listEl.next().attr('id') !== $formEl.attr('id')) {
                             $listEl.insertBefore($formEl);
                         }
+                        // FIX: In New Edit mode Siebel uses FormGrid/ColumnForm/FormItemVertical (no "Exist" suffix).
+                        // All BillingAddressContainer CSS rules target the "Exist" variants (used in Edit-Existing mode),
+                        // so in New Edit mode the raw Siebel form fields become visible alongside the custom SSJ layout,
+                        // causing the UI distortion shown when "Add new record" is clicked.
+                        // Adding the "Exist" classes to any elements that don't already have them makes the existing
+                        // CSS rules apply correctly in New Edit mode without affecting Edit-Existing mode.
+                        $formEl.find(".FormGrid:not(.FormGridExist)").addClass("FormGridExist");
+                        $formEl.find(".ColumnForm:not(.ColumnFormExist)").addClass("ColumnFormExist");
+                        $formEl.find(".FormItemVertical:not(.FormItemVerticalExist)").addClass("FormItemVerticalExist");
                         setTimeout(function () {
                             var grid = $("#gbox_" + listApplet.GetFullId() + " .ui-jqgrid-btable");
                             if (grid.length) {
