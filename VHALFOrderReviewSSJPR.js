@@ -253,7 +253,11 @@ if (typeof(SiebelAppFacade.VHALFOrderReviewSSJPR) === "undefined") {
                             wfInput.SetProperty("Method", "Query");
                             wfInput.SetProperty("RecordType", "PurchaseOfferHTML");
                             wfOut = wfBSS.InvokeMethod("RunProcess", wfInput);
-                            popupHtml = wfOut?.GetChildByType("ResultSet")?.GetChild(0)?.GetChild(0)?.GetChild(0)?.GetProperty("CartDetails") || "";
+                            var resultSet = wfOut ? wfOut.GetChildByType("ResultSet") : null;
+                            var listOfHeader = resultSet && resultSet.GetChildCount() > 0 ? resultSet.GetChild(0) : null;
+                            var header = listOfHeader && listOfHeader.GetChildCount() > 0 ? listOfHeader.GetChild(0) : null;
+                            var record = header && header.GetChildCount() > 0 ? header.GetChild(0) : null;
+                            popupHtml = record ? record.GetProperty("CartDetails") || "" : "";
                         } catch (e) {}
 
                         if (!popupHtml) {
