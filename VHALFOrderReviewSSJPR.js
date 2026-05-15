@@ -237,6 +237,59 @@ if (typeof(SiebelAppFacade.VHALFOrderReviewSSJPR) === "undefined") {
                     var html = `<div class="orderReviewExtraButtons"><button type="button" id="PurchaseAndOfferDetails">Purchase & offer details</button><button type="button" id="editInCart">Edit in cart</button></div>`;
                     $(".customHeading1").before(html);
                     var Options = {};
+
+                    function getPurchaseOfferPopupHtml() {
+                        var popupHtml = "";
+                        var wfBSS = null;
+                        var wfInput = null;
+                        var wfOut = null;
+
+                        try {
+                            wfBSS = SiebelApp.S_App.GetService("Workflow Process Manager");
+                            wfInput = SiebelApp.S_App.NewPropertySet();
+                            wfOut = SiebelApp.S_App.NewPropertySet();
+                            wfInput.SetProperty("ProcessName", "VHA SSJ Upsert Query Cart Details Process WF");
+                            wfInput.SetProperty("Object Id", quoteId);
+                            wfInput.SetProperty("Method", "Query");
+                            wfInput.SetProperty("RecordType", "PurchaseOfferHTML");
+                            wfOut = wfBSS.InvokeMethod("RunProcess", wfInput);
+                            popupHtml = wfOut?.GetChildByType("ResultSet")?.GetChild(0)?.GetChild(0)?.GetChild(0)?.GetProperty("CartDetails") || "";
+                        } catch (e) {}
+
+                        if (!popupHtml) {
+                            try {
+                                var inp = SiebelApp.S_App.NewPropertySet();
+                                var out = SiebelApp.S_App.NewPropertySet();
+                                inp.SetProperty("QuoteId", quoteId);
+                                out = VHAAppUtilities.CallBS("VF SSJ Order review Utilities BS", "getHTML", inp, Options);
+                                popupHtml = out.GetProperty("FullHTML") || "";
+                            } catch (e) {}
+                        }
+
+                        wfBSS = null;
+                        wfInput = null;
+                        wfOut = null;
+                        return popupHtml;
+                    }
+
+                    function showPurchaseOfferPopup(popupHtml) {
+                        if (!popupHtml) {
+                            alert("Purchase & offer details are not available.");
+                            return;
+                        }
+
+                        $('#customPopup #vha-orr-sec').removeClass('no-padding-vha-orr');
+                        $('#customOverlay, #customPopup').remove();
+
+                        const overlayHtml = `<div id="customOverlay" class="customOverlay ui-widget-overlay"></div>`;
+                        $('body').append(overlayHtml).append(popupHtml);
+                        $('#customPopup #vha-orr-sec').addClass('no-padding-vha-orr');
+                        $('#closePopup, #customOverlay').off("click.purchaseOfferPopup").on("click.purchaseOfferPopup", function() {
+                            $('#customPopup #vha-orr-sec').removeClass('no-padding-vha-orr');
+                            $('#customOverlay, #customPopup').remove();
+                        });
+                    }
+
                     $(".orderReviewExtraButtons #editInCart").off("click").on("click", function() {
                         SiebelApp.S_App.SetProfileAttr("FromResumeQuote", "Y");
                         SiebelApp.S_App.SetProfileAttr("SSJParentOrderId", quoteId);
@@ -251,36 +304,7 @@ if (typeof(SiebelAppFacade.VHALFOrderReviewSSJPR) === "undefined") {
                         outputPropSet = VHAAppUtilities.CallBS("Shopping Service", "GotoView", inputPropSet, Options);
                     });
                     $(".orderReviewExtraButtons button[id='PurchaseAndOfferDetails']").off("click").on("click", function() {
-                        /* var inp = SiebelApp.S_App.NewPropertySet();
-                        var out = SiebelApp.S_App.NewPropertySet();
-                        inp.SetProperty("QuoteId", quoteId);
-                        out = VHAAppUtilities.CallBS("VF SSJ Order review Utilities BS", "getHTML", inp, Options); 
-						var popupHtml = out.GetProperty("FullHTML");*/
-
-                      /*  var wfBSS = SiebelApp.S_App.GetService("Workflow Process Manager");
-                        var wfInput = SiebelApp.S_App.NewPropertySet();
-                        var wfOut = SiebelApp.S_App.NewPropertySet();
-                        wfInput.SetProperty("ProcessName", "VHA SSJ Upsert Query Cart Details Process WF");
-                        wfInput.SetProperty("Object Id", quoteId);
-                        wfInput.SetProperty("Method", "Query");
-                        wfInput.SetProperty("RecordType", "PurchaseOfferHTML");
-                        wfOut = wfBSS.InvokeMethod("RunProcess", wfInput);
-                        var popupHtml = wfOut?.GetChildByType("ResultSet")?.GetChild(0)?.GetChild(0)?.GetChild(0)?.GetProperty("CartDetails");
-                        const overlayHtml = `<div id="customOverlay" class="customOverlay ui-widget-overlay"></div>`;
-                        $('body').append(overlayHtml).append(popupHtml);
-                        $('#customPopup #vha-orr-sec').addClass('no-padding-vha-orr'); //chandrika
-                        $('#closePopup, #customOverlay').on('click', function() {
-                            $('#customPopup #vha-orr-sec').removeClass('no-padding-vha-orr'); //chandrika
-                            $('#customOverlay, #customPopup').remove();
-							wfBSS = null;
-							wfInput = null;
-							wfOut = null;
-							popupHtml = null;
-                        });
-						wfBSS = null;
-						wfInput = null;
-						wfOut = null;
-						popupHtml = null; */
+                        showPurchaseOfferPopup(getPurchaseOfferPopupHtml());
                     });
                 }
 
