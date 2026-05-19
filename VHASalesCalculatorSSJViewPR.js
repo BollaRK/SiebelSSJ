@@ -95,6 +95,7 @@ if (typeof(SiebelAppFacade.VHASalesCalculatorSSJViewPR) === "undefined") {
         let checkTab; //dhana_7796
 
         //Marvin
+		let currConfigId = "";//Marvin : 10925
 		let jourTypeSetFlag = "N";//Marvin : CM-10782
         let existNoChangeFlg = "N";
         let resumeProdCon = "N";
@@ -1115,20 +1116,29 @@ if (typeof(SiebelAppFacade.VHASalesCalculatorSSJViewPR) === "undefined") {
                     });
 
                 // FIX 2 - close dropdown on mouse wheel
-                $(document).off("wheel.uiAutoClose")
-                    .on("wheel.uiAutoClose", function () {
+               $(document).off("wheel.uiAutoClose")
+                .on("wheel.uiAutoClose", function (e) {
 
-                        if ($(".ui-autocomplete:visible").length) {
+                //  do NOT close if scrolling inside dropdown
+                var isInsideDropdown = $(e.target).closest(".ui-autocomplete").length; 
 
-                            $(autoFields).each(function () {
-                                if ($(this).data("ui-autocomplete")) {
-                                    $(this).autocomplete("close"); //11057
-                                }
-                            });
+                if (isInsideDropdown) {
+                    return;  
+                }
 
+                //  close only when scrolling outside dropdown
+                if ($(".ui-autocomplete:visible").length) {
+
+                    $(autoFields).each(function () {
+                        if ($(this).data("ui-autocomplete")) {
+                            $(this).autocomplete("close"); 
                         }
-
                     });
+
+                }
+
+                });
+
 
                 //  FIX 3 - close dropdown on window scroll
                 $(window).off("scroll.uiAutoCloseWin")
@@ -4379,7 +4389,7 @@ console.log("SB upd cart new");
                                             </div>
                                             <div class="vha-upgrade-bottom-line"></div>
                                             <div class="vha-body">
-                                            <p>This service is not eligible to be Upgraded as it was recently connected or upgraded.</br>To override the upgrade eligibilty, please select a reason code from the list below.</p>
+                                            <p>This service is not eligible to be upgraded as it was recently connected or upgraded.</br>To override the upgrade eligibilty, please select a reason code from the list below.</p>
                                             <label><span class="vha-reason-sign">*</span><span class="vha-reason-text"> Reason</span></label>
                                             <select id="VHA-reason" style="width:30%; margin-top:8px;">
                                             <option disabled selected hidden>Select</option>
@@ -5591,16 +5601,22 @@ console.log("SB upd cart new");
                                                         if (serv.ListOfAssetLineItemAPPSD && serv.ListOfAssetLineItemAPPSD.AssetLineItemAPPSD) {
                                                            // Normalize APPSD to array
                                                            let appSdList = serv.ListOfAssetLineItemAPPSD.AssetLineItemAPPSD;
+                                                           let accsryappsd = "";//vinay
+                                                            if(SiebelApp.S_App.GetProfileAttr("IgniteSalesCalcflow") === "Y"){//vinay
+                                                                accsryappsd =  parseFloat(appSdList.RecurringCharge).toFixed(2)
+                                                            }
                                                            appSdList = $.isArray(appSdList) ? appSdList : [appSdList];
                                                            $.each(appSdList, function (i, SD) {
                                                              if (SD.ListOfAssetLineItemSecondary && SD.ListOfAssetLineItemSecondary.AssetLineItemSecondary) {
                                                              // Normalize Secondary device to array
                                                              var secList = SD.ListOfAssetLineItemSecondary.AssetLineItemSecondary;
- 
+                                                             if(SiebelApp.S_App.GetProfileAttr("IgniteSalesCalcflow") !== "Y"){//vinay
+                                                                accsryappsd =  parseFloat(SDAcc.RRPexcGST || 0).toFixed(2);
+                                                            }             
                                                              secList = $.isArray(secList) ? secList : [secList];
                                                              $.each(secList, function (j, SDAcc) {
                                                              if (SDAcc.Name) {
-                                                               container += `<div id="prod" class="prod row"><img src="${VHAAppUtilities.GetDeviceIcon("secdevice")}" alt="img" class="header-icon cart-icon mr-3"><span class="item">${SDAcc.Name}</span><span class="item-list-price toAdd">$${parseFloat(SDAcc.RRPexcGST || 0).toFixed(2)}</span></div>`;
+                                                               container += `<div id="prod" class="prod row"><img src="${VHAAppUtilities.GetDeviceIcon("secdevice")}" alt="img" class="header-icon cart-icon mr-3"><span class="item">${SDAcc.Name}</span><span class="item-list-price toAdd">$${accsryappsd}</span></div>`;
                                                               }
                                                            });
                                                           }
@@ -5609,8 +5625,13 @@ console.log("SB upd cart new");
 
 							if (serv.ListOfAssetLineItemAPPAcc) {
 								var sAccessorlitems = serv.ListOfAssetLineItemAPPAcc.AssetLineItemAPPAcc;
+								let accrpptag = "";//vinay
 								if (sAccessorlitems) {
+                                    let accrpptag = "";
 									if (!Array.isArray(sAccessorlitems)) {
+                                        if(SiebelApp.S_App.GetProfileAttr("IgniteSalesCalcflow") === "Y"){//vinay
+                                            accrpptag =  parseFloat(sAccessorlitems.RecurringCharge).toFixed(2)
+                                        }
 										sAccessorlitems = [sAccessorlitems];
 									}
 									$.each(sAccessorlitems, function (i, accessorItem) {
@@ -5618,13 +5639,16 @@ console.log("SB upd cart new");
 											var accesoryitem = accessorItem.ListOfAssetLineItemAccessory.AssetLineItemAccessory;
 											if (accesoryitem) {
 												if (!Array.isArray(accesoryitem)) {
+                                                    if(SiebelApp.S_App.GetProfileAttr("IgniteSalesCalcflow") !== "Y"){//vinay
+                                                        accrpptag =  parseFloat(item.RRPexcGST).toFixed(2)
+                                                    }
 													accesoryitem = [accesoryitem];
 												}
 												$.each(accesoryitem, function (j, item) {
 													container += '<div id="prod" class="prod row">' +
 														'<img src="' + VHAAppUtilities.GetDeviceIcon("secdevice") + '" alt="img" class="header-icon cart-icon mr-3">' +
 														'<span class="item">' + item.Name + '</span>' +
-														'<span class="item-list-price toAdd">$' + parseFloat(item.RRPexcGST).toFixed(2) + '</span>' +
+														'<span class="item-list-price toAdd">$' + accrpptag + '</span>' +
 														'</div>';
 												});
 											}
@@ -5726,6 +5750,46 @@ console.log("SB upd cart new");
 										</div>`; //dhana_CM-7530
 								}
 							});
+							
+							if (SiebelApp.S_App.GetProfileAttr("IgniteSalesCalcflow") === "Y") {//vinay: added for ignite
+								$.map(serv.ListOfPegaCreditItem, function (off) {
+									var sPegaCredititem = serv.ListOfPegaCreditItem.PegaCreditItem;
+									if (sPegaCredititem.length > 0) {
+										$.each(sPegaCredititem, function (id, sPegaCredititem) {
+											container += `<div id="` + serv.MSISDN + `_` + sPegaCredititem.ProductId + `" class="prod row">
+							<img src="images/custom/menu-icons/CreditOffer.svg" alt="img" class="header-icon cart-icon mr-3">
+							<span class="item">` + sPegaCredititem.Name + `</span>
+							<span class="item-list-price toSubtract">` + formatNegativeCurrency(parseFloat(sPegaCredititem.RecurringCharge)) + `</span>
+							</div>`; 
+										});
+									} else {
+										container += `<div id="` + serv.MSISDN + `_` + sPegaCredititem.ProductId + `" class="prod row">
+							<img src="images/custom/menu-icons/CreditOffer.svg" alt="img" class="header-icon cart-icon mr-3">
+							<span class="item">` + sPegaCredititem.Name + `</span>
+							<span class="item-list-price toSubtract">` + formatNegativeCurrency(parseFloat(sPegaCredititem.RecurringCharge)) + `</span>
+							</div>`; 
+									}
+								});
+								$.map(serv.ListOfDeviceCare, function (off) {
+									var sDevicecareitm = serv.ListOfDeviceCare.DeviceCare;
+									if (sDevicecareitm.length > 0) {
+										$.each(sDevicecareitm, function (id, sDevicecareitm) {
+											container += `<div id="` + serv.MSISDN + `_` + sDevicecareitm.ProductId + `" class="prod row">
+							<img src="` + VHAAppUtilities.GetDeviceIcon("mobile") + `" alt="img" class="header-icon cart-icon mr-3">
+							<span class="item">` + sDevicecareitm.Name + `</span>
+							<span class="item-list-price toSubtract">` + formatNegativeCurrency(parseFloat(sDevicecareitm.RecurringCharge)) + `</span>
+							</div>`; 
+										});
+									} else {
+										container += `<div id="` + serv.MSISDN + `_` + sDevicecareitm.ProductId + `" class="prod row">
+							<img src="` + VHAAppUtilities.GetDeviceIcon("mobile") + `" alt="img" class="header-icon cart-icon mr-3">
+							<span class="item">` + sDevicecareitm.Name + `</span>
+							<span class="item-list-price toSubtract">` + formatNegativeCurrency(parseFloat(sDevicecareitm.RecurringCharge)) + `</span>
+							</div>`;
+									}
+								});
+							}
+							
 
 							$.map(serv.ListOfDeviceDiscountItem, function (off) {
 								var sDeviceDiscountItem = serv.ListOfDeviceDiscountItem.DeviceDiscountItem;
@@ -6007,9 +6071,23 @@ console.log("SB upd cart new");
 											$(`.availableplansheadingcontainer1[data-device="mobile"] .current-plan`).removeClass("displaynone");
 											$(`.availableplansheadingcontainer1[data-device="mobile"] .current-plan-toggle-switch`).removeClass("displaynone");
 											//$(`.availableplansheadingcontainer1[data-device="mobile"] .availableplans .current-plancontainer .plandetailsitemsmain .stockStatus`).addClass("displaynone");
-//10172
-											$(`.vha-scj-wearbles-tab .scj-rows-flex .current-wearables .current-plan-toggle-switch`).removeClass("displaynone");
-											$(`.vha-scj-accessory-tab .scj-rows-flex .current-accessories .current-plan-toggle-switch`).removeClass("displaynone");
+										}
+                                                                                //10172
+										if (filteredExistingServices.SiebelProdType === 'Voice') {
+											
+											if(filteredExistingServices?.ListOfAssetLineItemAPPSD?.AssetLineItemAPPSD?.length > 0){
+												$(`.vha-scj-wearbles-tab .scj-rows-flex .current-wearables .current-plan-toggle-switch`).removeClass("displaynone");
+											}
+											
+											if (
+												filteredExistingServices?.ListOfAssetLineItemAPPAcc?.AssetLineItemAPPAcc &&
+												Object.keys(
+													filteredExistingServices.ListOfAssetLineItemAPPAcc.AssetLineItemAPPAcc
+												).length > 0
+											) {
+
+												$(`.vha-scj-accessory-tab .scj-rows-flex .current-accessories .current-plan-toggle-switch`).removeClass("displaynone");
+											}
 										}
 										if (filteredExistingServices.SiebelProdType === 'MBB') {
 											$(`.availableplansheadingcontainer1[data-device="tablet"] .current-plan`).removeClass("displaynone");
@@ -6363,67 +6441,95 @@ console.log("SB upd cart new");
 										}
 
 										// show accessories 
+										// Show accessories only for Voice services
+												
 										if (filteredExistingServices.SiebelProdType === "Voice") {
-											if (filteredExistingServices?.ListOfAssetLineItemAPPAcc?.AssetLineItemAPPAcc) {
-												 let assetData = filteredExistingServices?.ListOfAssetLineItemAPPAcc?.AssetLineItemAPPAcc;
-												 const AssetArr = Array.isArray(assetData) ? assetData : [assetData];
-												 const AccessoriesTab = $('.carosuel-main[data-id="accessory"]');
-												 const toggle = AccessoriesTab.find('.current-plan-toggle-switch');
-												 toggle.removeClass('displaynone');
-												 const $cardsContainer = AccessoriesTab.find('.ssj-existing-ser-acc');
-
-												 $cardsContainer.empty();
-
-												AssetArr.forEach((item, index) => {
-												    const name = item.Name;
-												    const price = item.RecurringCharge;
-												    const IntegrationId = item["Prod Integration Id"];
-
-												    // Check payout eligibility
-												    let matcheddevice = payoutArr.filter((obj) => obj.propArray.IntegrationId === IntegrationId);
-
-												    // Prepare checkbox attributes and styles BEFORE appending
-												    let checkboxAttr = "";
-												    let extraStyle = "";
-												    if (matcheddevice.length > 0) {
-												        const amount = matcheddevice[0].propArray.RemainingBalanceIncGST || "0";
-												        checkboxAttr = `data-payoutAmt="${amount}"`;
-												        extraStyle = 'style="pointer-events:auto;opacity:1;"'; // Enabled
-												    } else {
-												        checkboxAttr = "disabled";
-												        extraStyle = 'style="pointer-events:none;opacity:0.5;"'; // Disabled
-												    }
-
-												//     // Build card HTML with correct checkbox state
-                                              const html = `
-                                              <div class="existing-ser-info-container">
-                                                <div class="existing-ser-info-subheading">${item.Brand || "Brand name"}</div>
-                                                <div class="existing-ser-info-product-description">${name}</div>
-                                                <div class="existing-ser-info-price-info">$${price}/mo</div>
-                                                <div class="existing-ser-info-checkbox-container row px-4">
-                                                  <input type="checkbox"
-												         data-payout-type="wearable"
-                                                         id="payOutDevice_${index}"
-                                                         class="payOutDevice m-1"
-                                                         ${checkboxAttr}
-                                                         ${extraStyle}
-                                                         data-name="${name || ''}"
-                                                         data-integrationId="${IntegrationId || ''}">
-                                                  <label for="payOutDevice_${index}">Pay out device</label>
-                                                </div>
-                                                <div class="ssj-dashed-hr"></div>
-												<div>
-                                              </div>
-                                            `;
-													$cardsContainer.append(html);
-												});
-
-
-											}
-										   
-											
-										}
-																										
+										 if (filteredExistingServices?.ListOfAssetLineItemAPPAcc?.AssetLineItemAPPAcc) {
+											const appAcc =
+												filteredExistingServices?.ListOfAssetLineItemAPPAcc?.AssetLineItemAPPAcc;
+										
+											const accessories =
+												appAcc?.ListOfAssetLineItemAccessory?.AssetLineItemAccessory;
+										
+											if (!accessories) return;
+										
+											// Normalize to array
+											const accessoryArr = Array.isArray(accessories)
+												? accessories
+												: [accessories];
+										
+											const AccessoriesTab = $('.carosuel-main[data-id="accessory"]');
+											const toggle = AccessoriesTab.find('.current-plan-toggle-switch');
+											toggle.removeClass('displaynone');
+										
+											const $cardsContainer = AccessoriesTab.find('.ssj-existing-ser-acc');
+											$cardsContainer.empty();
+										
+											accessoryArr.forEach((item, index) => {
+										
+												const name = item.Name;
+												const price = item.RRPincGST || "0";
+										
+												// ✅ REQUIRED CHANGE
+												const IntegrationId = item["Prod Integration Id"];
+										
+												// Match payout eligibility using IntegrationId
+												let matcheddevice = payoutArr.filter(
+													obj => obj.propArray.IntegrationId === IntegrationId
+												);
+										
+												let checkboxAttr = "";
+												let extraStyle = "";
+										
+												if (matcheddevice.length > 0) {
+													const amount =
+													matcheddevice[0].propArray.RemainingBalanceIncGST || "0";
+													checkboxAttr = `data-payoutAmt="${amount}"`;
+													extraStyle = 'style="pointer-events:auto;opacity:1;"';
+												} else {
+													checkboxAttr = "disabled";
+													extraStyle = 'style="pointer-events:none;opacity:0.5;"';
+												}
+										
+												const html = `
+													<div class="existing-ser-info-container">
+														<div class="existing-ser-info-subheading">
+															${item.Category || "Accessory"}
+														</div>
+										
+														<div class="existing-ser-info-product-description">
+															${name}
+														</div>
+										
+														<div class="existing-ser-info-price-info">
+															$${price}
+														</div>
+										
+														<div class="existing-ser-info-checkbox-container row px-4">
+															<input type="checkbox"
+																id="payOutAcc_${index}"
+																class="payOutDevice m-1"
+																data-payout-type="accessory"
+																data-name="${name}"
+																data-integrationId="${IntegrationId || ''}"
+																${checkboxAttr}
+																${extraStyle}
+															>
+															<label for="payOutAcc_${index}">
+																Pay out accessory
+															</label>
+														</div>
+										
+														<div class="ssj-dashed-hr"></div>
+													</div>
+												`;
+										
+												$cardsContainer.append(html);
+											});
+										 }	 
+										}										
+										//end
+										
 										//end
 										
 										
@@ -8592,7 +8698,11 @@ populatePropositionDropdown(jsonTabletMbbPlans, 'tablet'); //juhi 10400
 				fixedCoverageCheckStatus = "N";//vinay: added for cm-10055
 				selectedNetwork = "";
                 DefaultListOfAddress = [];
+				
+				SiebelApp.S_App.SetProfileAttr("IgniteSalesCalcflow",""); //Vinay for ignite Goto Sales calc
             }
+
+			
 
             /*functions calls*/
             function VHACovergaeCheck() {
@@ -11677,6 +11787,8 @@ function sortStorageArray(storageArr) {
                 const $container = $(`.availableplansheadingcontainer1[data-device="${device}"] .plancontainer`);
                 const $plans = $container.find(".availableplansdetailContainers");
 
+                totalPages = Math.ceil(totalItems / itemsPerPage);//RAJUD-18052026-CM-11265
+
                 const start = page * itemsPerPage;
                 const end = Math.min(start + itemsPerPage, totalItems);
 
@@ -13598,7 +13710,8 @@ function sortStorageArray(storageArr) {
 						let jsonTempRoot = "";
 						let setPostFulfilchg = "";
 						existConfigMSISDN = wfOutput.GetChildByType("ResultSet").GetChild(0).GetChild(0).GetChild(e).propArray.MSISDN;
-						
+						let sConfigCheck = SiebelApp.S_App.GetProfileAttr("SsjCustomizeClick");
+						if(sConfigCheck !== "Y" || sConfigCheck === "Y" && sCartItemId === currConfigId){//Marvin : CM-10925
 						if(sCartItemId.length > 0){
 							jsonRoot = scJson.QuoteHeader.RootItem;
 							jsonTempRoot = sTempscJson.QuoteHeader.RootItem;
@@ -13785,6 +13898,7 @@ function sortStorageArray(storageArr) {
 													jsonTempRoot[a]?.update[0]?.DDItem?.push(sDvcDiscItemField);
 													jsonRoot[a]?.update?.DDItem?.push(sDvcDiscItemField);
 													jsonTempRoot[a]?.update?.DDItem?.push(sDvcDiscItemField);
+												}
                                             }
                                         }
                                     }
@@ -15075,7 +15189,7 @@ Header.SetProperty("RetrieveNBNBusiness", (document.getElementById('retrievenbnp
 				}
             }//end of functions
             function configureoui(eid,reqtype)
-            {
+            {	currConfigId = eid;//Marvin : CM-10925
                 let existHeader = "";
                 let existRoot = "";
                 if(reqtype === "new")
@@ -15134,8 +15248,8 @@ Header.SetProperty("RetrieveNBNBusiness", (document.getElementById('retrievenbnp
                 
                 window[sRoot + i] = SiebelApp.S_App.NewPropertySet();
                 window[sRoot + i].SetType("RootItem");
-                window[sRoot + i].SetProperty("Proposition", (reqtype == "upgrade" ? existHeader.Proposition : existRoot.Proposition));
-                window[sRoot + i].SetProperty("PropSAMId", (reqtype == "upgrade" ? existHeader.PropSAMId : existRoot.PropSAMId));
+                window[sRoot + i].SetProperty("Proposition", (reqtype == "upgrade" ? (existHeader.FixedProposition || existHeader.Proposition || existRoot.Proposition || "") : (existRoot.FixedProposition || existRoot.Proposition || "")));
+                window[sRoot + i].SetProperty("PropSAMId", (reqtype == "upgrade" ? (existHeader.FixedPropSAMId || existHeader.PropSAMId || existRoot.PropSAMId || "") : (existRoot.FixedPropSAMId || existRoot.PropSAMId || "")));
                 window[sRoot + i].SetProperty("SrvType", (reqtype == "exist" ? "Modify Service" : reqtype == "upgrade" ? existHeader.SrvType : existRoot.SrvType));
                 window[sRoot + i].SetProperty("Id", (reqtype == "new" ? existRoot.Id : existRoot.MSISDN));
                 window[sRoot + i].SetProperty("Service", (reqtype == "new" ? existRoot.Service : ""));
@@ -15176,16 +15290,19 @@ Header.SetProperty("RetrieveNBNBusiness", (document.getElementById('retrievenbnp
 					ListOfItem = SiebelApp.S_App.NewPropertySet();
 					ListOfItem.SetType("ListOfItem");
 
-					if (existHeader.plan !== "" || existHeader.PlanItem !== "") {
+					const planLine = reqtype === "new"
+					? (existHeader?.FixedPlanItem?.Name ? existHeader.FixedPlanItem : existHeader?.PlanItem)
+					: (existHeader?.FixedPlanItem?.Name ? existHeader.FixedPlanItem : existHeader?.plan);
+				if (planLine?.Name) {
 						window[sItem + i] = SiebelApp.S_App.NewPropertySet();
 						window[sItem + i].SetType("Item");
-						window[sItem + i].SetProperty("Name", (reqtype == "new" ? existHeader.PlanItem.Name : existHeader.plan.Name));
-						window[sItem + i].SetProperty("Type", (reqtype == "new" ? existHeader.PlanItem.Type : existHeader.plan.Type));
-						window[sItem + i].SetProperty("Action", (reqtype == "new" ? existHeader.PlanItem.Action : existHeader.plan.Action));
-						window[sItem + i].SetProperty("Code", (reqtype == "new" ? existHeader.PlanItem.Code : existHeader.plan.Code));
+						window[sItem + i].SetProperty("Name", planLine.Name || "");
+						window[sItem + i].SetProperty("Type", planLine.Type || "");
+						window[sItem + i].SetProperty("Action", planLine.Action || "Add");
+						window[sItem + i].SetProperty("Code", planLine.Code || "");
 						window[sItem + i].SetProperty("ProdIntegrationId", "");
-						window[sItem + i].SetProperty("Price", (reqtype == "new" ? existHeader.PlanItem.Price : existHeader.plan.Price));
-						window[sItem + i].SetProperty("Descr", (reqtype == "new" ? existHeader.PlanItem.Descr : existHeader.plan.Descr));
+						window[sItem + i].SetProperty("Price", planLine.Price || "");
+						window[sItem + i].SetProperty("Descr", planLine.Descr || "");
 
 						ListOfItem.AddChild(window[sItem + i]);
 					}
@@ -16574,8 +16691,8 @@ console.log("SB upd cart exist");
 								container += ``+actCode+`
 								<img src="` + VHAAppUtilities.GetDeviceIcon("discount") + `" alt="img" class="header-icon cart-icon mr-3">
 									<span class="item">` + bitem.Name + `</span>
-									`+ bonusPrice +`
-								</div>`;
+									
+								</div>`;//`+ bonusPrice +`  Defect no 11221
 							}
 						});
 						$.map(itm.DDItem, function (ditem) {
