@@ -3,8 +3,53 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
     define("siebel/custom/VHASSJBillingDetailViewPR", ["siebel/viewpr", "siebel/custom/VHASSJValidations"],
         function () {
         SiebelAppFacade.VHASSJBillingDetailViewPR = (function () {
+            var EXISTING_BILLING_DETAIL_VIEW = "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ";
+            var NEW_BILLING_DETAIL_VIEW = "VHA Connection Wizard View - Billing Detail - TBUI - SSJ";
+            var EXISTING_BILLING_ADDRESS_FORM_APPLET = "VF SSJ Billing Account Address Details TBUI";
+            var NEW_BILLING_ADDRESS_FORM_APPLET = "VHA SSJ Billing Details Account Address Form Applet - TBUI";
+            var BILLING_ADDRESS_LIST_APPLET = "VHA SSJ Billing Account Address List Applet TBUI";
             function VHASSJBillingDetailViewPR(pm) {
                 SiebelAppFacade.VHASSJBillingDetailViewPR.superclass.constructor.apply(this, arguments);
+            }
+            function isBillingDetailView(viewName) {
+                return viewName === EXISTING_BILLING_DETAIL_VIEW || viewName === NEW_BILLING_DETAIL_VIEW;
+            }
+            function isExistingBillingDetailView(viewName) {
+                return viewName === EXISTING_BILLING_DETAIL_VIEW;
+            }
+            function getBillingAddressFormApplet(view) {
+                if (!view)
+                    return null;
+                return view.GetApplet(EXISTING_BILLING_ADDRESS_FORM_APPLET) || view.GetApplet(NEW_BILLING_ADDRESS_FORM_APPLET);
+            }
+            function getCurrentRecordValue(applet, fieldName) {
+                if (!applet || !fieldName)
+                    return "";
+                var bc = applet.GetBusComp();
+                if (!bc)
+                    return "";
+                try {
+                    return bc.GetFieldValue(fieldName) || "";
+                } catch (e) {}
+                var recordSet = bc.GetRecordSet ? bc.GetRecordSet() : null;
+                var selection = bc.GetSelection ? bc.GetSelection() : -1;
+                if (selection !== -1 && recordSet && recordSet[selection] && recordSet[selection][fieldName] !== undefined) {
+                    return recordSet[selection][fieldName];
+                }
+                return "";
+            }
+            function getControlByFieldName(controls, fieldName) {
+                if (!controls || !fieldName)
+                    return null;
+                if (controls[fieldName]) {
+                    return controls[fieldName];
+                }
+                for (var ctrlName in controls) {
+                    if (controls[ctrlName] && controls[ctrlName].GetFieldName && controls[ctrlName].GetFieldName() === fieldName) {
+                        return controls[ctrlName];
+                    }
+                }
+                return null;
             }
             // ==========================================================
             // 1. DATA BRIDGE: Explicitly maps BC values to the UI if TBUI stalls
@@ -27,28 +72,69 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                             pm.SetProperty(ctrlName, activeRecord[fieldName]);
                             // Push directly to DOM if the field currently appears empty
                             var uiEl = $("[name='" + controls[ctrlName].GetInputName() + "']");
-                            if (uiEl.length > 0 && !uiEl.val()) {
+                            if (uiEl.length > 0 && uiEl.is(":checkbox")) {
+                                uiEl.prop("checked", activeRecord[fieldName] === "Y");
+                            } else if (uiEl.length > 0 && !uiEl.val()) {
                                 uiEl.val(activeRecord[fieldName]);
                             }
                         }
                     }
                 }
             }
+            function syncManualAddressFields(applet) {
+            if (!applet)
+                return;
+            var pm = applet.GetPModel();
+            if (!pm)
+                return;
+            var controls = pm.Get("GetControls");
+            var appletId = pm.Get("GetId");
+            if (!controls || !appletId)
+                return;
+            var manualAddressFlag = getCurrentRecordValue(applet, "VF Manual Address Flg");
+            var manualControl = getControlByFieldName(controls, "VF Manual Address Flg");
+            if (manualControl) {
+                var $manualInput = $("[name='" + manualControl.GetInputName() + "']");
+                if ($manualInput.length > 0 && $manualInput.is(":checkbox")) {
+                    $manualInput.prop("checked", manualAddressFlag === "Y");
+                }
+            }
+            var selectorPrefix = '[aria-labelledby="';
+            var selectorSuffix = '_Label_' + appletId + '"],[aria-labelledby="';
+            var manualFieldSelectors = selectorPrefix + 'Address_Floor_Type_OPUI' + selectorSuffix + 'Active' + selectorSuffix + 'Address_Floor_Type_OPUI' + selectorSuffix + 'Address_Apt_OPUI' + selectorSuffix + 'Address_Building_OPUI' + selectorSuffix + 'Street_Address_2_-_ns_OPUI' + selectorSuffix + 'Street_Address_OPUI' + selectorSuffix + 'Street_Type_OPUI' + selectorSuffix + 'City_AU' + selectorSuffix + 'State_OPUI' + selectorSuffix + 'Postal_Code_AU' + selectorSuffix + 'Country_OPUI' + selectorSuffix + 'Street_Address_2_-_no_star' + selectorSuffix + 'City_-_no_star_AU' + selectorSuffix + 'DPID' + selectorSuffix + 'Validation_Status' + selectorSuffix + 'Address_Format' + selectorSuffix + 'Address_Floor_Type' + selectorSuffix + 'Street_Address' + selectorSuffix + 'Address_Apt' + selectorSuffix + 'Street_Type' + selectorSuffix + 'Address_Building' + selectorSuffix + 'State' + selectorSuffix + 'Country"]';
+            var $manualRows = $(manualFieldSelectors).closest("td").parent();
+            var $wsdlRow = $('[aria-labelledby="WSDL_Address_Label_' + appletId + '"]').closest("td").parent();
+            var $cityRow = $('[aria-labelledby="City_AU_Label_' + appletId + '"]').closest("td").parent();
+            if (manualAddressFlag === "Y") {
+                $manualRows.show();
+                $wsdlRow.show();
+                $cityRow.hide();
+            } else {
+                $manualRows.hide();
+                $wsdlRow.show();
+                $cityRow.hide();
+            }
+            }
             // ==========================================================
             // 2. LAYOUT HELPER: Uses "Soft Hide" to keep the Selection Link alive
             // ==========================================================
             function refreshBillingLayout() {
-                var view = SiebelApp.S_App.GetActiveView();
-                if (!view)
+            var view = SiebelApp.S_App.GetActiveView();
+            if (!view)
+                return;
+            if (isBillingDetailView(activeView)) {
+                var listApplet = view.GetApplet(BILLING_ADDRESS_LIST_APPLET);
+                var formApplet = getBillingAddressFormApplet(view);
+                if (!formApplet)
                     return;
-                if (activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ" || activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ") {
-                    var listApplet = view.GetApplet("VHA SSJ Billing Account Address List Applet TBUI");
-                    var formApplet = view.GetApplet("VF SSJ Billing Account Address Details TBUI");
-                    if (!listApplet || !formApplet)
-                        return;
-                    var $listEl = $("#" + listApplet.GetFullId());
-                    var $formEl = $("#" + formApplet.GetFullId());
-                    // Detection: Edit mode is active if Save button exists
+                if (!isExistingBillingDetailView(activeView) || !listApplet) {
+                    manualDataSync(formApplet);
+                    syncManualAddressFields(formApplet);
+                    return;
+                }
+                var $listEl = $("#" + listApplet.GetFullId());
+                var $formEl = $("#" + formApplet.GetFullId());
+                // Detection: Edit mode is active if Save button exists
                     var isEditMode = $formEl.find("button[data-display='Save'], button:contains('Save')").length > 0;
                     if (isEditMode) {
                         // Reset to standard layout for editing
@@ -81,8 +167,10 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                         });
                         // Perform fallback data sync for read-only mode
                         //Soumalya:Added if condition for SIT blocker
-                        if (activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ" || activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ")
+                        if (isExistingBillingDetailView(activeView)) {
                             manualDataSync(formApplet);
+                            syncManualAddressFields(formApplet);
+                        }
                     }
                 }
             }
@@ -176,7 +264,7 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                 var sView1 = SiebelApp.S_App.GetActiveView().GetName();
                 //var isDFAFlow = SiebelApp.S_App.GetProfileAttr("VHANewOrg");
                 var ext = SiebelApp.S_App.GetProfileAttr("ExistingCustomerFlag");
-                if (sView1 === "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ" &&
+                if (sView1 === EXISTING_BILLING_DETAIL_VIEW &&
                     (isDFAFlow === "TPG" || isDFAFlow === "iiNet")) {
                     if (ext == "Y") {
                         var service = SiebelApp.S_App.GetService("SIS OM PMT Service");
@@ -199,7 +287,7 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                         }, 500);
                         $('.Capturenewdirect, .siebui-ctrl-link, .Refreshbutton > div').hide();
                     }
-                } else if (sView1 === "VHA Connection Wizard View - Billing Detail - TBUI-SSJ") {
+                } else if (sView1 === NEW_BILLING_DETAIL_VIEW) {
                     //console.log("view", sView1);
                     setTimeout(() => {
                         if (ext == "N") {
@@ -228,20 +316,21 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                     makeBillingAddressReadOnly();
                 }, 300);
                 setTimeout(function () {
-                    refreshBillingLayout
+                    refreshBillingLayout();
                 }, 50);
             }
             VHASSJBillingDetailViewPR.prototype.BindData = function (bRefresh) {
                 SiebelAppFacade.VHASSJBillingDetailViewPR.superclass.BindData.apply(this, arguments);
                 // Manually sync the address details applet to ensure data is visible
                 //Soumalya:Added if condition for SIT blocker
-                if (activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ" || activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ") {
-                    manualDataSync(this.GetPM().Get("GetAppletMap")["VF SSJ Billing Account Address Details TBUI"]);
+                if (isBillingDetailView(activeView)) {
+                    manualDataSync(getBillingAddressFormApplet(SiebelApp.S_App.GetActiveView()));
+                    syncManualAddressFields(getBillingAddressFormApplet(SiebelApp.S_App.GetActiveView()));
                     setTimeout(function () {
                         makeBillingAddressReadOnly();
                     }, 200);
                     setTimeout(function () {
-                        refreshBillingLayout
+                        refreshBillingLayout();
                     }, 150);
                 }
             }
@@ -251,7 +340,7 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                     var txt = ($(this).text() || "").trim().toLowerCase();
                     if (txt === "edit" || txt === "save" || txt === "discard") {
                         setTimeout(function () {
-                            refreshBillingLayout
+                            refreshBillingLayout();
                         }, 500);
                     }
                 });
@@ -301,7 +390,7 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                 var view = SiebelApp.S_App.GetActiveView();
                 if (!view)
                     return;
-                var formApplet = view.GetApplet("VF SSJ Billing Account Address Details TBUI");
+                var formApplet = getBillingAddressFormApplet(view);
                 if (!formApplet)
                     return;
                 var $formEl = $("#" + formApplet.GetFullId());
