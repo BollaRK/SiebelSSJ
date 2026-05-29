@@ -120,14 +120,15 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
             // ==========================================================
             function refreshBillingLayout() {
             var view = SiebelApp.S_App.GetActiveView();
+            var currentViewName = view && view.GetName ? view.GetName() : "";
             if (!view)
                 return;
-            if (isBillingDetailView(activeView)) {
+            if (isBillingDetailView(currentViewName)) {
                 var listApplet = view.GetApplet(BILLING_ADDRESS_LIST_APPLET);
                 var formApplet = getBillingAddressFormApplet(view);
                 if (!formApplet)
                     return;
-                if (!isExistingBillingDetailView(activeView) || !listApplet) {
+                if (!isExistingBillingDetailView(currentViewName) || !listApplet) {
                     manualDataSync(formApplet);
                     syncManualAddressFields(formApplet);
                     return;
@@ -167,7 +168,7 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                         });
                         // Perform fallback data sync for read-only mode
                         //Soumalya:Added if condition for SIT blocker
-                        if (isExistingBillingDetailView(activeView)) {
+                        if (isExistingBillingDetailView(currentViewName)) {
                             manualDataSync(formApplet);
                             syncManualAddressFields(formApplet);
                         }
@@ -178,7 +179,7 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
             // 3. BAU HELPERS (CM-7656 - Bank Popups)
             // ==========================================================
             function watchUpdateBankAcctPopupAfterPickClick() {
-                if (activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ" || activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ") {
+                if (isExistingBillingDetailView(activeView)) {
                     $(document).off("click.updateBankPopup", ".vha-ssj-bill-setup-an-icon .appletButton.siebui-icon-showpopup").on("click.updateBankPopup", ".vha-ssj-bill-setup-an-icon .appletButton.siebui-icon-showpopup", function () {
                         const popupWatcher = setInterval(function () {
                             const updateBankPopup = document.querySelector(".update-bank-container");
@@ -191,7 +192,7 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                 }
             }
             function handleUpdateBankAcctPopup() {
-                if (activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ" || activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ") {
+                if (isExistingBillingDetailView(activeView)) {
                     const updateBankDetailsPopup = document.querySelector('.update-bank-container');
                     if (updateBankDetailsPopup) {
                         updateBankDetailsPopup.querySelectorAll("label, span, div").forEach(el => {
@@ -209,7 +210,7 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                 }
             }
             function watchBankPopupAfterPickClick() {
-                if (activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ" || activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ") {
+                if (isExistingBillingDetailView(activeView)) {
                     $(document).off("click.bankPopup", ".VHASearch .applet-form-pick.applet-list-pick").on("click.bankPopup", ".VHASearch .applet-form-pick.applet-list-pick", function () {
                         const popupWatcher = setInterval(function () {
                             const bankPopup = document.querySelector(".bank-applet-container");
@@ -222,7 +223,7 @@ if (typeof(SiebelAppFacade.VHASSJBillingDetailViewPR) === "undefined") {
                 }
             }
             function handleBankDetailsPopup() {
-                if (activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ" || activeView == "VHA Connection Wizard View - Exist Billing Detail - TBUI - SSJ") {
+                if (isExistingBillingDetailView(activeView)) {
                     const bankDetailsPopup = document.querySelector('.bank-applet-container');
                     if (bankDetailsPopup) {
                         bankDetailsPopup.querySelectorAll("label, span, div").forEach(el => {
