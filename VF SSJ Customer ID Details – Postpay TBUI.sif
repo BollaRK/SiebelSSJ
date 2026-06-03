@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<REPOSITORY
+   NAME="Siebel Repository"
+   UPDATED="02/11/2019 19:21:26"
+   UPDATED_BY="SADMIN"
+   CREATED="02/11/2019 18:54:57"
+   CREATED_BY="SADMIN"
+   FIO_PLACEHOLDER_FIO="TRUE">
+	<PROJECT
+	   ALLOW_OBJECT_LOCKING="Y"
+	   COMMENTS="SATESHM: Created for SSJ"
+	   INACTIVE="N"
+	   LOCKED="N"
+	   NAME="SSJ"
+	   UI_FREEZE="N"
+	   UPDATED="04/21/2026 19:38:12"
+	   UPDATED_BY="SOUMALYAM"
+	   CREATED="06/10/2025 16:22:29"
+	   CREATED_BY="SATESHM"
+	   FIO_PLACEHOLDER_FIO="TRUE">
+		<VIEW
+		   ADD_TO_HISTORY="N"
+		   ADMIN_MODE_FLAG="N"
+		   BUSINESS_OBJECT="Order Entry (Sales)"
+		   COMMENTS="MJ:Created cloned view  for SSJ Fulfillment ID detail page"
+		   DISABLE_PDQ="N"
+		   EXPLICIT_LOGIN="N"
+		   INACTIVE="N"
+		   NAME="VF SSJ Customer ID Details – Postpay TBUI"
+		   NO_BORDERS="N"
+		   SCREEN_MENU="Y"
+		   SECURE="N"
+		   TASK="VF Capture Account Details Task"
+		   TYPE="Task"
+		   UPGRADE_BEHAVIOR="Admin"
+		   VISIBILITY_APPLET="VF Task Session Form Applet OUI – SSJ"
+		   VISIBILITY_APPLET_TYPE="All"
+		   UPDATED="01/09/2026 15:48:28"
+		   UPDATED_BY="SADMIN"
+		   CREATED="01/09/2026 15:48:28"
+		   CREATED_BY="SADMIN">
+			<VIEW_LOCALE
+			   APPLICATION_CODE="STD"
+			   INACTIVE="N"
+			   LANGUAGE_CODE="ENU"
+			   NAME="ENU-STD"
+			   TITLE="VF SSJ Customer ID Details – Postpay TBUI"
+			   TRANSLATE="Y"
+			   UPDATED="01/09/2026 15:48:36"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:48:36"
+			   CREATED_BY="SADMIN">
+			</VIEW_LOCALE>
+			<VIEW_WEB_TEMPLATE
+			   INACTIVE="N"
+			   NAME="Base"
+			   USER_LAYOUT="N"
+			   WEB_TEMPLATE="VHALaunchFulfilmentWebTemplate"
+			   UPDATED="01/09/2026 15:48:30"
+			   UPDATED_BY="SADMIN"
+			   CREATED="01/09/2026 15:48:30"
+			   CREATED_BY="SADMIN">
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Account Contact List Applet - TBUI"
+				   APPLET_MODE="Edit List"
+				   DISPLAY_VISIBILITY="Hide"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="101"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Account Contact List Applet - TBUI"
+				   UPDATED="01/09/2026 15:48:31"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:48:31"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Account Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   DISPLAY_VISIBILITY="Hide"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="102"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Account Hidden Applet - TBUI"
+				   UPDATED="01/09/2026 15:48:31"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:48:31"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Contact Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   DISPLAY_VISIBILITY="Hide"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="103"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Contact Hidden Applet - TBUI"
+				   UPDATED="01/09/2026 15:48:31"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:48:31"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Order Hidden Applet - TBUI"
+				   APPLET_MODE="Base"
+				   DISPLAY_VISIBILITY="Hide"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="5"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Order Hidden Applet - TBUI"
+				   UPDATED="04/22/2026 16:31:10"
+				   UPDATED_BY="SWATANTRAS"
+				   CREATED="01/09/2026 15:48:31"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF SSJ Capture Identification Details List Applet – Postpay TBUI"
+				   APPLET_MODE="Edit List"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="4"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF SSJ Capture Identification Details List Applet – Postpay TBUI"
+				   UPDATED="01/09/2026 15:48:31"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:48:31"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF SSJ ID Scan Disabled Form Applet - TBUI"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="13"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF SSJ ID Scan Disabled Form Applet - TBUI2"
+				   UPDATED="01/09/2026 15:48:31"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:48:31"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF SSJ ID Scan Session List Applet – TBUI"
+				   APPLET_MODE="Edit List"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="12"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF SSJ ID Scan Session List Applet – TBUI"
+				   UPDATED="01/09/2026 15:48:31"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:48:31"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF SSJ Task Playbar Applet - Bottom"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="50"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Playbar Applet - Top-SSJ"
+				   UPDATED="01/09/2026 15:48:31"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:48:31"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VF Task Session Form Applet OUI – SSJ"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="1"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VF Task Session Form Applet OUI – SSJ"
+				   UPDATED="01/09/2026 15:48:31"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:48:31"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA Customer Navigation Applet - SSJ"
+				   APPLET_MODE="Base"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="3"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA Customer Navigation Applet - SSJ"
+				   UPDATED="01/09/2026 15:48:32"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:48:32"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA SSJ Postpay Capture ID Details Applet"
+				   APPLET_MODE="Edit"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="6"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA SSJ Postpay Capture ID Details Applet"
+				   UPDATED="01/09/2026 15:48:32"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:48:32"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+				<VIEW_WEB_TEMPLATE_ITEM
+				   APPLET="VHA SSJ Postpay Capture Id Failure List Applet TBUI"
+				   APPLET_MODE="Edit List"
+				   EXTENSION_FLAG="N"
+				   INACTIVE="N"
+				   ITEM_IDENTIFIER="11"
+				   MARKUP_LANGUAGE="HTML"
+				   NAME="VHA SSJ Postpay Capture Id Failure List Applet TBUI"
+				   UPDATED="01/09/2026 15:48:32"
+				   UPDATED_BY="SADMIN"
+				   CREATED="01/09/2026 15:48:32"
+				   CREATED_BY="SADMIN">
+				</VIEW_WEB_TEMPLATE_ITEM>
+			</VIEW_WEB_TEMPLATE>
+		</VIEW>
+	</PROJECT>
+	<SBL_EXT_TYPE_DEF>
+		<TYPE
+		   NAME="View">
+			<ATTRIBUTE
+			   NAME="Responsive Flag">
+			</ATTRIBUTE>
+		</TYPE>
+		<TYPE
+		   NAME="View Web Template Item">
+			<ATTRIBUTE
+			   NAME="Ext Expression">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Group Name">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Html Attr">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Sequence">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Tmpl Item Holder Name">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Type">
+			</ATTRIBUTE>
+			<ATTRIBUTE
+			   NAME="Web Tmpl Name">
+			</ATTRIBUTE>
+		</TYPE>
+	</SBL_EXT_TYPE_DEF>
+</REPOSITORY>
+
+
+
